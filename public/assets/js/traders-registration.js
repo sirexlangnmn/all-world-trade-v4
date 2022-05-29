@@ -1,0 +1,387 @@
+$(function () {
+    traderStartOperatingHourSelect();
+    traderEndOperatingHourSelect();
+});
+
+let traderRegionOfOperation;
+
+let traderLanguagesOfCommunication;
+
+let tradeCategoriesForRegistration;
+let traderSubCategoryToggleField1;
+let traderSubCategoryToggleField2;
+let traderMinorSubCategoryToggleField1;
+let traderMinorSubCategoryToggleField2;
+
+let traderPassword;
+let traderPlainPassword;
+let traderConfirmPassword;
+let traderHashedPassword;
+let traderHashedPasswordInput;
+
+let btnAddKeyword;
+let inputAddKeyword;
+let textAreaAddKeywords;
+
+traderRegionOfOperation = getId('traderRegionOfOperation');
+
+traderLanguagesOfCommunication = getId('traderLanguagesOfCommunication');
+
+tradeCategoriesForRegistration = getId('traderTradeCategory');
+traderSubCategoryToggleField1 = getId('traderSubCategoryToggleField1');
+traderSubCategoryToggleField2 = getId('traderSubCategoryToggleField2');
+traderMinorSubCategoryToggleField1 = getId('traderMinorSubCategoryToggleField1');
+traderMinorSubCategoryToggleField2 = getId('traderMinorSubCategoryToggleField2');
+
+traderPassword = getId('traderPassword');
+traderPlainPassword = getId('traderPlainPassword');
+traderConfirmPassword = getId('traderConfirmPassword');
+traderHashedPassword = getId('traderHashedPassword');
+traderHashedPasswordInput = getId('traderHashedPasswordInput');
+traderPlainPasswordInput = getId('traderPlainPasswordInput');
+
+btnAddKeyword = getId('btnAddKeyword');
+inputAddKeyword = getId('inputAddKeyword');
+textAreaAddKeywords = getId('textAreaAddKeywords');
+
+// consume api to get all trade categories
+async function getRegionOfOperations() {
+    let response = await fetch(host + '/api/get/region-of-operations');
+    let data = await response.json();
+    return data;
+}
+
+// display region of operations in frontend select option
+getRegionOfOperations().then((data) => {
+    traderRegionOfOperation.innerHTML = '<option value="">Select</option>';
+    for (var i = 0; i < data.length; i++) {
+        traderRegionOfOperation.innerHTML =
+            traderRegionOfOperation.innerHTML +
+            '<option value="' +
+            data[i]['iso'] +
+            '">' +
+            data[i]['name'] +
+            '</option>';
+    }
+});
+
+// consume api to get all languages
+async function getLanguages() {
+    let response = await fetch(host + '/api/get/languages');
+    let data = await response.json();
+    return data;
+}
+
+// display all languages in frontend select option
+getLanguages().then((data) => {
+    traderLanguagesOfCommunication.innerHTML = '<option value="select">Select</option>';
+    for (var i = 0; i < data.length; i++) {
+        traderLanguagesOfCommunication.innerHTML =
+            traderLanguagesOfCommunication.innerHTML +
+            '<option value="' +
+            data[i]['code'] +
+            '">' +
+            data[i]['name'] +
+            '</option>';
+    }
+});
+
+// consume api to get all trade categories
+async function getTradeCategories() {
+    let response = await fetch(host + '/api/get/categories');
+    let data = await response.json();
+    return data;
+}
+
+// display all trade categories in frontend select option
+getTradeCategories().then((data) => {
+    traderMinorSubCategoryToggleField1.disabled = true;
+    tradeCategoriesForRegistration.innerHTML = '<option value="">Select</option>';
+    for (var i = 0; i < data.length; i++) {
+        tradeCategoriesForRegistration.innerHTML =
+            tradeCategoriesForRegistration.innerHTML +
+            '<option value="' +
+            data[i]['id'] +
+            '">' +
+            data[i]['title'] +
+            '</option>';
+    }
+});
+
+// display all minor sub categories under sub category in frontend select option
+tradeCategoriesForRegistration.addEventListener('change', function () {
+    let tradeCategoryId = this.value;
+
+    async function getSubCategoriesByTradeCategoryId() {
+        let response = await fetch(host + '/api/get/sub-categories-by-trade-category-id/' + tradeCategoryId);
+        let data = await response.json();
+        return data;
+    }
+
+    getSubCategoriesByTradeCategoryId().then((data) => {
+        traderSubCategoryToggleField1.disabled = false;
+
+        traderSubCategoryToggleField1.innerHTML = '<option value="select">Select</option>';
+        for (var i = 0; i < data.length; i++) {
+            traderSubCategoryToggleField1.innerHTML =
+                traderSubCategoryToggleField1.innerHTML +
+                '<option value="' +
+                data[i]['id'] +
+                '">' +
+                data[i]['title'] +
+                '</option>';
+        }
+        traderSubCategoryToggleField1.innerHTML =
+            traderSubCategoryToggleField1.innerHTML +
+            '<option value="customOption">Other (Type a custom value)</option><input id="traderSubCategoryToggleField2" name="traderSubCategoryToggleField" style="display:none;" disabled="disabled" >';
+
+        required(traderSubCategoryToggleField1, traderSubCategoryValidation, 'required');
+    });
+});
+
+// display all minor sub categories under sub category in frontend select option
+traderSubCategoryToggleField1.addEventListener('change', function () {
+    traderMinorSubCategoryToggleField1.disabled = false;
+    $('#traderMinorSubCategoryToggleField1').empty();
+    let subCategoryId = this.value;
+
+    if (this.options[this.selectedIndex].value == 'customOption') {
+        toggleField(this, this.nextSibling);
+        this.selectedIndex = '0';
+
+        traderMinorSubCategoryToggleField1.style.display = 'none';
+        traderMinorSubCategoryToggleField1.disabled = false;
+
+        traderMinorSubCategoryToggleField2.style.display = 'block';
+        traderMinorSubCategoryToggleField2.disabled = false;
+    }
+
+    if (this.options[this.selectedIndex].value !== 'customOption' && subCategoryId !== 'customOption') {
+        async function getMinorSubCategoriesByTradeCategoryId() {
+            let response = await fetch(host + '/api/get/minor-sub-categories-by-sub-category-id/' + subCategoryId);
+            let data = await response.json();
+            return data;
+        }
+
+        getMinorSubCategoriesByTradeCategoryId().then((data) => {
+            if (data.length === undefined) {
+                $('#traderMinorSubCategoryToggleField1').empty();
+                traderMinorSubCategoryToggleField1.style.display = 'none';
+                traderMinorSubCategoryToggleField1.disabled = false;
+
+                traderMinorSubCategoryToggleField2.style.display = 'block';
+                traderMinorSubCategoryToggleField2.disabled = false;
+                traderMinorSubCategoryToggleField2.style.display = 'inline';
+                traderMinorSubCategoryToggleField2.focus();
+            } else {
+                traderMinorSubCategoryToggleField1.disabled = false;
+
+                for (var i = 0; i < data.length; i++) {
+                    traderMinorSubCategoryToggleField1.innerHTML =
+                        traderMinorSubCategoryToggleField1.innerHTML +
+                        '<option value="' +
+                        data[i]['id'] +
+                        '">' +
+                        data[i]['title'] +
+                        '</option>';
+                }
+                traderMinorSubCategoryToggleField1.innerHTML =
+                    traderMinorSubCategoryToggleField1.innerHTML +
+                    '<option value="none">None</option><option value="customOption">Other (Type a custom value)</option><input id="traderMinorSubCategoryToggleField2" name="traderMinorSubCategoryToggleField" style="display:none;" disabled="disabled" >';
+            }
+        });
+    }
+});
+
+traderSubCategoryToggleField2.addEventListener('blur', function () {
+    if (this.value == '') {
+        toggleField(this, this.previousSibling);
+
+        traderMinorSubCategoryToggleField2.style.display = 'none';
+        traderMinorSubCategoryToggleField2.disabled = false;
+        traderMinorSubCategoryToggleField2.value = '';
+
+        traderMinorSubCategoryToggleField1.style.display = 'block';
+        traderMinorSubCategoryToggleField1.disabled = false;
+    }
+});
+
+traderMinorSubCategoryToggleField1.addEventListener('change', function () {
+    if (this.options[this.selectedIndex].value == 'customOption') {
+        toggleField(this, this.nextSibling);
+        this.selectedIndex = '0';
+    }
+});
+
+traderMinorSubCategoryToggleField2.addEventListener('blur', function () {
+    if (this.value == '') {
+        toggleField(this, this.previousSibling);
+    }
+});
+
+function toggleField(hideObj, showObj) {
+    hideObj.disabled = true;
+    hideObj.style.display = 'none';
+    showObj.disabled = false;
+    showObj.style.display = 'inline';
+    showObj.focus();
+}
+
+const $form = $('#traderRegistrationForm');
+
+traderHashedPasswordInput.style.display = 'none';
+traderPlainPasswordInput.style.display = 'none';
+
+traderPassword.onkeyup = function () {
+    hashedPassword();
+    required(traderPassword, traderPasswordValidation, 'required');
+};
+
+function hashedPassword() {
+    let password = traderPassword.value;
+    traderPlainPassword.value = password;
+
+    if (password !== '') {
+        $.ajax({
+            url: '/api/post/password-hashing',
+            method: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify({
+                password: password,
+            }),
+            success: function (response) {
+                traderHashedPassword.value = response;
+            },
+        });
+    } else {
+        traderHashedPassword.value = '';
+    }
+}
+
+traderConfirmPassword.addEventListener('blur', function () {
+    passwordComparison('traderPassword', 'traderConfirmPassword');
+});
+
+function passwordComparison(tags1, tags2) {
+    let password1 = document.getElementById(tags1).value;
+    let password2 = document.getElementById(tags2).value;
+    if (password2 !== '') {
+        if (password1 === password2) {
+        } else {
+            Swal.fire('Error', 'Password does not match.', 'danger');
+        }
+    }
+}
+
+btnAddKeyword.addEventListener('click', addKeyword);
+
+const data = [];
+function addKeyword() {
+    let add = inputAddKeyword.value;
+    data.push(add);
+    textAreaAddKeywords.value = data;
+}
+
+let btnTraderRegistrationForm;
+btnTraderRegistrationForm = getId('btnTraderRegistrationForm');
+
+btnTraderRegistrationForm.addEventListener('click', (e) => {
+    //stop submit the form, we will post it manually.
+    e.preventDefault();
+
+    // let validation = tradersRegistrationValidation();
+    // if (validation === 'true') {
+        //if (validation != '') {
+        $.ajax({
+            url: '/api/post/trader-registration',
+            type: 'post',
+            data: $form.serialize(),
+        }).done((res) => {
+            console.log(res);
+            console.log(res.uuid);
+            console.log(res.verification_code);
+            console.log(res.email_or_social_media);
+            if (res.uuid && res.verification_code) {
+                registrationUsersBusinessMedias(res.uuid, res.verification_code);
+                registrationEmailVerification(res.uuid, res.verification_code, res.email_or_social_media);
+                Swal.fire('Success', 'Registration Success.', 'success');
+            }
+
+            // if (response.message) {
+            //     tradersRegistrationServerValidation(response.message);
+            // }
+        });
+    //}
+});
+
+function registrationUsersBusinessMedias(uuid, verification_code) {
+    // Get form
+    let form = $('#traderRegistrationForm')[0];
+
+    // Create an FormData object
+    let formData = new FormData(form);
+    formData.append('uuid', uuid);
+    formData.append('verification_code', verification_code);
+
+    $.ajax({
+        type: 'post',
+        enctype: 'multipart/form-data',
+        url: '/api/post/upload-users-business-medias',
+        data: formData,
+        processData: false,
+        contentType: false,
+        cache: false,
+        timeout: 800000,
+        success: function (data) {
+            console.log(data);
+
+            // if (data === 'success upload files') {
+            //     location.replace(host + '/email-verification');
+            // }
+        },
+        error: function (e) {
+            // some code here
+        },
+    });
+}
+
+function registrationEmailVerification(uuid, verification_code, email_or_social_media) {
+    $.ajax({
+        url: '/api/post/registration-email-verification',
+        type: 'POST',
+        data: {
+            uuid: uuid,
+            verification_code: verification_code,
+            email_or_social_media: email_or_social_media,
+        },
+        success: function (data) {
+            console.log(data);
+
+            if (data == 'email sent') {
+                location.replace(host + '/email-verification');
+            }
+        },
+        error: function (e) {
+            // some code here
+        },
+    });
+}
+
+
+
+function traderStartOperatingHourSelect() {
+    operatingHour('traderStartOperatingHour');
+}
+
+function traderEndOperatingHourSelect() {
+    operatingHour('traderEndOperatingHour');
+}
+
+function operatingHour(elementId) {
+    document.getElementById(elementId).innerHTML = '<option value="">Select</option>';
+    for (let i = 1; i < 25; i++) {
+        let time = i < 10 ? '0' + i + ':00' : i + ':00';
+        document.getElementById(elementId).innerHTML =
+            document.getElementById(elementId).innerHTML + '<option value="' + time + '">' + time + '</option>';
+    }
+}

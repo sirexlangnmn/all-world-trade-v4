@@ -1,0 +1,757 @@
+<%- include('../includes/head/index.ejs') %>
+
+  <body>
+    <div id="wrapper" class="is-collapse is-active">
+      <!-- === HEADER - START === -->
+      <%- include('../includes/header/index.ejs') %>
+        <!-- === HEADER - END === -->
+
+        <!-- Main Contents -->
+        <div class="main_content">
+          <div class="mcontainer">
+            <!-- ===============================  -->
+            <!-- BANNER LOGO AND NAV DIV - START  -->
+            <!-- ===============================  -->
+            <!-- Profile cover -->
+            <div class="profile user-profile">
+              <div class="profiles_banner image-upload">
+                <form action="javascript:void(0);" method="POST" id="editcompanyBanner"
+                  name="editcompanyBanner" enctype="multipart/form-data" accept-charset="utf-8">
+                  <label for="companyBanner">
+                    <img id="companyBannerPreview" src="uploads/banner/banner.jpg" />
+                  </label>
+                  <input type="file" id="companyBanner" name="companyBanner" />
+                  <input type="text" id="companyBannerId" name="companyBannerId" />
+                </form>
+              </div>
+              <div class="profiles_content">
+                <form action="javascript:void(0);" method="POST" id="editcompanyLogo" name="editcompanyLogo"
+                  enctype="multipart/form-data" accept-charset="utf-8">
+                  <div class="profile_avatar image-upload">
+                    <div class="profile_avatar_holder">
+                      <label for="companyLogo">
+                        <img id="companyLogoPreview" src="uploads/logo/circle-logo2.png" />
+                      </label>
+                    </div>
+
+                    <input type="file" id="companyLogo" name="companyLogo" />
+                    <input type="text" id="companyLogoId" name="companyLogoId" />
+                    <div class="user_status status_online"></div>
+                    <div class="icon_change_photo" hidden>
+                      <ion-icon name="camera" class="text-xl"></ion-icon>
+                    </div>
+                  </div>
+                </form>
+
+                <div class="profile_info">
+                  <h1 id="displayBusinessNameH1"> </h1>
+                  <p style="text-align: center;" id="displayBusinessTagLineH1"> </p>
+                </div>
+
+              </div>
+
+              <div class="flex justify-between lg:border-t border-gray-100 flex-col-reverse lg:flex-row pt-2">
+                <nav class="responsive-nav pl-3">
+                  <ul uk-switcher="connect: #timeline-tab; animation: uk-animation-fade">
+                    <li class="active" id="liTabCompanyDetails"><a href="#" id="tabCompanyDetails">About</a></li>
+                    <li id="liTabMediaFiles"><a href="#" id="tabMediaFiles">Brochure </a></li>
+                    <li id="liTabVideos"><a href="#" id="tabVideos">Videos</a></li>
+                    <li><a href="#0">Dashboard</a></li>
+                    <li id="liTabSettings"><a href="#0" id="tabSettings">Settings</a></li>
+                  </ul>
+                </nav>
+
+                <!-- button actions -->
+                <div class="flex items-center space-x-1.5 flex-shrink-0 pr-4 mb-2 justify-center order-1 relative">
+
+                  <!-- go to website -->
+                  <a href="#"
+                    class="flex items-center justify-center h-10 px-5 rounded-md bg-blue-600 text-white space-x-1.5 hover:text-white blue-white-hover">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5">
+                      <path fill-rule="evenodd"
+                        d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z"
+                        clip-rule="evenodd"></path>
+                    </svg>
+                    <span> Traders Website </span>
+                  </a>
+
+                  <img alt="bookmark icon"
+                    srcset="https://img.icons8.com/external-kiranshastry-gradient-kiranshastry/452/external-bookmark-interface-kiranshastry-gradient-kiranshastry.png 2x"
+                    class="icon-custom" />
+
+                  <img alt="phone icon" srcset="https://img.icons8.com/color/2x/apple-phone.png 2x"
+                    class="icon-custom" />
+
+                  <!-- more icon -->
+                  <a href="#" class="flex items-center justify-center h-10 w-10 rounded-md bg-gray-100">
+                    <ion-icon name="ellipsis-horizontal" class="text-xl"></ion-icon>
+                  </a>
+                  <!-- more drowpdown -->
+                  <div
+                    class="bg-white w-56 shadow-md mx-auto p-2 mt-12 rounded-md text-gray-500 hidden border border-gray-100 dark:bg-gray-900 dark:text-gray-100 dark:border-gray-700"
+                    uk-drop="mode: click;pos: bottom-right;animation: uk-animation-slide-bottom-small; offset:5">
+                    <ul class="space-y-1">
+                      <li>
+                        <a href="#"
+                          class="flex items-center px-3 py-2 hover:bg-gray-100 hover:text-gray-800 rounded-md dark:hover:bg-gray-800">
+                          <ion-icon name="arrow-redo-outline" class="pr-2 text-xl"></ion-icon> Share Profile
+                        </a>
+                      </li>
+                      <li>
+                        <a href="#"
+                          class="flex items-center px-3 py-2 hover:bg-gray-100 hover:text-gray-800 rounded-md dark:hover:bg-gray-800">
+                          <ion-icon name="create-outline" class="pr-2 text-xl"></ion-icon> Account setting
+                        </a>
+                      </li>
+                      <li>
+                        <a href="#"
+                          class="flex items-center px-3 py-2 hover:bg-gray-100 hover:text-gray-800 rounded-md dark:hover:bg-gray-800">
+                          <ion-icon name="notifications-off-outline" class="pr-2 text-lg"></ion-icon> Disable
+                          notifications
+                        </a>
+                      </li>
+                      <li>
+                        <a href="#"
+                          class="flex items-center px-3 py-2 hover:bg-gray-100 hover:text-gray-800 rounded-md dark:hover:bg-gray-800">
+                          <ion-icon name="star-outline" class="pr-2 text-xl"></ion-icon> Add favorites
+                        </a>
+                      </li>
+                      <li>
+                        <hr class="-mx-2 my-2 dark:border-gray-800">
+                      </li>
+                      <li>
+                        <a href="#"
+                          class="flex items-center px-3 py-2 text-red-500 hover:bg-red-50 hover:text-red-500 rounded-md dark:hover:bg-red-600">
+                          <ion-icon name="stop-circle-outline" class="pr-2 text-xl"></ion-icon> Unfriend
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+
+              </div>
+
+            </div>
+            <!-- =============================  -->
+            <!-- BANNER LOGO AND NAV DIV - END  -->
+            <!-- =============================  -->
+
+
+
+            <div class="lg:flex lg:space-x-10">
+              <!-- ===========================  -->
+              <!-- Company Details Div - START  -->
+              <!-- ===========================  -->
+              <div class="lg:w-2/3" id="divCompanyDetails" style="display: block;">
+                <div uk-sticky="media @m ; offset:80 ; bottom : true" class="card mb-2">
+                  <div class="border-b flex items-center justify-between p-4">
+                    <div>
+                      <h2 class="text-lg font-semibold">Company Details</h2>
+                    </div>
+                    <div class="text-right">
+                      <button class="button blue-white-hover" type="button" id="btnCompanyDetailsEdit"
+                        style="display: none;">Edit</button>
+                      <button class="button blue-white-hover" type="button" onclick="editProfile()"> Update </button>
+                    </div>
+                    <div class="text-right" id="btnForUpdateCompanyDetails" style="display: none;">
+                      <button class="p-2 px-4 rounded bg-gray-50 text-red-500" id="btnCompanyDetailsCancelEdit"> Cancel
+                      </button>
+                      <button type="button" class="button bg-blue-700"> Save </button>
+                    </div>
+                  </div>
+                  <div class="p-4 -mt-1.5">
+                    <!-- ===============================  -->
+                    <!-- Company Details Display - START  -->
+                    <!-- ===============================  -->
+                    <div id="showCompanyDetails">
+                      <div class="flex-1 space-y-4 p-4">
+                        <p class="text-xs text-gray-400 mb-2"> Business Email Address </p>
+                        <p id="displayBusinessEmail"></p>
+
+                        <p class="text-xs text-gray-400 mb-2"> Business Contact Number</p>
+                        <p id="displayBusinessContact"></p>
+
+                        <p class="text-xs text-gray-400 mb-2"> Business Social Media Contact Number </p>
+                        <p id="displayBusinessSocialMediaContact"></p>
+
+                        <p class="text-xs text-gray-400 mb-2"> Address </p>
+                        <p id=""> <span id="displayBusinessAddress"> </span> <span
+                            id="displayBusinessAddressCity"></span> <span id="displayBusinessAddressStates"> </span>
+                          <span id="displayBusinessAddressCountry"> </span>
+                        </p>
+
+                        <p class="text-xs text-gray-400 mb-2"> Region of Operation </p>
+                        <p id="displayBusinessRegionOfOperation"> </p>
+
+                        <p class="text-xs text-gray-400 mb-2"> Country of Operation </p>
+                        <p id="displayBusinessCountryOfOperation"> </p>
+
+                        <p class="text-xs text-gray-400 mb-2"> States of Operation </p>
+                        <p id="displayBusinessStatesOfOperation"> </p>
+
+                        <p class="text-xs text-gray-400 mb-2"> City of Operation </p>
+                        <p id="displayBusinessCityOfOperation"> </p>
+
+                        <div class="line">
+                          <p class="text-xs text-gray-400 mb-2"> Trade Category </p>
+                          <p id="displayBusinessTradeCategory"> </p>
+                        </div>
+                        <div class="line">
+                          <p class="text-xs text-gray-400 mb-2"> Sub Category </p>
+                          <p id="displayBusinessSubCategory"> </p>
+                        </div>
+                        <div class="line">
+                          <p class="text-xs text-gray-400 mb-2"> Minor Sub Category (Optional) </p>
+                          <p id="displayBusinessMinorCategory"> </p>
+                        </div>
+                        <div class="line">
+                          <p class="text-xs text-gray-400 mb-2"> Business Scale </p>
+                          <p id="displayBusinessScale"> </p>
+                        </div>
+                        <p class="text-xs text-gray-400 mb-2"> Language Of Communication </p>
+                        <div class="flex flex-wrap gap-2" id="displayLanguageOfComm"> </div>
+                        <p class="text-xs text-gray-400 mb-2"> Tags (Business Industry Belong To) </p>
+                        <div class="flex flex-wrap gap-2" id="displayBusinessTags">
+                        </div>
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                      </div>
+                    </div>
+                    <!-- =============================  -->
+                    <!-- Company Details Display - END  -->
+                    <!-- =============================  -->
+
+                  </div>
+                </div>
+              </div>
+              <!-- =========================  -->
+              <!-- Company Details Div - END  -->
+              <!-- =========================  -->
+
+              <!-- ==================================  -->
+              <!-- Company Representative Div - START  -->
+              <!-- ==================================  -->
+              <div class="lg:w-1/3 w-full" id="divCompanyRepresentative" style="display: block;">
+                <!-- ======================================  -->
+                <!-- Company Representative Display - START  -->
+                <!-- ======================================  -->
+                <div uk-sticky="media @m ; offset:80 ; bottom : true" class="card mb-2" style="display: block;">
+                  <div class="border-b flex items-center justify-between p-4">
+                    <div>
+                      <h2 class="text-lg font-semibold">Representative</h2>
+                    </div>
+                    <div class="text-right">
+                      <!-- <button class="button blue-white-hover" type="button" id="">Update</button> -->
+                    </div>
+                  </div>
+                  <div class="flex-1 space-y-4 p-6">
+                    <h4 class="text-base text-gray-500 font-medium mb-2" id="displayReprestativeFullname"> </h4>
+                    <p id="displayReprestativeEmailAddress"> </p>
+                    <p id="displayReprestativeContactNumber"> </p>
+                    <p>
+                      <span id="displayReprestativeAddress"> </span>
+                      <span id="displayReprestativeAddressCity"> </span>
+                      <span id="displayReprestativeAddressStates"> </span>
+                      <span id="displayReprestativeAddressCountry"> </span>
+                    </p>
+                    <br />
+
+                  </div>
+                </div>
+                <!-- ====================================  -->
+                <!-- Company Representative Display - END  -->
+                <!-- ====================================  -->
+
+              </div>
+              <!-- ================================  -->
+              <!-- Company Representative Div - END  -->
+              <!-- ================================  -->
+            </div>
+
+
+            <!-- ===========================  -->
+            <!-- Brochure Div - START  -->
+            <!-- ===========================  -->
+            <div class="relative">
+              <div class="" id="divMediaFiles" style="display: none;">
+                <div class="flex items-center justify-between p-4">
+                  <div>
+                    <h2 class="text-lg font-semibold">Brochure</h2>
+                  </div>
+                  <a href="#upload-brochure-modal" uk-toggle
+                    class="flex items-center justify-center h-9 lg:px-5 px-2 rounded-md bg-blue-600 text-white space-x-1.5 blue-white-hover">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5">
+                      <path fill-rule="evenodd"
+                        d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z"
+                        clip-rule="evenodd"></path>
+                    </svg>
+                    <span class="md:block hidden"> Upload Brochure </span>
+                  </a>
+                </div>
+
+                <!-- Upload Brochure Modal - START -->
+                <div id="upload-brochure-modal" class="create-post" uk-modal>
+                  <div
+                    class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical shadow-2xl uk-animation-slide-bottom-small">
+                    <div class="py-4 border-b flex  justify-between px-6">
+                      <h3 class="text-lg font-semibold"> Upload Brochure </h3>
+                      <div>
+                        <button
+                          class="uk-modal-close-default hover:bg-gray-100 rounded-full p-2.5 block uk-icon uk-close mt-0.5"
+                          type="button" uk-close>
+                          <i class="icon-feather-close"></i>
+                        </button>
+                      </div>
+                    </div>
+                    <div class="create-post-modal-body space-x-6 p-5 overflow-x-hidden mr-1" data-simplebar>
+                      <form action="" class="space-y-4 g:w-8/12" enctype="multipart/form-data" method="post"
+                        id="uploadBrochureForm">
+                        <label> Brochure </label>
+                        <div class="relative uk-transition-toggle overflow-hidden">
+                          <div
+                            class="bg-gray-100 border-2 border-dashed flex flex-col h-40 items-center justify-center relative w-full rounded-lg dark:bg-gray-800 dark:border-gray-600">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
+                              class="w-12">
+                              <path
+                                d="M5.5 13a3.5 3.5 0 01-.369-6.98 4 4 0 117.753-1.977A4.5 4.5 0 1113.5 13H11V9.413l1.293 1.293a1 1 0 001.414-1.414l-3-3a1 1 0 00-1.414 0l-3 3a1 1 0 001.414 1.414L9 9.414V13H5.5z" />
+                              <path d="M9 13h2v5a1 1 0 11-2 0v-5z" />
+                            </svg>
+                          </div>
+                          <div class="w-full" uk-form-custom>
+                            <div class="uk-position-bottom uk-transition-bottom-small">
+                              <input type="file" id="brochure" name="brochure">
+                              <a href="#"
+                                class="flex font-medium h-9 items-center justify-center px-5 rounded-b-xl text-blue-600 text-white"
+                                id="brochureFilename" style="margin-bottom: 25px;">
+                                Choose file</a>
+                            </div>
+                          </div>
+                        </div>
+                        <div>
+                          <label> Title </label>
+                          <input type="text" class="with-border" placeholder="" id="brochureTitle" name="brochureTitle">
+                        </div>
+                      </form>
+                    </div>
+                    <div class="flex items-center w-full justify-between p-3 border-t">
+                      <div class="flex items-center space-x-2">
+                      </div>
+                      <div class="flex space-x-2">
+                        <button type="button" class="button bg-blue-700" id="btnUploadBrochure"> Save </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- Upload Brochure Modal - END -->
+
+                <!-- Edit Upload Brochure Modal - START -->
+                <div id="edit-upload-brochure-modal" class="create-post" uk-modal>
+                  <div
+                    class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical shadow-2xl uk-animation-slide-bottom-small">
+                    <div class="py-4 border-b flex  justify-between px-6">
+                      <h3 class="text-lg font-semibold" id="uploadBrochureHeadTitle"> Upload Brochure </h3>
+                      <div>
+                        <button
+                          class="uk-modal-close-default hover:bg-gray-100 rounded-full p-2.5 block uk-icon uk-close mt-0.5"
+                          type="button" uk-close>
+                          <i class="icon-feather-close"></i>
+                        </button>
+                      </div>
+                    </div>
+                    <div class="create-post-modal-body space-x-6 p-5 overflow-x-hidden mr-1" data-simplebar>
+                      <form action="" class="space-y-4 g:w-8/12" enctype="multipart/form-data" method="post"
+                        id="editUploadBrochureForm">
+                        <label> Brochure </label>
+                        <div class="relative uk-transition-toggle overflow-hidden">
+                          <div
+                            class="bg-gray-100 border-2 border-dashed flex flex-col h-40 items-center justify-center relative w-full rounded-lg dark:bg-gray-800 dark:border-gray-600">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
+                              class="w-12">
+                              <path
+                                d="M5.5 13a3.5 3.5 0 01-.369-6.98 4 4 0 117.753-1.977A4.5 4.5 0 1113.5 13H11V9.413l1.293 1.293a1 1 0 001.414-1.414l-3-3a1 1 0 00-1.414 0l-3 3a1 1 0 001.414 1.414L9 9.414V13H5.5z" />
+                              <path d="M9 13h2v5a1 1 0 11-2 0v-5z" />
+                            </svg>
+                          </div>
+                          <div class="w-full" uk-form-custom>
+                            <div class="uk-position-bottom uk-transition-bottom-small">
+                              <input type="file" id="editBrochure" name="editBrochure">
+                              <a href="#"
+                                class="flex font-medium h-9 items-center justify-center px-5 rounded-b-xl text-blue-600 text-white"
+                                id="editBrochureFilename" style="margin-bottom: 25px;">
+                                Choose file</a>
+                            </div>
+                          </div>
+                        </div>
+                        <div>
+                          <label> Title </label>
+                          <input type="text" class="with-border" placeholder="" id="editBrochureTitle"
+                            name="editBrochureTitle">
+                          <input type="text" class="with-border" placeholder="" id="editBrochureId"
+                            name="editBrochureId" style="display: none;">
+                        </div>
+                      </form>
+                    </div>
+                    <div class="flex items-center w-full justify-between p-3 border-t">
+                      <div class="flex items-center space-x-2">
+                      </div>
+                      <div class="flex space-x-2">
+                        <button type="button" class="button bg-blue-700" id="btnEditUploadBrochure"> Save </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- Edit Upload Brochure Modal - END -->
+
+                <div class="uk-slider-container">
+                  <ul class="uk-child-width-1-3@m uk-child-width-1-3@s uk-child-width-1-2 uk-grid-small uk-grid"
+                    id="businessBrochureList">
+                    <!-- loop and display here the brochure coming from database -->
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <!-- ===========================  -->
+            <!-- Brochure Div - END  -->
+            <!-- ===========================  -->
+
+
+            <!-- ===========================  -->
+            <!-- Videos Div - START  -->
+            <!-- ===========================  -->
+            <div class="card">
+              <div id="divVideos" style="display: none;">
+                <!-- ===========================  -->
+                <!-- Videos List - START  -->
+                <!-- ===========================  -->
+                <div id="videoLists" style="display: none;">
+                  <div class="border-b flex items-center justify-between p-4">
+                    <div>
+                      <h2 class="text-lg font-semibold">Videos</h2>
+                    </div>
+                    <a href="#create-post-modal" uk-toggle
+                      class="flex items-center justify-center h-9 lg:px-5 px-2 rounded-md bg-blue-600 text-white space-x-1.5 blue-white-hover">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5">
+                        <path fill-rule="evenodd"
+                          d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z"
+                          clip-rule="evenodd"></path>
+                      </svg>
+                      <span class="md:block hidden"> Upload Video </span>
+                    </a>
+                  </div>
+
+                  <!-- Craete video post modal - START -->
+                  <div id="create-post-modal" class="create-post" uk-modal>
+                    <div
+                      class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical shadow-2xl uk-animation-slide-bottom-small">
+                      <div class="py-4 border-b flex  justify-between px-6">
+                        <h3 class="text-lg font-semibold"> Create Video </h3>
+                        <div>
+                          <button
+                            class="uk-modal-close-default hover:bg-gray-100 rounded-full p-2.5 block uk-icon uk-close mt-0.5"
+                            type="button" uk-close>
+                            <i class="icon-feather-close"></i>
+                          </button>
+                        </div>
+                      </div>
+                      <div class="create-post-modal-body space-x-6 p-5 overflow-x-hidden mr-1" data-simplebar>
+                        <form action="" class="space-y-4 g:w-8/12" enctype="multipart/form-data" method="post"
+                          id="uploadFileForm">
+                          <label> Videos </label>
+                          <div class="relative uk-transition-toggle overflow-hidden">
+                            <div
+                              class="bg-gray-100 border-2 border-dashed flex flex-col h-40 items-center justify-center relative w-full rounded-lg dark:bg-gray-800 dark:border-gray-600">
+                              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
+                                class="w-12">
+                                <path
+                                  d="M5.5 13a3.5 3.5 0 01-.369-6.98 4 4 0 117.753-1.977A4.5 4.5 0 1113.5 13H11V9.413l1.293 1.293a1 1 0 001.414-1.414l-3-3a1 1 0 00-1.414 0l-3 3a1 1 0 001.414 1.414L9 9.414V13H5.5z" />
+                                <path d="M9 13h2v5a1 1 0 11-2 0v-5z" />
+                              </svg>
+                            </div>
+                            <div class="w-full" uk-form-custom>
+                              <div class="uk-position-bottom uk-transition-bottom-small">
+                                <input type="file" id="videoInput" name="videoInput">
+                                <a href="#"
+                                  class="flex font-medium h-9 items-center justify-center px-5 rounded-b-xl text-blue-600 text-white"
+                                  id="videoName" style="margin-bottom: 25px;">
+                                  Choose file</a>
+                              </div>
+                            </div>
+                          </div>
+                          <label> Thumbnail </label>
+                          <div class="relative uk-transition-toggle overflow-hidden">
+                            <div
+                              class="bg-gray-100 border-2 border-dashed flex flex-col h-40 items-center justify-center relative w-full rounded-lg dark:bg-gray-800 dark:border-gray-600">
+                              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
+                                class="w-12">
+                                <path
+                                  d="M5.5 13a3.5 3.5 0 01-.369-6.98 4 4 0 117.753-1.977A4.5 4.5 0 1113.5 13H11V9.413l1.293 1.293a1 1 0 001.414-1.414l-3-3a1 1 0 00-1.414 0l-3 3a1 1 0 001.414 1.414L9 9.414V13H5.5z" />
+                                <path d="M9 13h2v5a1 1 0 11-2 0v-5z" />
+                              </svg>
+                            </div>
+                            <div class="w-full" uk-form-custom>
+                              <div class="uk-position-bottom uk-transition-bottom-small">
+                                <input type="file" id="thumbnailInput" name="thumbnailInput">
+                                <a href="#"
+                                  class="flex font-medium h-9 items-center justify-center px-5 rounded-b-xl text-blue-600 text-white"
+                                  id="thumbnailName" style="margin-bottom: 25px;">
+                                  Choose file</a>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div class="font-semibold text-lg"> Details </div>
+                          <div>
+                            <label> Title </label>
+                            <input type="text" class="with-border" placeholder="" id="videoTitle" name="videoTitle">
+                          </div>
+                          <div>
+                            <label> Description </label>
+                            <textarea rows="3" class="with-border w-full p-4" placeholder="Video Description."
+                              id="videoDescription" name="videoDescription"></textarea>
+                          </div>
+                        </form>
+                      </div>
+                      <div class="flex items-center w-full justify-between p-3 border-t">
+                        <div class="flex items-center space-x-2">
+                        </div>
+                        <div class="flex space-x-2">
+                          <button type="button" class="button bg-blue-700 blue-white-hover" id="btnUploadFile"> Save
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- Craete video post modal - END -->
+
+
+
+
+
+                  <div class="p-4 -mt-1.5">
+                    <!-- ===============================  -->
+                    <!-- Media Files Display - START  -->
+                    <!-- ===============================  -->
+                    <div id="">
+                      <div class="flex-1 space-y-4">
+                        <!-- === TRADERS VIDEO - START === -->
+                        <!-- === TRADERS VIDEO SLIDES - START === -->
+                        <div class="relative">
+                          <div class="px-1 py-3">
+                            <ul
+                              class="uk-child-width-1-4@m uk-child-width-1-3@s uk-child-width-1-2 uk-grid-small uk-grid mr-2"
+                              id="businessVideosList">
+                            </ul>
+                          </div>
+                        </div>
+                        <!-- === TRADERS VIDEO SLIDES - END === -->
+                        <!-- === TRADERS VIDEO - END === -->
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- ===========================  -->
+                <!-- Videos List - END  -->
+                <!-- ===========================  -->
+
+                <!-- ===========================  -->
+                <!-- Video Play - START  -->
+                <!-- ===========================  -->
+                <div id="videoPlay" style="display: none;">
+                  <div class="p-4 -mt-1.5">
+                    <div class="embed-video rounded">
+                      <iframe id="iframeVideoPlay" src="" frameborder="0" uk-video="automute: true" allowfullscreen
+                        uk-responsive></iframe>
+                    </div>
+                  </div>
+                </div>
+                <!-- ===========================  -->
+                <!-- Videos Play - END  -->
+                <!-- ===========================  -->
+              </div>
+            </div>
+            <!-- ===========================  -->
+            <!-- Videos Files Div - END  -->
+            <!-- ===========================  -->
+
+
+            <!-- ===========================  -->
+            <!-- Settings Div - START  -->
+            <!-- ===========================  -->
+            <div uk-sticky="media @m ; offset:80 ; bottom : true" class="card">
+              <div id="divSettings" style="display: none;">
+                <div class="border-b flex items-center justify-between p-4">
+                  <div>
+                    <h2 class="text-lg font-semibold">Business Visibility</h2>
+                  </div>
+                </div>
+                <div id="">
+                  <!-- ================================= -->
+                  <!-- Trader Visibility Details - START -->
+                  <!-- ================================= -->
+                  <div class="bg-white rounded-md lg:shadow-lg shadow col-span-2 lg:p-6 p-4 lg:mx-16">
+                    <div class="space-y-3">
+                      <div class="flex justify-between items-center">
+                        <div>
+                          <h4> Visible to your own country only?</h4>
+                        </div>
+                        <div class="switches-list -mt-8 is-large">
+                          <div class="switch-container">
+                            <label class="switch">
+                              <input type="checkbox" id="traderVisibleToYourOwnCountryOnly"
+                                name="traderVisibleToYourOwnCountryOnly" checked>
+                              <span class="switch-button"></span>
+                            </label>
+                          </div>
+                        </div>
+                      </div>
+                      <hr>
+                      <div class="flex justify-between items-center">
+                        <div>
+                          <h4> Visible in B2C, Micro and Small Enterprises, Retailers Category
+                            (Y/N)? </h4>
+                        </div>
+                        <div class="switches-list -mt-8 is-large">
+                          <div class="switch-container">
+                            <label class="switch">
+                              <input type="checkbox" id="traderVisibleToMicroSmallRetailers"
+                                name="traderVisibleToMicroSmallRetailers">
+                              <span class="switch-button"></span>
+                            </label>
+                          </div>
+                        </div>
+                      </div>
+                      <hr>
+                      <div class="flex justify-between items-center">
+                        <div>
+                          <h4> Visible in B2B, Medium & Large Enterprise, Wholesale, High End,
+                            High Tech Category (Y/N)?</h4>
+                        </div>
+                        <div class="switches-list -mt-8 is-large">
+                          <div class="switch-container">
+                            <label class="switch">
+                              <input type="checkbox" id="traderVisibleToBtbMediumLargeWholesaleHighEnd"
+                                name="traderVisibleToBtbMediumLargeWholesaleHighEnd" checked>
+                              <span class="switch-button"></span>
+                            </label>
+                          </div>
+                        </div>
+                      </div>
+                      <hr>
+                      <div class="flex justify-between items-center">
+                        <div>
+                          <h4> Visible to all ranks?</h4>
+                        </div>
+                        <div class="switches-list -mt-8 is-large">
+                          <div class="switch-container">
+                            <label class="switch">
+                              <input type="checkbox" id="traderVisibleToAllBusinessScale"
+                                name="traderVisibleToAllBusinessScale">
+                              <span class="switch-button"></span>
+                            </label>
+                          </div>
+                        </div>
+                      </div>
+                      <hr>
+                      <div class="flex justify-between items-center">
+                        <div>
+                          <h4> Visible to ranks close to yours? </h4>
+                        </div>
+                        <div class="switches-list -mt-8 is-large">
+                          <div class="switch-container">
+                            <label class="switch">
+                              <input type="checkbox" id="traderVisibleToCloseRanks" name="traderVisibleToCloseRanks"
+                                checked>
+                              <span class="switch-button"></span>
+                            </label>
+                          </div>
+                        </div>
+                      </div>
+                      <hr>
+                      <div class="flex justify-between items-center">
+                        <div>
+                          <h4> Visible to your rank and lower ranks?</h4>
+                        </div>
+                        <div class="switches-list -mt-8 is-large">
+                          <div class="switch-container">
+                            <label class="switch">
+                              <input type="checkbox" id="traderVisibleToYourRankToLower"
+                                name="traderVisibleToYourRankToLower">
+                              <span class="switch-button"></span>
+                            </label>
+                          </div>
+                        </div>
+                      </div>
+                      <hr>
+                      <div class="flex justify-between items-center">
+                        <div>
+                          <h4> Visible to your rank and higher ranks?</h4>
+                        </div>
+                        <div class="switches-list -mt-8 is-large">
+                          <div class="switch-container">
+                            <label class="switch">
+                              <input type="checkbox" id="traderVisibleToYourRankToHigher"
+                                name="traderVisibleToYourRankToHigher" checked>
+                              <span class="switch-button"></span>
+                            </label>
+                          </div>
+                        </div>
+                      </div>
+                      <hr>
+                      <div class="flex justify-between items-center">
+                        <div>
+                          <h4> Visible to your rank only?</h4>
+                        </div>
+                        <div class="switches-list -mt-8 is-large">
+                          <div class="switch-container">
+                            <label class="switch">
+                              <input type="checkbox" id="traderVisibleToYourRankOnly"
+                                name="traderVisibleToYourRankOnly">
+                              <span class="switch-button"></span>
+                            </label>
+                          </div>
+                        </div>
+                      </div>
+                      <hr>
+                    </div>
+                  </div>
+                  <!-- =============================== -->
+                  <!-- Trader Visibility Details - END -->
+                  <!-- =============================== -->
+                </div>
+              </div>
+            </div>
+            <!-- ===========================  -->
+            <!-- Settings Div - END  -->
+            <!-- ===========================  -->
+          </div>
+        </div>
+
+
+    </div>
+    <%- include('../includes/scripts/index.ejs') %>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.3.0/sweetalert2.min.js"></script>
+      <script src="assets/js/traders-profile.js"></script>
+      <script src="assets/js/global-countries.js"></script>
+      
+
+      <script type="text/javascript">
+        function calcTime(city, offset) {
+          var b = new Date()
+          var utc = b.getTime() + (b.getTimezoneOffset() * 60000);
+          var nd = new Date(utc + (3600000 * offset));
+          return "the local time of " + city + " is" + nd.toLocaleString();
+
+        }
+
+        //get specific country time
+        console.log(calcTime('argentina', '-3'))
+        console.log(calcTime('afganistan', '+4.3'))
+        console.log(calcTime('Denmark', '+2'))
+        console.log(calcTime('japan', '+9'))
+      </script>
+
+  </body>
+
+  </html>
