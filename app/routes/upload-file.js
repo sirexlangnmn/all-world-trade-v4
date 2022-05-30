@@ -12,7 +12,7 @@ module.exports = (app) => {
     // Database connection
     const db = mysql.createConnection({
         host: 'localhost',
-        user: 'admin',
+        user: 'root',
         password: '',
         database: 'awt_db_4',
     });

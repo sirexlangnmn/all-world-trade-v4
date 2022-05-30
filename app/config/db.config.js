@@ -1,6 +1,6 @@
 module.exports = {
   HOST: 'localhost',
-  USER: 'admin',
+  USER: 'root',
   PASSWORD: '',
   DB: 'awt_db_4',
 };
