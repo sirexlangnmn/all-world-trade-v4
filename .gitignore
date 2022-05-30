@@ -15,4 +15,4 @@ package-lock.json
 .cache
 
 # personal env
-.env
+#.env
