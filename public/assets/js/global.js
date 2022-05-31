@@ -6,7 +6,7 @@ if (location_hostname === 'localhost') {
 host = 'http://' + location_hostname + ':' + 3000;
 }
 if (location.hostname === 'allworldtrade.com' || location.hostname.endsWith('.allworldtrade.com')) {
-host = 'https://' + location_hostname + ':' + 3000;
+host = 'https://' + location_hostname;
 }
 
 /**
