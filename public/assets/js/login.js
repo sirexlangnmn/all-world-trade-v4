@@ -17,6 +17,10 @@ function loginSubmitHandler(e) {
     });
 }
 
+
+let host2 = location.hostname;
+alert(host2);
+
 function comparePassword(plainPassword, hashedPassword) {
     $.ajax({
         url: '/api/post/compare-password',

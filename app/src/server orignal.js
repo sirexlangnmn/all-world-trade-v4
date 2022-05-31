@@ -6,7 +6,7 @@ http://patorjk.com/software/taag/#p=display&f=ANSI%20Regular&t=Server
 ██      ██      ██   ██ ██    ██ ██      ██   ██ 
 ███████ █████   ██████  ██    ██ █████   ██████  
      ██ ██      ██   ██  ██  ██  ██      ██   ██ 
-███████ ███████ ██   ██   ████   ███████ ██   ██       intended for trial                                   
+███████ ███████ ██   ██   ████   ███████ ██   ██                                           
 
 dependencies: {
     compression     : https://www.npmjs.com/package/compression
@@ -115,21 +115,7 @@ app.set('view engine', 'ejs');
 
 // home
 app.get(['/'], (req, res) => {
-    if (req.session.user === undefined) {
-        res.render(path.join(__dirname, '../../', 'public/view/login/index'));
-    } else {
-        const sessionData = {
-            id: req.session.user.id,
-            uuid: req.session.user.uuid,
-            type: req.session.user.type,
-            first_name: req.session.user.first_name,
-            last_name: req.session.user.last_name,
-            email: req.session.user.email_or_social_media,
-        };
-        
-        res.render(path.join(__dirname, '../../', 'public/view/home/index'));
-    }
-    
+    res.render(path.join(__dirname, '../../', 'public/view/home/index'));
 });
 
 // selections

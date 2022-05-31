@@ -14,6 +14,7 @@ module.exports = (app) => {
         host: 'localhost',
         user: 'root',
         password: 'FightForYourDreams7!',
+        //password: '',
         database: 'awt_db_4',
     });
 
