@@ -404,7 +404,7 @@ app.get(['/email-verification'], (req, res) => {
     res.render(path.join(__dirname, '../../', 'public/view/verification/email-verification'), {registration_email_address: req.session.registration_email_address});
 });
 
-app.get(['/login-82dd09b8-dd92-45d5-8a25-ea79a1ee668c'], (req, res) => {
+app.get(['/login'], (req, res) => {
     res.render(path.join(__dirname, '../../', 'public/view/login/index'));
 });
 
