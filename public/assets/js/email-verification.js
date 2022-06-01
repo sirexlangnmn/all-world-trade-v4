@@ -100,7 +100,7 @@ function verifyCode(e) {
                 Swal.fire('Success', 'Verified.', 'success');
 
                 setInterval(function () {
-                    location.replace(host + '/login');
+                    location.replace(host + '/login-82dd09b8-dd92-45d5-8a25-ea79a1ee668c');
                 }, 3000);
             } else {
                 console.log('not_verify');
