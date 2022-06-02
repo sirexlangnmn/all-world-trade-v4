@@ -16,8 +16,8 @@ hashedPassword = getId('hashedPassword');
 plainPasswordInput = getId('plainPasswordInput');
 hashedPasswordInput = getId('hashedPasswordInput');
 
-hashedPasswordInput.style.display = 'none';
-plainPasswordInput.style.display = 'none';
+// hashedPasswordInput.style.display = 'block';
+// plainPasswordInput.style.display = 'block';
 
 // consume api to get all languages
 async function getLanguages() {
@@ -59,7 +59,7 @@ function hashedPasswordProcess() {
             },
         });
     } else {
-        traderHashedPassword.value = '';
+        hashedPassword.value = '';
     }
 }
 
