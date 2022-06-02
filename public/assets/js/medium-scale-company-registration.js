@@ -59,7 +59,7 @@ function hashedPasswordProcess() {
             },
         });
     } else {
-        traderHashedPassword.value = '';
+        hashedPassword.value = '';
     }
 }
 
