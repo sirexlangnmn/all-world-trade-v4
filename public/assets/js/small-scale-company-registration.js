@@ -16,8 +16,8 @@ hashedPassword = getId('hashedPassword');
 plainPasswordInput = getId('plainPasswordInput');
 hashedPasswordInput = getId('hashedPasswordInput');
 
-// hashedPasswordInput.style.display = 'block';
-// plainPasswordInput.style.display = 'block';
+hashedPasswordInput.style.display = 'block';
+plainPasswordInput.style.display = 'block';
 
 // consume api to get all languages
 async function getLanguages() {
