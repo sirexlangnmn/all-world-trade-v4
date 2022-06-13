@@ -73,7 +73,7 @@ function passwordComparison(tags1, tags2) {
     if (password2 !== '') {
         if (password1 === password2) {
         } else {
-            Swal.fire('Error', 'Password does not match.', 'danger');
+            Swal.fire('Warning', 'Password does not match.', 'warning');
         }
     }
 }

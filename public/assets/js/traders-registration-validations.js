@@ -3,7 +3,7 @@ let companyBannerValidation;
 let companyLogo;
 let companyLogoPreview;
 let companyLogoValidation;
-let videoInput;
+// let videoInput;
 let traderVideoValidation;
 let traderVideoThumbnailValidation;
 let thumbnailInput;
@@ -62,6 +62,8 @@ let traderEmailAddressValidation;
 let traderPasswordValidation;
 let traderConfirmPasswordValidation;
 
+let videoLink;
+let videoLinkValidation;
 let videoTitle;
 let videoTitleValidation;
 let videoDescription;
@@ -82,7 +84,7 @@ companyBannerValidation = getId('companyBannerValidation');
 companyLogo = getId('companyLogo');
 companyLogoPreview = getId('companyLogoPreview');
 companyLogoValidation = getId('companyLogoValidation');
-videoInput = getId('videoInput');
+// videoInput = getId('videoInput');
 traderVideoValidation = getId('traderVideoValidation');
 traderVideoThumbnailValidation = getId('traderVideoThumbnailValidation');
 thumbnailInput = getId('thumbnailInput');
@@ -140,6 +142,10 @@ traderEmailAddressValidation = getId('traderEmailAddressValidation');
 traderPasswordValidation = getId('traderPasswordValidation');
 traderConfirmPasswordValidation = getId('traderConfirmPasswordValidation');
 
+
+
+videoLink = getId('videoLink');
+videoLinkValidation = getId('videoLinkValidation');
 videoTitle = getId('videoTitle');
 videoTitleValidation = getId('videoTitleValidation');
 videoDescription = getId('videoDescription');
@@ -158,174 +164,253 @@ webinarsScheduleValidation = getId('webinarsScheduleValidation');
 
 function tradersRegistrationValidation() {
     let output = 'true';
-    if (companyBanner.files.length == 0) {
-        output = 'empty1';
-        companyBannerValidation.style.display = 'block';
-        companyBannerValidation.innerHTML = 'Please upload banner';
-        companyBannerPreview.src = host + '/uploads/placeholder/banner-placeholder.png';
+
+    // if (companyBanner.files.length == 0) {
+    //     output = 'empty banner';
+    //     companyBannerValidation.style.display = 'block';
+    //     companyBannerValidation.innerHTML = 'Please upload banner';
+    //     companyBannerPreview.src = host + '/uploads/placeholder/banner-placeholder2.jpg';
+    // }
+    // if (companyLogo.files.length == 0) {
+    //     output = 'empty logo';
+    //     companyLogoPreview.src = host + '/uploads/placeholder/logo-placeholder2.jpg';
+    //     companyLogoValidation.innerHTML = 'Upload logo';
+    // }
+    
+    // if (videoInput.files.length == 0) {
+    //     output = 'empty video';
+    //     traderVideoValidation.style.display = 'block';
+    //     traderVideoValidation.innerHTML = 'Please upload video presenting your company.';
+    // }
+    let isWantToUploadVideo = document.getElementById('inputWantToUploadCompanyVideo').value;
+    let isWantToUploadBrochure = document.getElementById('inputWantToUploadCompanyBrochure').value;
+    let isWantToUploadCompanyWebinar = document.getElementById('inputWantToUploadCompanyWebinar').value;
+   
+    if (isWantToUploadVideo == 1) {
+        if (thumbnailInput.files.length == 0) {
+            output = 'empty video thumbnail';
+            traderVideoThumbnailValidation.style.display = 'block';
+            traderVideoThumbnailValidation.innerHTML = 'Please upload video thumbnail.';
+        }
+        if (videoLink.value.length == 0) {
+            output = 'empty Video title';
+            videoLinkValidation.innerHTML = 'Video link required';
+        }
+        if (videoTitle.value.length == 0) {
+            output = 'empty Video title';
+            videoTitleValidation.innerHTML = 'Video title required';
+        }
+        if (videoDescription.value.length == 0) {
+            output = 'empty Video description';
+            videoDescriptionValidation.innerHTML = 'Video description required';
+        }
+    } else {
+        traderVideoThumbnailValidation.innerHTML = '';
+        videoLinkValidation.innerHTML = '';
+        videoTitleValidation.innerHTML = '';
+        videoDescriptionValidation.innerHTML = '';
     }
-    if (companyLogo.files.length == 0) {
-        output = 'empty2';
-        companyLogoPreview.src = host + '/uploads/placeholder/logo-placeholder.jpg';
-        companyLogoValidation.innerHTML = 'Upload logo';
+
+    if ( isWantToUploadBrochure == 1) {
+        if (brochureInput.files.length == 0) {
+            output = 'empty brochure';
+            traderBrochureValidation.style.display = 'block';
+            traderBrochureValidation.innerHTML = 'Please upload brochure related to your company.';
+        }
+        if (brochureTitle.value.length == 0) {
+            output = 'empty Brouchure title';
+            brochureTitleValidation.innerHTML = 'Brouchure title required';
+        }
+    } else {
+        traderBrochureValidation.innerHTML = '';
+        brochureTitleValidation.innerHTML = '';
     }
-    if (videoInput.files.length == 0) {
-        output = 'empty3';
-        traderVideoValidation.style.display = 'block';
-        traderVideoValidation.innerHTML = 'Please upload video presenting your company.';
+
+    if ( isWantToUploadCompanyWebinar == 1) {
+        if (webinarsThumbnailInput.files.length == 0) {
+            output = 'empty webinars thumbnail';
+            traderWebinarThumbnailValidation.style.display = 'block';
+            traderWebinarThumbnailValidation.innerHTML = 'Please upload thumbnail image related to your webinars.';
+        }
+        if (webinarsTitle.value.length == 0) {
+            output = 'empty Webinars title';
+            webinarsTitleValidation.innerHTML = 'Webinars title required';
+        }
+        if (webinarsDescription.value.length == 0) {
+            output = 'empty Webinars description';
+            webinarsDescriptionValidation.innerHTML = 'Webinars description required';
+        }
+        if (webinarsLink.value.length == 0) {
+            output = 'empty Webinars link';
+            webinarsLinkValidation.innerHTML = 'Webinars link required';
+        }
+        if (webinarsSchedule.value.length == 0) {
+            output = 'empty Webinars schedules';
+            webinarsScheduleValidation.innerHTML = 'Webinars schedules required';
+        }
+    } else {
+        traderWebinarThumbnailValidation.innerHTML = '';
+        webinarsTitleValidation.innerHTML = '';
+        webinarsDescriptionValidation.innerHTML = '';
+        webinarsLinkValidation.innerHTML = '';
+        webinarsScheduleValidation.innerHTML = '';
     }
-    if (thumbnailInput.files.length == 0) {
-        output = 'empty4';
-        traderVideoThumbnailValidation.style.display = 'block';
-        traderVideoThumbnailValidation.innerHTML = 'Please upload video thumbnail.';
-    }
-    if (brochureInput.files.length == 0) {
-        output = 'empty5';
-        traderBrochureValidation.style.display = 'block';
-        traderBrochureValidation.innerHTML = 'Please upload brochure related to your company.';
-    }
-    if (webinarsThumbnailInput.files.length == 0) {
-        output = 'empty6';
-        traderWebinarThumbnailValidation.style.display = 'block';
-        traderWebinarThumbnailValidation.innerHTML = 'Please upload thumbnail image related to your webinars.';
-    }
+
+
+
+    
+    
+   
     if (traderCompanyName.value.length == 0) {
-        output = 'empty7';
+        output = 'empty company name';
         traderCompanyNameValidation.innerHTML = 'Company Name must not be empty';
     }
     if (traderCompanyTagline.value.length == 0) {
-        output = 'empty8';
+        output = 'empty company tagline';
         traderCompanyTaglineValidation.innerHTML = 'Company tagline must not be empty';
     }
     if (traderWebsite.value.length == 0) {
-        output = 'empty9';
+        output = 'empty company website';
         traderWebsiteValidation.innerHTML = 'Company website is required';
     }
     if (traderBusinessEmailAddress.value.length == 0) {
-        output = 'empty10';
+        output = 'empty business email address';
         traderBusinessEmailAddressValidation.innerHTML = 'Business Email Address is required';
     }
     if (traderBusinessContactNumber.value.length == 0) {
-        output = 'empty11';
+        output = 'empty business contact number';
         traderBusinessContactNumberValidation.innerHTML = 'Business Contact Number is required';
     }
     if (traderBusinessSocialMediaContactNumber.value.length == 0) {
-        output = 'empty12';
+        output = 'empty social media contact number';
         traderBusinessSocialMediaContactNumberValidation.innerHTML = 'Social Media Contact Number is required';
     }
     if (traderBusinessAddress.value.length == 0) {
-        output = 'empty13';
+        output = 'empty business address';
         traderBusinessAddressValidation.innerHTML = 'Business Address is required';
     }
     if (traderBusinessCountryLocation.value.length == 0) {
-        output = 'empty14';
+        output = 'empty business country location';
         traderBusinessCountryLocationValidation.innerHTML = 'Business Country Location is required';
     }
     if (traderBusinessCityLocation.value.length == 0) {
-        output = 'empty15';
+        output = 'empty business city location';
         traderBusinessCityLocationValidation.innerHTML = 'Business City Location is required';
     }
-    if (traderRegionOfOperation.value.length == 0) {
-        output = 'empty16';
-        traderRegionOfOperationValidation.innerHTML = 'Region of Operation is required';
-    }
+    
+    // validation of region of operation moved to bottom of this function
+
     if (traderStartOperatingHour.value.length == 0) {
-        output = 'empty17';
-        traderStartOperatingHourValidation.innerHTML = 'required';
+        output = 'empty Start of operating ';
+        traderStartOperatingHourValidation.innerHTML = 'Start of operating hour required';
     }
     if (traderEndOperatingHour.value.length == 0) {
-        output = 'empty18';
-        traderEndOperatingHourValidation.innerHTML = 'required';
+        output = 'empty End of operating hour';
+        traderEndOperatingHourValidation.innerHTML = 'End of operating hour required';;
     }
     if (traderLanguagesOfCommunication.value.length == 0) {
-        output = 'empty19';
-        traderLanguagesOfCommunicationValidation.innerHTML = 'required';
+        output = 'empty Language of operation';
+        traderLanguagesOfCommunicationValidation.innerHTML = 'Language of operation required';
     }
     if (traderTradeCategory.value.length == 0) {
-        output = 'empty20';
-        traderTradeCategoryValidation.innerHTML = 'required';
+        output = 'empty Trade Category';
+        traderTradeCategoryValidation.innerHTML = 'Trade Category required';;
     }
     if (traderSubCategoryToggleField1.value.length == 0) {
-        output = 'empty21';
-        traderSubCategoryValidation.innerHTML = 'required';
+        output = 'empty SubCategory';
+        traderSubCategoryValidation.innerHTML = 'SubCategory required';
     }
     if (traderMinorSubCategoryToggleField1.value.length == 0) {
-        output = 'empty22';
-        traderMinorSubCategoryValidation.innerHTML = 'required';
+        output = 'empty Minor Sub Category ';
+        traderMinorSubCategoryValidation.innerHTML = 'Minor Sub Category required';;
     }
     if (textAreaAddKeywords.value.length == 0) {
-        output = 'empty23';
-        traderTagsValidation.innerHTML = 'required';
+        output = 'empty Tags';
+        traderTagsValidation.innerHTML = 'Tags required';
     }
     if (traderBusinessScale.value.length == 0) {
-        output = 'empty24';
-        traderBusinessScaleValidation.innerHTML = 'required';
+        output = 'empty Business scale';
+        traderBusinessScaleValidation.innerHTML = 'Business scale required';
     }
     if (traderSurnameOfRepresentative.value.length == 0) {
-        output = 'empty25';
-        traderSurnameOfRepresentativeValidation.innerHTML = 'required';
+        output = 'empty Surname of representative';
+        traderSurnameOfRepresentativeValidation.innerHTML = 'Surname of representative required';
     }
     if (traderGivenNameOfRepresentative.value.length == 0) {
-        output = 'empty26';
-        traderGivenNameOfRepresentativeValidation.innerHTML = 'required';
+        output = 'empty Given name of representative';
+        traderGivenNameOfRepresentativeValidation.innerHTML = 'Given name of representative required';
     }
     if (traderHomeAddress.value.length == 0) {
-        output = 'empty27';
-        traderHomeAddressValidation.innerHTML = 'required';
+        output = 'empty Representative country of residence';
+        traderHomeAddressValidation.innerHTML = 'Representative home address required';
     }
     if (traderCountryofResidence.value.length == 0) {
         output = 'empty28';
-        traderCountryofResidenceValidation.innerHTML = 'required';
+        traderCountryofResidenceValidation.innerHTML = 'Representative country of residence required';;
     }
     if (traderCityOfResidence.value.length == 0) {
-        output = 'empty29';
-        traderCityOfResidenceValidation.innerHTML = 'required';
+        output = 'empty Representative city of residence';
+        traderCityOfResidenceValidation.innerHTML = 'Representative city of residence requiredd';
     }
     if (traderCellphone.value.length == 0) {
-        output = 'empty30';
-        traderCellphoneValidation.innerHTML = 'required';
+        output = 'empty Representative cell phone';
+        traderCellphoneValidation.innerHTML = 'Representative cell phone required';
     }
     if (traderEmailAddress.value.length == 0) {
-        output = 'empty31';
-        traderEmailAddressValidation.innerHTML = 'required';
+        output = 'empty Representative email address';
+        traderEmailAddressValidation.innerHTML = 'Representative email address required';
     }
     if (traderPassword.value.length == 0) {
-        output = 'empty32';
-        traderPasswordValidation.innerHTML = 'required';
+        output = 'empty Password';
+        traderPasswordValidation.innerHTML = 'Password required';
     }
     if (traderConfirmPassword.value.length == 0) {
-        output = 'empty33';
-        traderConfirmPasswordValidation.innerHTML = 'required';
-    }
-    if (videoTitle.value.length == 0) {
-        output = 'empty34';
-        videoTitleValidation.innerHTML = 'required';
-    }
-    if (videoDescription.value.length == 0) {
-        output = 'empty35';
-        videoDescriptionValidation.innerHTML = 'required';
-    }
-    if (brochureTitle.value.length == 0) {
-        output = 'empty36';
-        brochureTitleValidation.innerHTML = 'required';
-    }
-    if (webinarsTitle.value.length == 0) {
-        output = 'empty37';
-        webinarsTitleValidation.innerHTML = 'required';
-    }
-    if (webinarsDescription.value.length == 0) {
-        output = 'empty38';
-        webinarsDescriptionValidation.innerHTML = 'required';
-    }
-    if (webinarsLink.value.length == 0) {
-        output = 'empty39';
-        webinarsLinkValidation.innerHTML = 'required';
-    }
-    if (webinarsSchedule.value.length == 0) {
-        output = 'empty40';
-        webinarsScheduleValidation.innerHTML = 'required';
+        output = 'empty Confirm Password';
+        traderConfirmPasswordValidation.innerHTML = 'Confirm Password required';
     }
 
+    
+
+
+    
+    const iOperateOnAWorldWide = document.querySelector('#iOperateOnAWorldWideLevelRadioButton');
+    if (iOperateOnAWorldWide.checked) {
+        document.getElementById('traderRegionOfOperationValidation').innerHTML = '';
+        document.getElementById('traderCountryOfOperationValidation').innerHTML = '';
+        document.getElementById('traderStatesOfOperationValidation').innerHTML = '';
+    }
+
+    
+    const iOperateOnAGlobalRegional = document.querySelector('#iOperateOnAGlobalRegionalLevelRadioButton');
+    if (iOperateOnAGlobalRegional.checked) {
+        if (document.getElementById('traderRegionOfOperation').value.length == 0) {
+            output = 'empty region of operation';
+            document.getElementById('traderRegionOfOperationValidation').innerHTML = 'Region of Operation is required';
+        }
+    } else {
+        document.getElementById('traderRegionOfOperationValidation').innerHTML = '';
+    }
+
+    const iOperateOnANational = document.querySelector('#iOperateOnANationalLevelRadioButton');
+    if (iOperateOnANational.checked) {
+        if (document.getElementById('traderCountryOfOperation').value.length == 0) {
+            output = 'empty country of operation';
+            document.getElementById('traderCountryOfOperationValidation').innerHTML = 'Country of Operation is required';
+        }
+    } else {
+        document.getElementById('traderCountryOfOperationValidation').innerHTML = '';
+    }
+    
+    const iOperateOnAState = document.querySelector('#iOperateOnAStateLevelRadioButton');
+    if (iOperateOnAState.checked) {
+        if (document.getElementById('traderStatesOfOperation').value.length == 0) {
+            output = 'empty state of operation';
+            document.getElementById('traderStatesOfOperationValidation').innerHTML = 'State of Operation is required';
+        }
+    } else {
+        document.getElementById('traderStatesOfOperationValidation').innerHTML = '';
+    }
+    
     return output;
 }
 
@@ -347,13 +432,13 @@ companyBanner.onchange = (evt) => {
     }
 };
 
-videoInput.onchange = (evt) => {
-    const [file] = videoInput.files;
-    if (file) {
-        traderVideoValidation.style.display = 'none';
-        traderVideoValidation.innerHTML = '';
-    }
-};
+// videoInput.onchange = (evt) => {
+//     const [file] = videoInput.files;
+//     if (file) {
+//         traderVideoValidation.style.display = 'none';
+//         traderVideoValidation.innerHTML = '';
+//     }
+// };
 
 traderCompanyName.onkeyup = function () {
     required(traderCompanyName, traderCompanyNameValidation, 'Company Name is required');
@@ -404,95 +489,95 @@ traderRegionOfOperation.onchange = function () {
 };
 
 traderStartOperatingHour.onchange = function () {
-    required(traderStartOperatingHour, traderStartOperatingHourValidation, 'required');
+    required(traderStartOperatingHour, traderStartOperatingHourValidation, 'Start of Operation is required');
 };
 
 traderEndOperatingHour.onchange = function () {
-    required(traderEndOperatingHour, traderEndOperatingHourValidation, 'required');
+    required(traderEndOperatingHour, traderEndOperatingHourValidation, 'End of Operation is required');;
 };
 
 traderLanguagesOfCommunication.onchange = function () {
-    required(traderLanguagesOfCommunication, traderLanguagesOfCommunicationValidation, 'required');
+    required(traderLanguagesOfCommunication, traderLanguagesOfCommunicationValidation, 'Language of Communication is required');
 };
 
 traderTradeCategory.onchange = function () {
-    required(traderTradeCategory, traderTradeCategoryValidation, 'required');
+    required(traderTradeCategory, traderTradeCategoryValidation, 'Trade Category is required');
 };
 
 traderSubCategoryToggleField1.onchange = function () {
-    required(traderSubCategoryToggleField1, traderSubCategoryValidation, 'required');
+    required(traderSubCategoryToggleField1, traderSubCategoryValidation, 'Sub Category is required');
 };
 
 traderMinorSubCategoryToggleField1.onchange = function () {
-    required(traderMinorSubCategoryToggleField1, traderMinorSubCategoryValidation, 'required');
+    required(traderMinorSubCategoryToggleField1, traderMinorSubCategoryValidation, 'Minor Sub Category is required');
 };
 
 inputAddKeyword.onkeyup = function () {
-    required(textAreaAddKeywords, traderTagsValidation, 'required');
+    required(textAreaAddKeywords, traderTagsValidation, 'Tags is required');
 };
 
 traderBusinessScale.onchange = function () {
-    required(traderBusinessScale, traderBusinessScaleValidation, 'required');
+    required(traderBusinessScale, traderBusinessScaleValidation, 'Business Scale is required');
 };
 
 traderSurnameOfRepresentative.onkeyup = function () {
-    required(traderSurnameOfRepresentative, traderSurnameOfRepresentativeValidation, 'required');
+    required(traderSurnameOfRepresentative, traderSurnameOfRepresentativeValidation, 'Surname of representative is required');
 };
 
 traderGivenNameOfRepresentative.onkeyup = function () {
-    required(traderGivenNameOfRepresentative, traderGivenNameOfRepresentativeValidation, 'required');
+    required(traderGivenNameOfRepresentative, traderGivenNameOfRepresentativeValidation, 'Given name of representative is required');
 };
 
 traderHomeAddress.onkeyup = function () {
-    required(traderHomeAddress, traderHomeAddressValidation, 'required');
+    required(traderHomeAddress, traderHomeAddressValidation, 'Home address is required');;
 };
 
 traderCountryofResidence.onchange = function () {
-    required(traderCountryofResidence, traderCountryofResidenceValidation, 'required');
+    required(traderCountryofResidence, traderCountryofResidenceValidation, 'Country of residence is required');;
 };
 
 traderCityOfResidence.onchange = function () {
-    required(traderCityOfResidence, traderCityOfResidenceValidation, 'required');
+    required(traderCityOfResidence, traderCityOfResidenceValidation, 'City of residence is required');
 };
 
 traderCellphone.onchange = function () {
-    required(traderCellphone, traderCellphoneValidation, 'required');
+    required(traderCellphone, traderCellphoneValidation, 'Representative cellphone number is required');
 };
 
 traderEmailAddress.onchange = function () {
-    required(traderEmailAddress, traderEmailAddressValidation, 'required');
+    required(traderEmailAddress, traderEmailAddressValidation, 'Representative Email Address is required');
 };
 
 traderConfirmPassword.onkeyup = function () {
-    required(traderConfirmPassword, traderConfirmPasswordValidation, 'required');
+    required(traderConfirmPassword, traderConfirmPasswordValidation, 'Password is required');
 };
 
 videoTitle.onkeyup = function () {
-    required(videoTitle, videoTitleValidation, 'required');
+    required(videoTitle, videoTitleValidation, 'Video title is required');
 };
 
 videoDescription.onkeyup = function () {
-    required(videoDescription, videoDescriptionValidation, 'required');
+    required(videoDescription, videoDescriptionValidation, 'Video description is required');
 };
 
 brochureTitle.onkeyup = function () {
-    required(brochureTitle, brochureTitleValidation, 'required');
+    required(brochureTitle, brochureTitleValidation, 'Brochure title is required');
 };
 
 webinarsTitle.onkeyup = function () {
-    required(webinarsTitle, webinarsTitleValidation, 'required');
+    required(webinarsTitle, webinarsTitleValidation, 'Webinars title is required');
 };
 
 webinarsDescription.onkeyup = function () {
-    required(webinarsDescription, webinarsDescriptionValidation, 'required');
+    required(webinarsDescription, webinarsDescriptionValidation, 'Webinars description is required');
 };
 
 webinarsLink.onkeyup = function () {
-    required(webinarsLink, webinarsLinkValidation, 'required');
+    required(webinarsLink, webinarsLinkValidation, 'Webinars link is required');;
 };
 
 webinarsSchedule.onchange = function () {
-    required(webinarsSchedule, webinarsScheduleValidation, 'required');
+    required(webinarsSchedule, webinarsScheduleValidation, 'Webinars schedule is required');;
 };
 
 function required(elementIdInput, elementIdValidation, message) {
@@ -516,15 +601,15 @@ function required2(elementIdValidation, message) {
     }
 }
 
-videoInput.addEventListener('change', videoInputFileName);
+// videoInput.addEventListener('change', videoInputFileName);
 thumbnailInput.addEventListener('change', inputThumbnailFileName);
 webinarsThumbnailInput.addEventListener('change', webinarsThumbnailFileName);
 brochureInput.addEventListener('change', brochureFileName);
 
-function videoInputFileName() {
-    let fileName = videoInput.value;
-    videoName.innerHTML = fileName;
-}
+// function videoInputFileName() {
+//     let fileName = videoInput.value;
+//     videoName.innerHTML = fileName;
+// }
 
 function inputThumbnailFileName() {
     let fileName = thumbnailInput.value;
@@ -598,10 +683,10 @@ function tradersRegistrationServerValidation(message) {
         required2(companyLogoValidation, filteredcompanyLogo);
     }
 
-    let filteredVideoInput = message.filter((d) => d.param == 'videoInput');
-    if (filteredVideoInput) {
-        required2(traderVideoValidation, filteredVideoInput);
-    }
+    // let filteredVideoInput = message.filter((d) => d.param == 'videoInput');
+    // if (filteredVideoInput) {
+    //     required2(traderVideoValidation, filteredVideoInput);
+    // }
 
     let filteredThumbnailInput = message.filter((d) => d.param == 'thumbnailInput');
     if (filteredThumbnailInput) {

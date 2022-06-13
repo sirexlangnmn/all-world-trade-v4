@@ -3,5 +3,5 @@ module.exports = {
   USER: 'root',
   // PASSWORD: 'FightForYourDreams7!',
   PASSWORD: '',
-  DB: 'awt_db_4',
+  DB: 'awt_db_5',
 };

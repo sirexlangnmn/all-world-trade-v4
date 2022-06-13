@@ -381,151 +381,40 @@
                     </div>
                     <div class="flex-1 space-y-4 p-6">
                       <div class="space-y-3">
-    
-                        <div class="flex justify-between items-center">
-                          <div>
-                            <h4>I operate on a World Wide Level</h4>
-                            <!-- <p class="text-xs text-gray-400 mb-2">I do not operate on a Global Level.</p> -->
-                          </div>
-                          <div class="switches-list -mt-8 is-large">
-                            <div class="switch-container">
-                              <label class="switch">
-                                <input type="checkbox" id="iOperateOnAWorldWideLevelRadioButton"
-                                  name="iOperateOnAWorldWideLevelRadioButton">
-                                <span class="switch-button"></span>
-                              </label>
-                            </div>
-                          </div>
-                        </div>
-                        <hr>
-    
-                        <div id="editRegionOfOperationDiv">
+                        <div>
                           <label for="">Global Region of Operation</label>
-                          <!-- <span class="icon-feather-info" style="font-size: 16px; font-family: inherit"
-                              uk-tooltip="title: Leave this part if you dont cater in global regional level.; pos: right">
-                            </span> -->
-    
-    
-                          <div id="iOperateOnAGlobalRegionalLevelDiv">
-                            <div class="flex justify-between items-center">
-                              <div>
-                                <h4>I operate on a Global Regional Level</h4>
-                                <!-- <p class="text-xs text-gray-400 mb-2">I do not operate on a global regional level.</p> -->
-                              </div>
-                              <div class="switches-list -mt-8 is-large">
-                                <div class="switch-container">
-                                  <label class="switch">
-                                    <input type="checkbox" id="iOperateOnAGlobalRegionalLevelRadioButton"
-                                      name="iOperateOnAGlobalRegionalLevelRadioButton">
-                                    <span class="switch-button"></span>
-                                  </label>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-    
-                          <label for=""></label>
-                          <div id="editRegionOfOperationInput">
-                            <select id="traderRegionOfOperation" name="traderRegionOfOperation"
-                              class="shadow-none selectpicker with-border" multiple>
-                            </select>
-                          </div>
-                          <div id="editRegionOfOperationPlaceholder" style="display: none;">
-                            <input type="text" placeholder="Not Applicable" class="shadow-none with-border" disabled>
-                          </div>
-                          <p class="text-red-500" id="traderRegionOfOperationValidation"></p>
+                          <select id="editRegionOfOperation" name="editRegionOfOperation"
+                            class="shadow-none selectpicker with-border ">
+                          </select>
+                          <p class="text-red-500" id="editRegionOfOperationValidation"></p>
                         </div>
-                        <div id="countryOfOperationDiv">
+                        <div>
                           <label for="">Country of Operation</label>
-    
-                          <div class="" id="iOperateOnANationalLevelDiv">
-                            <div class="flex justify-between items-center">
-                              <div>
-                                <h4>I operate on a National Level</h4>
-                                <!-- <p class="text-xs text-gray-400 mb-2">I do not operate on a national level.</p> -->
-                              </div>
-                              <div class="switches-list -mt-8 is-large">
-                                <div class="switch-container">
-                                  <label class="switch">
-                                    <input type="checkbox" id="iOperateOnANationalLevelRadioButton"
-                                      name="iOperateOnANationalLevelRadioButton">
-                                    <span class="switch-button"></span>
-                                  </label>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-    
-                          <label for=""></label>
-                          <div id="countryOfOperationInput">
-                            <select id="traderCountryOfOperation" name="traderCountryOfOperation"
-                              class="shadow-none selectpicker with-border " multiple>
-                            </select>
-                          </div>
-                          <div id="countryOfOperationPlaceholder" style="display: none;">
-                            <input type="text" placeholder="Not Applicable" class="shadow-none with-border" disabled>
-                          </div>
-                          <p class="text-red-500" id="traderCountryOfOperationValidation"></p>
+                          <select id="countryOfOperation" name="countryOfOperation"
+                            class="shadow-none selectpicker with-border ">
+                          </select>
+                          <p class="text-red-500" id="countryOfOperationValidation"></p>
                         </div>
-    
-                        <div id="statesOfOperationDiv">
+                        <div>
                           <label for="">States of Operation</label>
-    
-                          <div id="iOperateOnAProvincialLevelDiv">
-                            <div class="flex justify-between items-center">
-                              <div>
-                                <h4>I operate on a Provincial/State Level</h4>
-                                <!-- <p class="text-xs text-gray-400 mb-2">I do not operate on a provincial/state level.</p> -->
-                              </div>
-                              <div class="switches-list -mt-8 is-large">
-                                <div class="switch-container">
-                                  <label class="switch">
-                                    <input type="checkbox" id="iOperateOnAStateLevelRadioButton"
-                                      name="iOperateOnAStateLevelRadioButton" checked="checked">
-                                    <span class="switch-button"></span>
-                                  </label>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-    
-                          <label for=""></label>
-                          <div id="countryOfOperationInput2" style="display: none;">
-                            <select id="traderCountryOfOperation2" name="traderCountryOfOperation2"
-                              class="shadow-none selectpicker with-border ">
-                            </select>
-                          </div>
-                          <label for=""></label>
-                          <div id="statesOfOperationInput">
-                            <select id="traderStatesOfOperation" name="traderStatesOfOperation"
-                              class="shadow-none selectpicker with-border ">
-                            </select>
-                          </div>
-                          <div id="statesOfOperationPlaceholder" style="display: none;">
-                            <input type="text" placeholder="Not Applicable" class="shadow-none with-border" disabled>
-                          </div>
-                          <p class="text-red-500" id="traderStatesOfOperationValidation"></p>
+                          <select id="statesOfOperation" name="statesOfOperation"
+                            class="shadow-none selectpicker with-border ">
+                          </select>
+                          <p class="text-red-500" id="statesOfOperationValidation"></p>
                         </div>
-    
-                        <div id="cityOfOperationDiv">
-                          <label for="">City of Operation</label>
-                          <div id="cityOfOperationInput">
-                            <select id="traderCityOfOperation" name="traderCityOfOperation"
-                              class="shadow-none selectpicker with-border ">
-                            </select>
-                          </div>
-                          <div id="cityOfOperationPlaceholder" style="display: none;">
-                            <input type="text" placeholder="Not Applicable" class="shadow-none with-border" disabled>
-                          </div>
-                          <p class="text-red-500" id="cityOfOperationValidation"></p>
-                          <p class="text-red-500" id="traderCityOfOperationValidation"></p>
+                        <div>
+                        <label for="">Cityof Operation</label>
+                        <select id="cityOfOperation" name="cityOfOperation"
+                          class="shadow-none selectpicker with-border ">
+                        </select>
+                        <p class="text-red-500" id="cityOfOperationValidation"></p>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
                 <div class="lg:w-1/3 w-full">
-    
+
                 </div>
               </div>
               <!-- ===============================  -->

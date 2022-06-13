@@ -1,4 +1,6 @@
 module.exports = (app) => {
+    const USERS_BUSINESS_MEDIAS = require('../query/users_business_medias.query.js');
+
     const express = require('express');
     const path = require('path');
     const nodemailer = require('nodemailer');
@@ -15,7 +17,7 @@ module.exports = (app) => {
         user: 'root',
         // password: 'FightForYourDreams7!',
         password: '',
-        database: 'awt_db_4',
+        database: 'awt_db_5',
     });
 
     db.connect(function (err) {
@@ -48,6 +50,114 @@ module.exports = (app) => {
         { name: 'webinarsThumbnailInput', maxCount: 1 },
     ]);
 
+    const uploadAllUsersBusinessMediasMiddleware = upload.fields([
+        { name: 'thumbnailInput', maxCount: 1 },
+        { name: 'companyBanner', maxCount: 1 },
+        { name: 'companyLogo', maxCount: 1 },
+        { name: 'brochureInput', maxCount: 1 },
+        { name: 'webinarsThumbnailInput', maxCount: 1 },
+    ]);
+
+    const uploadAllButNoLogoMiddleware = upload.fields([
+        { name: 'thumbnailInput', maxCount: 1 },
+        { name: 'companyBanner', maxCount: 1 },
+        { name: 'brochureInput', maxCount: 1 },
+        { name: 'webinarsThumbnailInput', maxCount: 1 },
+    ]);
+
+    const uploadAllButNoBannerMiddleware = upload.fields([
+        { name: 'thumbnailInput', maxCount: 1 },
+        { name: 'companyLogo', maxCount: 1 },
+        { name: 'brochureInput', maxCount: 1 },
+        { name: 'webinarsThumbnailInput', maxCount: 1 },
+    ]);
+
+    const uploadAllButNoVideoMiddleware = upload.fields([
+        { name: 'companyBanner', maxCount: 1 },
+        { name: 'companyLogo', maxCount: 1 },
+        { name: 'brochureInput', maxCount: 1 },
+        { name: 'webinarsThumbnailInput', maxCount: 1 },
+    ]);
+
+    const uploadAllButNoBrochureMiddleware = upload.fields([
+        { name: 'thumbnailInput', maxCount: 1 },
+        { name: 'companyBanner', maxCount: 1 },
+        { name: 'companyLogo', maxCount: 1 },
+        { name: 'webinarsThumbnailInput', maxCount: 1 },
+    ]);
+
+    const uploadAllButNoWebinarMiddleware = upload.fields([
+        { name: 'thumbnailInput', maxCount: 1 },
+        { name: 'companyBanner', maxCount: 1 },
+        { name: 'companyLogo', maxCount: 1 },
+        { name: 'brochureInput', maxCount: 1 },
+    ]);
+
+    const registrationUploadCompanyLogoBannerVideoMiddleware = upload.fields([
+        { name: 'companyBanner', maxCount: 1 },
+        { name: 'companyLogo', maxCount: 1 },
+        { name: 'thumbnailInput', maxCount: 1 },
+    ]);
+
+    const registrationUploadCompanyLogoBannerBrochureMiddleware = upload.fields([
+        { name: 'companyBanner', maxCount: 1 },
+        { name: 'companyLogo', maxCount: 1 },
+        { name: 'brochureInput', maxCount: 1 },
+    ]);
+
+    const registrationUploadCompanyLogoBannerWebinarMiddleware = upload.fields([
+        { name: 'companyBanner', maxCount: 1 },
+        { name: 'companyLogo', maxCount: 1 },
+        { name: 'webinarsThumbnailInput', maxCount: 1 },
+    ]);
+
+    const registrationUploadCompanyLogoVideoBrochureMiddleware = upload.fields([
+        { name: 'thumbnailInput', maxCount: 1 },
+        { name: 'companyLogo', maxCount: 1 },
+        { name: 'brochureInput', maxCount: 1 },
+    ]);
+
+    const registrationUploadCompanyLogoVideoWebinarMiddleware = upload.fields([
+        { name: 'thumbnailInput', maxCount: 1 },
+        { name: 'companyLogo', maxCount: 1 },
+        { name: 'webinarsThumbnailInput', maxCount: 1 },
+    ]);
+
+    const registrationUploadCompanyLogoBrochureWebinarMiddleware = upload.fields([
+        { name: 'companyLogo', maxCount: 1 },
+        { name: 'brochureInput', maxCount: 1 },
+        { name: 'webinarsThumbnailInput', maxCount: 1 },
+    ]);
+
+    const registrationUploadCompanyBannerVideoBrochureMiddleware = upload.fields([
+        { name: 'thumbnailInput', maxCount: 1 },
+        { name: 'companyBanner', maxCount: 1 },
+        { name: 'brochureInput', maxCount: 1 },
+    ]);
+
+    const registrationUploadCompanyBannerVideoWebinarMiddleware = upload.fields([
+        { name: 'thumbnailInput', maxCount: 1 },
+        { name: 'companyBanner', maxCount: 1 },
+        { name: 'webinarsThumbnailInput', maxCount: 1 },
+    ]);
+
+    const registrationUploadCompanyBannerBrochureWebinarMiddleware = upload.fields([
+        { name: 'companyBanner', maxCount: 1 },
+        { name: 'brochureInput', maxCount: 1 },
+        { name: 'webinarsThumbnailInput', maxCount: 1 },
+    ]);
+
+    const registrationUploadCompanyLogoBannerMiddleware = upload.fields([
+        { name: 'companyBanner', maxCount: 1 },
+        { name: 'companyLogo', maxCount: 1 },
+    ]);
+
+    const registrationUploadCompanyLogoMiddleware = upload.fields([{ name: 'companyLogo', maxCount: 1 }]);
+    const registrationUploadCompanyBannerMiddleware = upload.fields([{ name: 'companyBanner', maxCount: 1 }]);
+    const registrationUploadCompanyVideoMiddleware = upload.fields([{ name: 'thumbnailInput', maxCount: 1 }]);
+    const registrationUploadCompanyBrochureMiddleware = upload.fields([{ name: 'brochureInput', maxCount: 1 }]);
+    const registrationUploadCompanyWebinarMiddleware = upload.fields([{ name: 'webinarsThumbnailInput', maxCount: 1 }]);
+
     const uploadUsersBusinessMediasMiddleware2 = upload.fields([
         { name: 'videoInput', maxCount: 1 },
         { name: 'thumbnailInput', maxCount: 1 },
@@ -73,9 +183,7 @@ module.exports = (app) => {
         { name: 'companyLogo', maxCount: 1 },
     ]);
 
-
     app.post('/api/post/upload-users-business-medias', uploadUsersBusinessMediasMiddleware, (req, res) => {
-
         // console.log('req');
         // console.log(req);
         console.log('banner');
@@ -102,7 +210,6 @@ module.exports = (app) => {
         // console.log(req.body);
         // console.log('req.files');
         // console.log(req.files);
-        
 
         if (!req.files) {
             console.log('No file upload');
@@ -140,6 +247,701 @@ module.exports = (app) => {
         }
     });
 
+    app.post(
+        '/api/post/registration-upload-all-users-business-medias',
+        uploadAllUsersBusinessMediasMiddleware,
+        (req, res) => {
+            // console.log('req');
+            // console.log(req);
+            console.log('banner');
+            console.log(req.files['companyBanner'][0].filename);
+            // console.log(req.files['companyBanner']);
+            // console.log(req.files['companyLogo'][0].filename);
+            // console.log(req.files['companyLogo']);
+
+            // console.log('video');
+            // console.log(req.files['videoInput'][0].filename);
+            // console.log(req.files['videoInput']);
+            // console.log(req.files['thumbnailInput'][0].filename);
+            // console.log(req.files['thumbnailInput']);
+
+            // console.log('brochure');
+            // console.log(req.files['brochureInput'][0].filename);
+            // console.log(req.files['brochureInput']);
+
+            // console.log('webinars');
+            // console.log(req.files['webinarsThumbnailInput'][0].filename);
+            // console.log(req.files['webinarsThumbnailInput']);
+
+            // console.log('req.body');
+            // console.log(req.body);
+            // console.log('req.files');
+            // console.log(req.files);
+
+            if (!req.files) {
+                console.log('No file upload');
+            } else {
+                const inputObject = {
+                    logo: req.files['companyLogo'][0].filename,
+                    banner: req.files['companyBanner'][0].filename,
+                    video_thumbnail: req.files['thumbnailInput'][0].filename,
+                    video_link: req.body.videoLink,
+                    video_title: req.body.videoTitle,
+                    video_description: req.body.videoDescription,
+                    brochure: req.files['brochureInput'][0].filename,
+                    brochure_title: req.body.brochureTitle,
+                    webinars_thumbnail: req.files['webinarsThumbnailInput'][0].filename,
+                    webinars_title: req.body.webinarsTitle,
+                    webinars_description: req.body.webinarsDescription,
+                    webinars_link: req.body.webinarsLink,
+                    webinars_schedule: req.body.webinarsSchedule,
+                    uuid: req.body.uuid,
+                    date_created: new Date().toISOString().replace('T', ' ').substr(0, 19),
+                };
+
+                db.query(USERS_BUSINESS_MEDIAS.CREATE_ALL, Object.values(inputObject), (err, result) => {
+                    if (err) {
+                        //throw err;
+                        console.log(err);
+                    } else {
+                        res.send('success upload files');
+                        console.log('success upload files');
+                    }
+                });
+            }
+        },
+    );
+
+    app.post('/api/post/registration-upload-all-but-no-logo', uploadAllButNoLogoMiddleware, (req, res) => {
+        if (!req.files) {
+            console.log('No file upload');
+        } else {
+            const inputObject = {
+                banner: req.files['companyBanner'][0].filename,
+                video_thumbnail: req.files['thumbnailInput'][0].filename,
+                video_link: req.body.videoLink,
+                video_title: req.body.videoTitle,
+                video_description: req.body.videoDescription,
+                brochure: req.files['brochureInput'][0].filename,
+                brochure_title: req.body.brochureTitle,
+                webinars_thumbnail: req.files['webinarsThumbnailInput'][0].filename,
+                webinars_title: req.body.webinarsTitle,
+                webinars_description: req.body.webinarsDescription,
+                webinars_link: req.body.webinarsLink,
+                webinars_schedule: req.body.webinarsSchedule,
+                uuid: req.body.uuid,
+                date_created: new Date().toISOString().replace('T', ' ').substr(0, 19),
+            };
+
+            db.query(USERS_BUSINESS_MEDIAS.CREATE_ALL_BUT_NO_LOGO, Object.values(inputObject), (err, result) => {
+                if (err) {
+                    //throw err;
+                    console.log(err);
+                } else {
+                    res.send('success upload files');
+                    console.log('success upload files');
+                }
+            });
+        }
+    });
+
+    app.post('/api/post/registration-upload-all-but-no-banner', uploadAllButNoBannerMiddleware, (req, res) => {
+        if (!req.files) {
+            console.log('No file upload');
+        } else {
+            const inputObject = {
+                logo: req.files['companyLogo'][0].filename,
+                video_thumbnail: req.files['thumbnailInput'][0].filename,
+                video_link: req.body.videoLink,
+                video_title: req.body.videoTitle,
+                video_description: req.body.videoDescription,
+                brochure: req.files['brochureInput'][0].filename,
+                brochure_title: req.body.brochureTitle,
+                webinars_thumbnail: req.files['webinarsThumbnailInput'][0].filename,
+                webinars_title: req.body.webinarsTitle,
+                webinars_description: req.body.webinarsDescription,
+                webinars_link: req.body.webinarsLink,
+                webinars_schedule: req.body.webinarsSchedule,
+                uuid: req.body.uuid,
+                date_created: new Date().toISOString().replace('T', ' ').substr(0, 19),
+            };
+
+            db.query(USERS_BUSINESS_MEDIAS.CREATE_ALL_BUT_NO_BANNER, Object.values(inputObject), (err, result) => {
+                if (err) {
+                    //throw err;
+                    console.log(err);
+                } else {
+                    res.send('success upload files');
+                    console.log('success upload files');
+                }
+            });
+        }
+    });
+
+    app.post('/api/post/registration-upload-all-but-no-video', uploadAllButNoVideoMiddleware, (req, res) => {
+        if (!req.files) {
+            console.log('No file upload');
+        } else {
+            const inputObject = {
+                logo: req.files['companyLogo'][0].filename,
+                banner: req.files['companyBanner'][0].filename,
+                brochure: req.files['brochureInput'][0].filename,
+                brochure_title: req.body.brochureTitle,
+                webinars_thumbnail: req.files['webinarsThumbnailInput'][0].filename,
+                webinars_title: req.body.webinarsTitle,
+                webinars_description: req.body.webinarsDescription,
+                webinars_link: req.body.webinarsLink,
+                webinars_schedule: req.body.webinarsSchedule,
+                uuid: req.body.uuid,
+                date_created: new Date().toISOString().replace('T', ' ').substr(0, 19),
+            };
+
+            db.query(USERS_BUSINESS_MEDIAS.CREATE_ALL_BUT_NO_VIDEO, Object.values(inputObject), (err, result) => {
+                if (err) {
+                    //throw err;
+                    console.log(err);
+                } else {
+                    res.send('success upload files');
+                    console.log('success upload files');
+                }
+            });
+        }
+    });
+
+    app.post('/api/post/registration-upload-all-but-no-brochure', uploadAllButNoBrochureMiddleware, (req, res) => {
+        if (!req.files) {
+            console.log('No file upload');
+        } else {
+            const inputObject = {
+                logo: req.files['companyLogo'][0].filename,
+                banner: req.files['companyBanner'][0].filename,
+                video_thumbnail: req.files['thumbnailInput'][0].filename,
+                video_link: req.body.videoLink,
+                video_title: req.body.videoTitle,
+                video_description: req.body.videoDescription,
+                webinars_thumbnail: req.files['webinarsThumbnailInput'][0].filename,
+                webinars_title: req.body.webinarsTitle,
+                webinars_description: req.body.webinarsDescription,
+                webinars_link: req.body.webinarsLink,
+                webinars_schedule: req.body.webinarsSchedule,
+                uuid: req.body.uuid,
+                date_created: new Date().toISOString().replace('T', ' ').substr(0, 19),
+            };
+
+            db.query(USERS_BUSINESS_MEDIAS.CREATE_ALL_BUT_NO_BROCHURE, Object.values(inputObject), (err, result) => {
+                if (err) {
+                    //throw err;
+                    console.log(err);
+                } else {
+                    res.send('success upload files');
+                    console.log('success upload files');
+                }
+            });
+        }
+    });
+
+    app.post('/api/post/registration-upload-all-but-no-webinar', uploadAllButNoWebinarMiddleware, (req, res) => {
+        if (!req.files) {
+            console.log('No file upload');
+        } else {
+            const inputObject = {
+                logo: req.files['companyLogo'][0].filename,
+                banner: req.files['companyBanner'][0].filename,
+                video_thumbnail: req.files['thumbnailInput'][0].filename,
+                video_link: req.body.videoLink,
+                video_title: req.body.videoTitle,
+                video_description: req.body.videoDescription,
+                brochure: req.files['brochureInput'][0].filename,
+                brochure_title: req.body.brochureTitle,
+                uuid: req.body.uuid,
+                date_created: new Date().toISOString().replace('T', ' ').substr(0, 19),
+            };
+
+            db.query(USERS_BUSINESS_MEDIAS.CREATE_ALL_BUT_NO_WEBINAR, Object.values(inputObject), (err, result) => {
+                if (err) {
+                    //throw err;
+                    console.log(err);
+                } else {
+                    res.send('success upload files');
+                    console.log('success upload files');
+                }
+            });
+        }
+    });
+
+    app.post(
+        '/api/post/registration-upload-company-logo-banner-video',
+        registrationUploadCompanyLogoBannerVideoMiddleware,
+        (req, res) => {
+            if (!req.files) {
+                console.log('No file upload');
+            } else {
+                const inputObject = {
+                    logo: req.files['companyLogo'][0].filename,
+                    banner: req.files['companyBanner'][0].filename,
+                    video_thumbnail: req.files['thumbnailInput'][0].filename,
+                    video_link: req.body.videoLink,
+                    video_title: req.body.videoTitle,
+                    video_description: req.body.videoDescription,
+                    uuid: req.body.uuid,
+                    date_created: new Date().toISOString().replace('T', ' ').substr(0, 19),
+                };
+
+                db.query(USERS_BUSINESS_MEDIAS.CREATE_LOGO_BANNER_VIDEO, Object.values(inputObject), (err, result) => {
+                    if (err) {
+                        //throw err;
+                        console.log(err);
+                    } else {
+                        res.send('success upload files');
+                        console.log('success upload files');
+                    }
+                });
+            }
+        },
+    );
+
+    app.post(
+        '/api/post/registration-upload-company-logo-banner-brochure',
+        registrationUploadCompanyLogoBannerBrochureMiddleware,
+        (req, res) => {
+            if (!req.files) {
+                console.log('No file upload');
+            } else {
+                const inputObject = {
+                    logo: req.files['companyLogo'][0].filename,
+                    banner: req.files['companyBanner'][0].filename,
+                    brochure: req.files['brochureInput'][0].filename,
+                    brochure_title: req.body.brochureTitle,
+                    uuid: req.body.uuid,
+                    date_created: new Date().toISOString().replace('T', ' ').substr(0, 19),
+                };
+
+                db.query(
+                    USERS_BUSINESS_MEDIAS.CREATE_LOGO_BANNER_BROCHURE,
+                    Object.values(inputObject),
+                    (err, result) => {
+                        if (err) {
+                            //throw err;
+                            console.log(err);
+                        } else {
+                            res.send('success upload files');
+                            console.log('success upload files');
+                        }
+                    },
+                );
+            }
+        },
+    );
+
+    app.post(
+        '/api/post/registration-upload-company-logo-banner-webinar',
+        registrationUploadCompanyLogoBannerWebinarMiddleware,
+        (req, res) => {
+            if (!req.files) {
+                console.log('No file upload');
+            } else {
+                const inputObject = {
+                    logo: req.files['companyLogo'][0].filename,
+                    banner: req.files['companyBanner'][0].filename,
+                    webinars_thumbnail: req.files['webinarsThumbnailInput'][0].filename,
+                    webinars_title: req.body.webinarsTitle,
+                    webinars_description: req.body.webinarsDescription,
+                    webinars_link: req.body.webinarsLink,
+                    webinars_schedule: req.body.webinarsSchedule,
+                    uuid: req.body.uuid,
+                    date_created: new Date().toISOString().replace('T', ' ').substr(0, 19),
+                };
+
+                db.query(
+                    USERS_BUSINESS_MEDIAS.CREATE_LOGO_BANNER_WEBINAR,
+                    Object.values(inputObject),
+                    (err, result) => {
+                        if (err) {
+                            //throw err;
+                            console.log(err);
+                        } else {
+                            res.send('success upload files');
+                            console.log('success upload files');
+                        }
+                    },
+                );
+            }
+        },
+    );
+
+    app.post(
+        '/api/post/registration-upload-company-logo-video-brochure',
+        registrationUploadCompanyLogoVideoBrochureMiddleware,
+        (req, res) => {
+            if (!req.files) {
+                console.log('No file upload');
+            } else {
+                const inputObject = {
+                    logo: req.files['companyLogo'][0].filename,
+                    video_thumbnail: req.files['thumbnailInput'][0].filename,
+                    video_link: req.body.videoLink,
+                    video_title: req.body.videoTitle,
+                    video_description: req.body.videoDescription,
+                    brochure: req.files['brochureInput'][0].filename,
+                    brochure_title: req.body.brochureTitle,
+                    uuid: req.body.uuid,
+                    date_created: new Date().toISOString().replace('T', ' ').substr(0, 19),
+                };
+
+                db.query(
+                    USERS_BUSINESS_MEDIAS.CREATE_LOGO_VIDEO_BROCHURE,
+                    Object.values(inputObject),
+                    (err, result) => {
+                        if (err) {
+                            //throw err;
+                            console.log(err);
+                        } else {
+                            res.send('success upload files');
+                            console.log('success upload files');
+                        }
+                    },
+                );
+            }
+        },
+    );
+
+    app.post(
+        '/api/post/registration-upload-company-logo-video-webinar',
+        registrationUploadCompanyLogoVideoWebinarMiddleware,
+        (req, res) => {
+            if (!req.files) {
+                console.log('No file upload');
+            } else {
+                const inputObject = {
+                    logo: req.files['companyLogo'][0].filename,
+                    video_thumbnail: req.files['thumbnailInput'][0].filename,
+                    video_link: req.body.videoLink,
+                    video_title: req.body.videoTitle,
+                    video_description: req.body.videoDescription,
+                    webinars_thumbnail: req.files['webinarsThumbnailInput'][0].filename,
+                    webinars_title: req.body.webinarsTitle,
+                    webinars_description: req.body.webinarsDescription,
+                    webinars_link: req.body.webinarsLink,
+                    webinars_schedule: req.body.webinarsSchedule,
+                    uuid: req.body.uuid,
+                    date_created: new Date().toISOString().replace('T', ' ').substr(0, 19),
+                };
+
+                db.query(USERS_BUSINESS_MEDIAS.CREATE_LOGO_VIDEO_WEBINAR, Object.values(inputObject), (err, result) => {
+                    if (err) {
+                        //throw err;
+                        console.log(err);
+                    } else {
+                        res.send('success upload files');
+                        console.log('success upload files');
+                    }
+                });
+            }
+        },
+    );
+
+    app.post(
+        '/api/post/registration-upload-company-logo-brochure-webinar',
+        registrationUploadCompanyLogoBrochureWebinarMiddleware,
+        (req, res) => {
+            if (!req.files) {
+                console.log('No file upload');
+            } else {
+                const inputObject = {
+                    logo: req.files['companyLogo'][0].filename,
+                    brochure: req.files['brochureInput'][0].filename,
+                    brochure_title: req.body.brochureTitle,
+                    webinars_thumbnail: req.files['webinarsThumbnailInput'][0].filename,
+                    webinars_title: req.body.webinarsTitle,
+                    webinars_description: req.body.webinarsDescription,
+                    webinars_link: req.body.webinarsLink,
+                    webinars_schedule: req.body.webinarsSchedule,
+                    uuid: req.body.uuid,
+                    date_created: new Date().toISOString().replace('T', ' ').substr(0, 19),
+                };
+
+                db.query(
+                    USERS_BUSINESS_MEDIAS.CREATE_LOGO_BROCHURE_WEBINAR,
+                    Object.values(inputObject),
+                    (err, result) => {
+                        if (err) {
+                            //throw err;
+                            console.log(err);
+                        } else {
+                            res.send('success upload files');
+                            console.log('success upload files');
+                        }
+                    },
+                );
+            }
+        },
+    );
+
+    app.post(
+        '/api/post/registration-upload-company-banner-video-brochure',
+        registrationUploadCompanyBannerVideoBrochureMiddleware,
+        (req, res) => {
+            if (!req.files) {
+                console.log('No file upload');
+            } else {
+                const inputObject = {
+                    banner: req.files['companyBanner'][0].filename,
+                    video_thumbnail: req.files['thumbnailInput'][0].filename,
+                    video_link: req.body.videoLink,
+                    video_title: req.body.videoTitle,
+                    video_description: req.body.videoDescription,
+                    brochure: req.files['brochureInput'][0].filename,
+                    brochure_title: req.body.brochureTitle,
+                    uuid: req.body.uuid,
+                    date_created: new Date().toISOString().replace('T', ' ').substr(0, 19),
+                };
+
+                db.query(
+                    USERS_BUSINESS_MEDIAS.CREATE_BANNER_VIDEO_BROCHURE,
+                    Object.values(inputObject),
+                    (err, result) => {
+                        if (err) {
+                            //throw err;
+                            console.log(err);
+                        } else {
+                            res.send('success upload files');
+                            console.log('success upload files');
+                        }
+                    },
+                );
+            }
+        },
+    );
+
+    app.post(
+        '/api/post/registration-upload-company-banner-video-webinar',
+        registrationUploadCompanyBannerVideoWebinarMiddleware,
+        (req, res) => {
+            if (!req.files) {
+                console.log('No file upload');
+            } else {
+                const inputObject = {
+                    banner: req.files['companyBanner'][0].filename,
+                    video_thumbnail: req.files['thumbnailInput'][0].filename,
+                    video_link: req.body.videoLink,
+                    video_title: req.body.videoTitle,
+                    video_description: req.body.videoDescription,
+                    webinars_thumbnail: req.files['webinarsThumbnailInput'][0].filename,
+                    webinars_title: req.body.webinarsTitle,
+                    webinars_description: req.body.webinarsDescription,
+                    webinars_link: req.body.webinarsLink,
+                    webinars_schedule: req.body.webinarsSchedule,
+                    uuid: req.body.uuid,
+                    date_created: new Date().toISOString().replace('T', ' ').substr(0, 19),
+                };
+
+                db.query(
+                    USERS_BUSINESS_MEDIAS.CREATE_BANNER_VIDEO_WEBINAR,
+                    Object.values(inputObject),
+                    (err, result) => {
+                        if (err) {
+                            //throw err;
+                            console.log(err);
+                        } else {
+                            res.send('success upload files');
+                            console.log('success upload files');
+                        }
+                    },
+                );
+            }
+        },
+    );
+
+    app.post(
+        '/api/post/registration-upload-company-banner-brochure-webinar',
+        registrationUploadCompanyBannerBrochureWebinarMiddleware,
+        (req, res) => {
+            if (!req.files) {
+                console.log('No file upload');
+            } else {
+                const inputObject = {
+                    banner: req.files['companyBanner'][0].filename,
+                    brochure: req.files['brochureInput'][0].filename,
+                    brochure_title: req.body.brochureTitle,
+                    webinars_thumbnail: req.files['webinarsThumbnailInput'][0].filename,
+                    webinars_title: req.body.webinarsTitle,
+                    webinars_description: req.body.webinarsDescription,
+                    webinars_link: req.body.webinarsLink,
+                    webinars_schedule: req.body.webinarsSchedule,
+                    uuid: req.body.uuid,
+                    date_created: new Date().toISOString().replace('T', ' ').substr(0, 19),
+                };
+
+                db.query(
+                    USERS_BUSINESS_MEDIAS.CREATE_BANNER_BROCHURE_WEBINAR,
+                    Object.values(inputObject),
+                    (err, result) => {
+                        if (err) {
+                            //throw err;
+                            console.log(err);
+                        } else {
+                            res.send('success upload files');
+                            console.log('success upload files');
+                        }
+                    },
+                );
+            }
+        },
+    );
+
+    app.post(
+        '/api/post/registration-upload-company-logo-banner',
+        registrationUploadCompanyLogoBannerMiddleware,
+        (req, res) => {
+            if (!req.files) {
+                console.log('No file upload');
+            } else {
+                const inputObject = {
+                    logo: req.files['companyLogo'][0].filename,
+                    banner: req.files['companyBanner'][0].filename,
+                    uuid: req.body.uuid,
+                    date_created: new Date().toISOString().replace('T', ' ').substr(0, 19),
+                };
+
+                db.query(USERS_BUSINESS_MEDIAS.CREATE_LOGO_BANNER, Object.values(inputObject), (err, result) => {
+                    if (err) {
+                        //throw err;
+                        console.log(err);
+                    } else {
+                        res.send('success upload files');
+                        console.log('success upload files');
+                    }
+                });
+            }
+        },
+    );
+
+    app.post('/api/post/registration-upload-company-logo', registrationUploadCompanyLogoMiddleware, (req, res) => {
+        if (!req.files) {
+            console.log('No file upload');
+        } else {
+            const inputObject = {
+                logo: req.files['companyLogo'][0].filename,
+                uuid: req.body.uuid,
+                date_created: new Date().toISOString().replace('T', ' ').substr(0, 19),
+            };
+
+            db.query(USERS_BUSINESS_MEDIAS.CREATE_LOGO, Object.values(inputObject), (err, result) => {
+                if (err) {
+                    //throw err;
+                    console.log(err);
+                } else {
+                    res.send('success upload files');
+                    console.log('success upload files');
+                }
+            });
+        }
+    });
+
+    app.post('/api/post/registration-upload-company-banner', registrationUploadCompanyBannerMiddleware, (req, res) => {
+        if (!req.files) {
+            console.log('No file upload');
+        } else {
+            const inputObject = {
+                banner: req.files['companyBanner'][0].filename,
+                uuid: req.body.uuid,
+                date_created: new Date().toISOString().replace('T', ' ').substr(0, 19),
+            };
+
+            db.query(USERS_BUSINESS_MEDIAS.CREATE_BANNER, Object.values(inputObject), (err, result) => {
+                if (err) {
+                    //throw err;
+                    console.log(err);
+                } else {
+                    res.send('success upload files');
+                    console.log('success upload files');
+                }
+            });
+        }
+    });
+
+    app.post('/api/post/registration-upload-company-video', registrationUploadCompanyVideoMiddleware, (req, res) => {
+        if (!req.files) {
+            console.log('No file upload');
+        } else {
+            const inputObject = {
+                video_thumbnail: req.files['thumbnailInput'][0].filename,
+                video_link: req.body.videoLink,
+                video_title: req.body.videoTitle,
+                video_description: req.body.videoDescription,
+                uuid: req.body.uuid,
+                date_created: new Date().toISOString().replace('T', ' ').substr(0, 19),
+            };
+
+            db.query(USERS_BUSINESS_MEDIAS.CREATE_VIDEO, Object.values(inputObject), (err, result) => {
+                if (err) {
+                    //throw err;
+                    console.log(err);
+                } else {
+                    res.send('success upload files');
+                    console.log('success upload files');
+                }
+            });
+        }
+    });
+
+    app.post(
+        '/api/post/registration-upload-company-brochure',
+        registrationUploadCompanyBrochureMiddleware,
+        (req, res) => {
+            if (!req.files) {
+                console.log('No file upload');
+            } else {
+                const inputObject = {
+                    brochure: req.files['brochureInput'][0].filename,
+                    brochure_title: req.body.brochureTitle,
+                    uuid: req.body.uuid,
+                    date_created: new Date().toISOString().replace('T', ' ').substr(0, 19),
+                };
+
+                db.query(USERS_BUSINESS_MEDIAS.CREATE_BROCHURE, Object.values(inputObject), (err, result) => {
+                    if (err) {
+                        //throw err;
+                        console.log(err);
+                    } else {
+                        res.send('success upload files');
+                        console.log('success upload files');
+                    }
+                });
+            }
+        },
+    );
+
+    app.post(
+        '/api/post/registration-upload-company-webinar',
+        registrationUploadCompanyWebinarMiddleware,
+        (req, res) => {
+            if (!req.files) {
+                console.log('No file upload');
+            } else {
+                const inputObject = {
+                    webinars_thumbnail: req.files['webinarsThumbnailInput'][0].filename,
+                    webinars_title: req.body.webinarsTitle,
+                    webinars_description: req.body.webinarsDescription,
+                    webinars_link: req.body.webinarsLink,
+                    webinars_schedule: req.body.webinarsSchedule,
+                    uuid: req.body.uuid,
+                    date_created: new Date().toISOString().replace('T', ' ').substr(0, 19),
+                };
+
+                db.query(USERS_BUSINESS_MEDIAS.CREATE_WEBINAR, Object.values(inputObject), (err, result) => {
+                    if (err) {
+                        //throw err;
+                        console.log(err);
+                    } else {
+                        res.send('success upload files');
+                        console.log('success upload files');
+                    }
+                });
+            }
+        },
+    );
+
     app.post('/api/post/registration-email-verification', (req, res) => {
         console.log('verification_code', req.body.verification_code);
         console.log('email_or_social_media', req.body.email_or_social_media);
@@ -148,9 +950,9 @@ module.exports = (app) => {
 
         let verification_code = req.body.verification_code;
         let receiverEmailAddress = req.body.email_or_social_media;
-        
-         // create reusable transporter object using the default SMTP transport
-         let transporter = nodemailer.createTransport({
+
+        // create reusable transporter object using the default SMTP transport
+        let transporter = nodemailer.createTransport({
             host: 'mail.allworldtrade.com', // smtp.gmail.com
             port: 587,
             secure: false, // true for 465, false for other ports
@@ -200,7 +1002,6 @@ module.exports = (app) => {
             // res.render('Email has been sent');
         });
     });
-
 
     app.post('/api/post/upload-users-business-medias2', uploadUsersBusinessMediasMiddleware2, (req, res) => {
         if (!req.files) {
@@ -252,7 +1053,6 @@ module.exports = (app) => {
         }
     });
 
-
     app.post('/api/post/upload-video2', uploadVideoMiddleware, (req, res) => {
         if (!req.files) {
             console.log('No file upload');
@@ -283,6 +1083,7 @@ module.exports = (app) => {
     });
 
     app.post('/api/post/upload-brochure', uploadbrochureMiddleware, (req, res) => {
+        // console.log('uploadbrochureMiddleware');
         // console.log(req.files['brochure']);
         // console.log(req.files['brochure'][0].filename);
         // console.log(req.body.brochureTitle);

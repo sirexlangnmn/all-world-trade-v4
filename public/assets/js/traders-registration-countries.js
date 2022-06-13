@@ -5,6 +5,7 @@ let traderCityOfResidence;
 let traderBusinessCityLocations;
 let traderCityOfResidences;
 let traderCountryOfOperation;
+let traderCountryOfOperation2;
 let traderStatesOfOperation;
 let traderCityOfOperation;
 
@@ -16,6 +17,7 @@ traderCityOfResidence = getId('traderCityOfResidence');
 traderBusinessCityLocations = getId('traderBusinessCityLocations');
 traderCityOfResidences = getId('traderCityOfResidences');
 traderCountryOfOperation = getId('traderCountryOfOperation');
+traderCountryOfOperation2 = getId('traderCountryOfOperation2');
 traderStatesOfOperation = getId('traderStatesOfOperation');
 traderCityOfOperation = getId('traderCityOfOperation');
 
@@ -268,7 +270,25 @@ fetch('assets/json/countries.json')
         }
     });
 
-traderCountryOfOperation.addEventListener('change', function () {
+fetch('assets/json/countries.json')
+    .then(function (resp) {
+        return resp.json();
+    })
+    .then(function (data) {
+        traderCountryOfOperation2.innerHTML = '<option value="" >Select</option>';
+        for (var i = 0; i < data.length; i++) {
+            traderCountryOfOperation2.innerHTML =
+                traderCountryOfOperation2.innerHTML +
+                '<option value="' +
+                data[i].iso2 +
+                '">' +
+                data[i].name +
+                '</option>';
+        }
+    });
+
+
+traderCountryOfOperation2.addEventListener('change', function () {
     $('#traderStatesOfOperation').empty();
     $('#traderCityOfOperation').empty();
 

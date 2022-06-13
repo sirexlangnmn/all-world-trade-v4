@@ -18,7 +18,7 @@
           <div class="profile is_page">
             <div class="profiles_banner profile_avatar image-upload">
               <label for="companyBanner">
-                <img id="companyBannerPreview" src="uploads/banner/banner.jpg" />
+                <img id="companyBannerPreview" src="uploads/placeholder/banner-placeholder2.jpg" />
               </label>
               <input type="file" id="companyBanner" name="companyBanner" />
             </div>
@@ -26,7 +26,7 @@
             <div class="profiles_content">
               <div class="profile_avatar image-upload">
                 <label for="companyLogo">
-                  <img id="companyLogoPreview" src="uploads/logo/circle-logo2.png" />
+                  <img id="companyLogoPreview" src="uploads/placeholder/logo-placeholder2.jpg" />
                 </label>
                 <input type="file" id="companyLogo" name="companyLogo" />
                 <p class="text-red-500" style="text-align: center; margin-top: -18px" id="companyLogoValidation"></p>
@@ -220,7 +220,7 @@
               <div class="bg-white rounded-md lg:shadow-md shadow">
                 <div class="border-b flex items-center justify-between p-4">
                   <div>
-                    <h2 class="text-lg font-semibold">Representative
+                    <h2 class="text-lg font-semibold">Representative Details
                       <a class="hover:border-gray-100" href="#">
                         <span class="icon-feather-info" style="font-size: 16px; font-family: inherit" uk-tooltip="title: Representative Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.; pos: right">
                         </span>
@@ -270,7 +270,7 @@
                     <p class="text-red-500" id="traderCellphoneValidation"></p>
                   </div> -->
                   <div>
-                    <label for=""> Representative Email Address (verifiable): </label>
+                    <label for=""> Representative Email Address (same as Registration/Login email): </label>
                     <input type="text" placeholder="" class="shadow-none with-border" id="traderEmailAddress" name="traderEmailAddress">
                     <p class="text-red-500" id="traderEmailAddressValidation"></p>
                   </div>
@@ -448,6 +448,12 @@
                         </div>
                       </div>
 
+                      <label for=""></label>
+                      <div id="countryOfOperationInput2" style="display: none;">
+                        <select id="traderCountryOfOperation2" name="traderCountryOfOperation2"
+                          class="shadow-none selectpicker with-border ">
+                        </select>
+                      </div>
                       <label for=""></label>
                       <div id="statesOfOperationInput">
                         <select id="traderStatesOfOperation" name="traderStatesOfOperation"
@@ -627,21 +633,35 @@
             <div class="lg:w-2/3 w-full mb-2">
               <div class="card mb-2">
                 <div class="border-b flex items-center justify-between p-4">
-                  <div>
                     <h2 class="text-lg font-semibold">Video
                       <a class="hover:border-gray-100" href="#">
                         <span class="icon-feather-info" style="font-size: 16px; font-family: inherit" uk-tooltip="title: Video Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.; pos: right">
                         </span>
                       </a>
                     </h2>
-                  </div>
                   <div class="text-right">
+                    <button
+                        type="button"
+                        class="bg-blue-600 font-semibold p-2 rounded-md text-center text-white w-full"
+                        id="btnWantToUploadCompanyVideo"
+                    >
+                    Upload Company Video
+                    </button>
+                    <button
+                        type="button"
+                        class="bg-blue-600 font-semibold p-2 rounded-md text-center text-white w-full"
+                        id="btnCancelUploadCompanyVideo"
+                        style="display: none"
+                    >
+                    Upload Later
+                    </button>
+                    <input type="hidden" id="inputWantToUploadCompanyVideo" name="inputWantToUploadCompanyVideo" >
                   </div>
                 </div>
-                <div class="flex-1 space-y-4 p-6">
+                <div class="flex-1 space-y-4 p-6" id="formWantToUploadCompanyVideo" style="display: none">
                   <div class="space-y-3">
                     <label> Video </label>
-                    <div class="relative uk-transition-toggle overflow-hidden">
+                    <!-- <div class="relative uk-transition-toggle overflow-hidden">
                       <div class="bg-gray-100 border-2 border-dashed flex flex-col h-40 items-center justify-center relative w-full rounded-lg dark:bg-gray-800 dark:border-gray-600">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-12">
                           <path d="M5.5 13a3.5 3.5 0 01-.369-6.98 4 4 0 117.753-1.977A4.5 4.5 0 1113.5 13H11V9.413l1.293 1.293a1 1 0 001.414-1.414l-3-3a1 1 0 00-1.414 0l-3 3a1 1 0 001.414 1.414L9 9.414V13H5.5z" />
@@ -656,7 +676,13 @@
                         </div>
                         <p class="text-red-500" id="traderVideoValidation"></p>
                       </div>
+                    </div> -->
+                    <div>
+                      <label> Video Link </label>
+                      <input type="text" class="with-border" placeholder="" id="videoLink" name="videoLink">
+                      <p class="text-red-500" id="videoLinkValidation"></p>
                     </div>
+
                     <label> Thumbnail </label>
                     <div class="relative uk-transition-toggle overflow-hidden">
                       <div class="bg-gray-100 border-2 border-dashed flex flex-col h-40 items-center justify-center relative w-full rounded-lg dark:bg-gray-800 dark:border-gray-600">
@@ -719,9 +745,25 @@
                     </h2>
                   </div>
                   <div class="text-right">
+                    <button
+                        type="button"
+                        class="bg-blue-600 font-semibold p-2 rounded-md text-center text-white w-full"
+                        id="btnWantToUploadCompanyBrochure"
+                    >
+                    Upload Company Brochure
+                    </button>
+                    <button
+                        type="button"
+                        class="bg-blue-600 font-semibold p-2 rounded-md text-center text-white w-full"
+                        id="btnCancelUploadCompanyBrochure"
+                        style="display: none"
+                    >
+                    Upload Later
+                    </button>
+                    <input type="hidden" id="inputWantToUploadCompanyBrochure" name="inputWantToUploadCompanyBrochure" >
                   </div>
                 </div>
-                <div class="flex-1 space-y-4 p-6">
+                <div class="flex-1 space-y-4 p-6" id="formWantToUploadCompanyBrochure" style="display: none">
                   <div class="space-y-3">
                     <label> Brochure </label>
                     <div class="relative uk-transition-toggle overflow-hidden">
@@ -777,9 +819,25 @@
                     </h2>
                   </div>
                   <div class="text-right">
+                    <button
+                        type="button"
+                        class="bg-blue-600 font-semibold p-2 rounded-md text-center text-white w-full"
+                        id="btnWantToUploadCompanyWebinar"
+                    >
+                    Upload Company Webinar Details
+                    </button>
+                    <button
+                        type="button"
+                        class="bg-blue-600 font-semibold p-2 rounded-md text-center text-white w-full"
+                        id="btnCancelUploadCompanyWebinar"
+                        style="display: none"
+                    >
+                    Upload Later
+                    </button>
+                    <input type="hidden" id="inputWantToUploadCompanyWebinar" name="inputWantToUploadCompanyWebinar" >
                   </div>
                 </div>
-                <div class="flex-1 space-y-4 p-6">
+                <div class="flex-1 space-y-4 p-6" id="formWantToUploadCompanyWebinar" style="display: none">
                   <div class="space-y-3">
                     <label> Webinars Thumbnail </label>
                     <div class="relative uk-transition-toggle overflow-hidden">
@@ -823,11 +881,7 @@
                     <input type="text" class="shadow-none with-border" id="link_2" name="link_2" style="display: none;" readonly>
                   </div>
                 </div>
-               
-                <div class="bg-gray-10 p-6 pt-0 flex justify-end space-x-3">
-                  <button class="p-2 px-4 rounded bg-gray-50 text-red-500"> Cancel </button>
-                  <button type="button" class="button bg-blue-700" id="btnTraderRegistrationForm"> Save </button>
-                </div>
+              
               </div>
             </div>
             <div class="lg:w-1/3 w-full">
@@ -837,6 +891,27 @@
           <!-- ===============================  -->
           <!-- Webinars - END  -->
           <!-- ===============================  -->
+
+
+          <div class="lg:flex lg:space-x-10 mt-2.5">
+            <div class="lg:w-2/3 w-full mb-2">
+              <div class="card mb-2">
+                <div class="border-b flex items-center justify-between p-4">
+                  <div>
+                    <h2 class="text-lg font-semibold">
+                    </h2>
+                  </div>
+                  <div class="text-right">
+                    <button class="p-2 px-4 rounded bg-gray-50 text-red-500"> Cancel </button>
+                    <button type="button" class="button bg-blue-700" id="btnTraderRegistrationForm"> Save </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="lg:w-1/3 w-full">
+
+            </div>
+          </div>
 
         </form>
       </div>
@@ -850,8 +925,11 @@
   <script src="assets/js/traders-registration-countries.js"></script>
   <script src="assets/js/traders-registration-validations.js"></script>
   <script src="assets/js/traders-registration.js"></script>
+  <script src="assets/js/traders-registration-upload-medias.js"></script>
   <script src="assets/js/traders-registration-operation-toogle.js"></script>
   <script src="assets/js/communicator_link.js"></script>
+  <script src="assets/js/traders-registration-upload-media-toogle.js"></script>
+  
 
 
 </body>

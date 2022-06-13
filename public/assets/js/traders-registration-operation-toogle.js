@@ -158,6 +158,7 @@ function iOperateOnANationalLevelFunction() {
         document.getElementById('editRegionOfOperationInput').style.display = 'none';
         document.getElementById('editRegionOfOperationPlaceholder').style.display = 'block';
         document.getElementById('countryOfOperationInput').style.display = 'block';
+        document.getElementById('countryOfOperationInput2').style.display = 'none';
         document.getElementById('countryOfOperationPlaceholder').style.display = 'none';
         document.getElementById('statesOfOperationInput').style.display = 'none';
         document.getElementById('statesOfOperationPlaceholder').style.display = 'block';
@@ -180,6 +181,7 @@ function iOperateOnANationalLevelFunction() {
        document.getElementById('editRegionOfOperationInput').style.display = 'none';
         document.getElementById('editRegionOfOperationPlaceholder').style.display = 'block';
         document.getElementById('countryOfOperationInput').style.display = 'block';
+        document.getElementById('countryOfOperationInput2').style.display = 'none';
         document.getElementById('countryOfOperationPlaceholder').style.display = 'none';
         document.getElementById('statesOfOperationInput').style.display = 'block';
         document.getElementById('statesOfOperationPlaceholder').style.display = 'none';
@@ -212,7 +214,8 @@ function iOperateOnAStateLevelFunction() {
 
         document.getElementById('editRegionOfOperationInput').style.display = 'none';
         document.getElementById('editRegionOfOperationPlaceholder').style.display = 'block';
-        document.getElementById('countryOfOperationInput').style.display = 'block';
+        document.getElementById('countryOfOperationInput').style.display = 'none';
+        document.getElementById('countryOfOperationInput2').style.display = 'block';
         document.getElementById('countryOfOperationPlaceholder').style.display = 'none';
         document.getElementById('statesOfOperationInput').style.display = 'block';
         document.getElementById('statesOfOperationPlaceholder').style.display = 'none';

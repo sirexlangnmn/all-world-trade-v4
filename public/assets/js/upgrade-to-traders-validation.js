@@ -192,6 +192,81 @@ function upgradeToTradersClientSideValidation() {
         document.getElementById('editBusinessScaleValidation').innerHTML = 'Business Scale is required';
     }
 
+    let isWantToUploadVideo = document.getElementById('inputWantToUploadCompanyVideo').value;
+    let isWantToUploadBrochure = document.getElementById('inputWantToUploadCompanyBrochure').value;
+    let isWantToUploadCompanyWebinar = document.getElementById('inputWantToUploadCompanyWebinar').value;
+   
+    if (isWantToUploadVideo == 1) {
+        if (document.getElementById('thumbnailInput').files.length == 0) {
+            output = 'empty video thumbnail';
+             document.getElementById('traderVideoThumbnailValidation').style.display = 'block';
+             document.getElementById('traderVideoThumbnailValidation').innerHTML = 'Please upload video thumbnail.';
+        }
+        if ( document.getElementById('videoLink').value.length == 0) {
+            output = 'empty Video title';
+             document.getElementById('videoLinkValidation').innerHTML = 'Video link required';
+        }
+        if ( document.getElementById('videoTitle').value.length == 0) {
+            output = 'empty Video title';
+             document.getElementById('videoTitleValidation').innerHTML = 'Video title required';
+        }
+        if ( document.getElementById('videoDescription').value.length == 0) {
+            output = 'empty Video description';
+             document.getElementById('videoDescriptionValidation').innerHTML = 'Video description required';
+        }
+    } else {
+         document.getElementById('traderVideoThumbnailValidation').innerHTML = '';
+         document.getElementById('videoLinkValidation').innerHTML = '';
+         document.getElementById('videoTitleValidation').innerHTML = '';
+         document.getElementById('videoDescriptionValidation').innerHTML = '';
+    }
+
+    if ( isWantToUploadBrochure == 1) {
+        if ( document.getElementById('brochureInput').files.length == 0) {
+            output = 'empty brochure';
+             document.getElementById('traderBrochureValidation').style.display = 'block';
+             document.getElementById('traderBrochureValidation').innerHTML = 'Please upload brochure related to your company.';
+        }
+        if ( document.getElementById('brochureTitle').value.length == 0) {
+            output = 'empty Brouchure title';
+             document.getElementById('brochureTitleValidation').innerHTML = 'Brouchure title required';
+        }
+    } else {
+        document.getElementById('traderBrochureValidation').innerHTML = '';
+        document.getElementById('brochureTitleValidation').innerHTML = '';
+    }
+
+    if ( isWantToUploadCompanyWebinar == 1) {
+        if ( document.getElementById('webinarsThumbnailInput').files.length == 0) {
+            output = 'empty webinars thumbnail';
+             document.getElementById('traderWebinarThumbnailValidation').style.display = 'block';
+             document.getElementById('traderWebinarThumbnailValidation').innerHTML = 'Please upload thumbnail image related to your webinars.';
+        }
+        if ( document.getElementById('webinarsTitle').value.length == 0) {
+            output = 'empty Webinars title';
+             document.getElementById('webinarsTitleValidation').innerHTML = 'Webinars title required';
+        }
+        if ( document.getElementById('webinarsDescription').value.length == 0) {
+            output = 'empty Webinars description';
+             document.getElementById('webinarsDescriptionValidation').innerHTML = 'Webinars description required';
+        }
+        if ( document.getElementById('webinarsLink').value.length == 0) {
+            output = 'empty Webinars link';
+             document.getElementById('webinarsLinkValidation').innerHTML = 'Webinars link required';
+        }
+        if ( document.getElementById('webinarsSchedule').value.length == 0) {
+            output = 'empty Webinars schedules';
+             document.getElementById('webinarsScheduleValidation').innerHTML = 'Webinars schedules required';
+        }
+    } else {
+        document.getElementById('traderWebinarThumbnailValidation').innerHTML = '';
+        document.getElementById('webinarsTitleValidation').innerHTML = '';
+        document.getElementById('webinarsDescriptionValidation').innerHTML = '';
+        document.getElementById('webinarsLinkValidation').innerHTML = '';
+        document.getElementById('webinarsScheduleValidation').innerHTML = '';
+    }
+
+
 
     return output;
 }

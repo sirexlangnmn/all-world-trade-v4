@@ -9,8 +9,8 @@ exports.create = (req, res) => {};
 // ===================
 exports.create = (req, res) => {
     //const errors = validationResult(req);
-    // console.log('traderRegistration contoller req.body');
-    // console.log(req.body);
+    console.log('traderRegistration contoller req.body');
+    console.log(req.body);
 
     // try {
     //     const errors = validationResult(req);
@@ -100,7 +100,8 @@ exports.create = (req, res) => {
         link_2: req.body.link_2,
     });
 
-    // console.log(inputData);
+    console.log("inputData");
+    console.log(inputData);
 
     // Save Controller in the database
     Controller.create(inputData, (err, data) => {

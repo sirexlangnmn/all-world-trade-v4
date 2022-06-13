@@ -268,7 +268,7 @@ function passwordComparison(tags1, tags2) {
     if (password2 !== '') {
         if (password1 === password2) {
         } else {
-            Swal.fire('Error', 'Password does not match.', 'danger');
+            Swal.fire('Warning', 'Password does not match.', 'warning');
         }
     }
 }
@@ -286,11 +286,15 @@ let btnTraderRegistrationForm;
 btnTraderRegistrationForm = getId('btnTraderRegistrationForm');
 
 btnTraderRegistrationForm.addEventListener('click', (e) => {
+    //registrationUploadBusinessMedias(1);
     //stop submit the form, we will post it manually.
     e.preventDefault();
 
-    // let validation = tradersRegistrationValidation();
-    // if (validation === 'true') {
+    let validation = tradersRegistrationValidation();
+    console.log("validation");
+    console.log(validation);
+
+    if (validation === 'true') {
         //if (validation != '') {
         $.ajax({
             url: '/api/post/trader-registration',
@@ -302,7 +306,7 @@ btnTraderRegistrationForm.addEventListener('click', (e) => {
             console.log(res.verification_code);
             console.log(res.email_or_social_media);
             if (res.uuid && res.verification_code) {
-                registrationUsersBusinessMedias(res.uuid, res.verification_code);
+                registrationUploadBusinessMedias(res.uuid);
                 registrationEmailVerification(res.uuid, res.verification_code, res.email_or_social_media);
                 Swal.fire('Success', 'Registration Success.', 'success');
             }
@@ -311,39 +315,11 @@ btnTraderRegistrationForm.addEventListener('click', (e) => {
             //     tradersRegistrationServerValidation(response.message);
             // }
         });
-    //}
+    } else {
+        Swal.fire('Warning', 'At least one required field is incomplete.', 'warning');
+    }
 });
 
-function registrationUsersBusinessMedias(uuid, verification_code) {
-    // Get form
-    let form = $('#traderRegistrationForm')[0];
-
-    // Create an FormData object
-    let formData = new FormData(form);
-    formData.append('uuid', uuid);
-    formData.append('verification_code', verification_code);
-
-    $.ajax({
-        type: 'post',
-        enctype: 'multipart/form-data',
-        url: '/api/post/upload-users-business-medias',
-        data: formData,
-        processData: false,
-        contentType: false,
-        cache: false,
-        timeout: 800000,
-        success: function (data) {
-            console.log(data);
-
-            // if (data === 'success upload files') {
-            //     location.replace(host + '/email-verification');
-            // }
-        },
-        error: function (e) {
-            // some code here
-        },
-    });
-}
 
 function registrationEmailVerification(uuid, verification_code, email_or_social_media) {
     $.ajax({
@@ -366,7 +342,6 @@ function registrationEmailVerification(uuid, verification_code, email_or_social_
         },
     });
 }
-
 
 
 function traderStartOperatingHourSelect() {

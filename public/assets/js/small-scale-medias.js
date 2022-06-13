@@ -20,10 +20,14 @@ function getUsersLogoAndBanner() {
         url: '/api/get/users-logo-and-banners',
         type: 'GET',
         success: function (data) {
-            companyBannerPreview.src = host + '/uploads/users_upload_files/' + data[0].banner;
-            companyLogoPreview.src = host + '/uploads/users_upload_files/' + data[0].logo;
-            companyLogoId.value = data[0].id;
-            companyBannerId.value = data[0].id;
+            console.log(data);
+            if (data.length > 0) {
+                let companyBannerImage = data[0].banner ?  '/uploads/users_upload_files/' + data[0].banner : '/uploads/placeholder/banner-placeholder2.jpg';
+                companyBannerPreview.src = host + companyBannerImage;
+                companyLogoPreview.src = host + '/uploads/users_upload_files/' + data[0].logo;
+                companyLogoId.value = data[0].id;
+                companyBannerId.value = data[0].id;
+            }
         },
     });
 }

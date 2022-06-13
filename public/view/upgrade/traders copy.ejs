@@ -15,8 +15,8 @@
             <!-- Profile cover -->
             <div class="profile user-profile">
               <div class="profiles_banner image-upload">
-                <form action="javascript:void(0);" method="POST" id="editcompanyBanner"
-                  name="editcompanyBanner" enctype="multipart/form-data" accept-charset="utf-8">
+                <form action="javascript:void(0);" method="POST" id="editcompanyBanner" name="editcompanyBanner"
+                  enctype="multipart/form-data" accept-charset="utf-8">
                   <label for="companyBanner">
                     <img id="companyBannerPreview" src="uploads/banner/banner.jpg" />
                   </label>
@@ -58,79 +58,16 @@
                 </nav>
 
                 <!-- button actions -->
-                <div class="flex items-center space-x-1.5 flex-shrink-0 pr-4 mb-2 justify-center order-1 relative">
-
-                  <!-- go to website -->
-                  <a href="#"
-                    class="flex items-center justify-center h-10 px-5 rounded-md bg-blue-600 text-white space-x-1.5 hover:text-white blue-white-hover">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5">
-                      <path fill-rule="evenodd"
-                        d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z"
-                        clip-rule="evenodd"></path>
-                    </svg>
-                    <span> Update Traders Website </span>
-                  </a>
-
-                  <img alt="bookmark icon"
-                    srcset="https://img.icons8.com/external-kiranshastry-gradient-kiranshastry/452/external-bookmark-interface-kiranshastry-gradient-kiranshastry.png 2x"
-                    class="icon-custom" />
-
-                  <img alt="phone icon" srcset="https://img.icons8.com/color/2x/apple-phone.png 2x"
-                    class="icon-custom" />
-
-                  <!-- more icon -->
-                  <a href="#" class="flex items-center justify-center h-10 w-10 rounded-md bg-gray-100">
-                    <ion-icon name="ellipsis-horizontal" class="text-xl"></ion-icon>
-                  </a>
-                  <!-- more drowpdown -->
-                  <div
-                    class="bg-white w-56 shadow-md mx-auto p-2 mt-12 rounded-md text-gray-500 hidden border border-gray-100 dark:bg-gray-900 dark:text-gray-100 dark:border-gray-700"
-                    uk-drop="mode: click;pos: bottom-right;animation: uk-animation-slide-bottom-small; offset:5">
-                    <ul class="space-y-1">
-                      <li>
-                        <a href="#"
-                          class="flex items-center px-3 py-2 hover:bg-gray-100 hover:text-gray-800 rounded-md dark:hover:bg-gray-800">
-                          <ion-icon name="arrow-redo-outline" class="pr-2 text-xl"></ion-icon> Share Profile
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#"
-                          class="flex items-center px-3 py-2 hover:bg-gray-100 hover:text-gray-800 rounded-md dark:hover:bg-gray-800">
-                          <ion-icon name="create-outline" class="pr-2 text-xl"></ion-icon> Account setting
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#"
-                          class="flex items-center px-3 py-2 hover:bg-gray-100 hover:text-gray-800 rounded-md dark:hover:bg-gray-800">
-                          <ion-icon name="notifications-off-outline" class="pr-2 text-lg"></ion-icon> Disable
-                          notifications
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#"
-                          class="flex items-center px-3 py-2 hover:bg-gray-100 hover:text-gray-800 rounded-md dark:hover:bg-gray-800">
-                          <ion-icon name="star-outline" class="pr-2 text-xl"></ion-icon> Add favorites
-                        </a>
-                      </li>
-                      <li>
-                        <hr class="-mx-2 my-2 dark:border-gray-800">
-                      </li>
-                      <li>
-                        <a href="#"
-                          class="flex items-center px-3 py-2 text-red-500 hover:bg-red-50 hover:text-red-500 rounded-md dark:hover:bg-red-600">
-                          <ion-icon name="stop-circle-outline" class="pr-2 text-xl"></ion-icon> Unfriend
-                        </a>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
+                <!-- === button_action.ejs - START === -->
+                <%- include('../includes/profile/upgradeAsTraders.ejs') %>
+                  <!-- === button_action.ejs - END === -->
               </div>
             </div>
             <!-- =============================  -->
             <!-- BANNER LOGO AND NAV DIV - END  -->
             <!-- =============================  -->
 
-            <form action="javascript:void(0);" method="POST" id="editCompanyDetails" name="editCompanyDetails"
+            <form action="javascript:void(0);" method="POST" id="upgradeToTradersForm" name="upgradeToTradersForm"
               enctype="multipart/form-data" accept-charset="utf-8">
               <div class="lg:flex lg:space-x-10 mt-2.5">
                 <!-- ===============================  -->
@@ -148,7 +85,7 @@
                           </a>
                         </h2>
                       </div>
-                      <div class="text-right">
+                      <!-- <div class="text-right">
                         <button class="button blue-white-hover" type="button" id="btnCompanyDetailsEdit"
                           style="display: none;">Edit</button>
                       </div>
@@ -157,10 +94,16 @@
                           style="display: none;"> Cancel </button>
                         <button class="p-2 px-4 rounded bg-gray-50 text-red-500" onclick="backProfile();"> Cancel
                         </button>
-                        <button type="button" class="button bg-blue-700" id="btnUpdateCompanyDetails"> Save </button>
-                      </div>
+                        <button type="button" class="button bg-blue-700" id="btnUpgradeToTraders"> Upgrade as Traders </button>
+                      </div> -->
                     </div>
                     <div class="flex-1 space-y-4 p-6">
+                      <div>
+                        <label for="">Company Name</label>
+                        <input type="text" placeholder="" class="shadow-none with-border" id="traderCompanyName"
+                          name="traderCompanyName">
+                        <p class="text-red-500" id="traderCompanyNameValidation"></p>
+                      </div>
                       <div>
                         <label for="">Company Tag Line</label>
                         <input type="text" placeholder="" class="shadow-none with-border" id="tagline" name="tagline">
@@ -192,6 +135,7 @@
                             <option value="2">Wechat</option>
                             <option value="3">Whatsapp</option>
                           </select>
+                          <p class="text-red-500" id="businessSocialMediaContactTypeValidation"></p>
                         </div>
                         <div>
                           <input type="text" placeholder="Mobile Number" class="shadow-none with-border"
@@ -381,7 +325,7 @@
                     </div>
                     <div class="flex-1 space-y-4 p-6">
                       <div class="space-y-3">
-    
+
                         <div class="flex justify-between items-center">
                           <div>
                             <h4>I operate on a World Wide Level</h4>
@@ -398,14 +342,14 @@
                           </div>
                         </div>
                         <hr>
-    
+
                         <div id="editRegionOfOperationDiv">
                           <label for="">Global Region of Operation</label>
                           <!-- <span class="icon-feather-info" style="font-size: 16px; font-family: inherit"
                               uk-tooltip="title: Leave this part if you dont cater in global regional level.; pos: right">
                             </span> -->
-    
-    
+
+
                           <div id="iOperateOnAGlobalRegionalLevelDiv">
                             <div class="flex justify-between items-center">
                               <div>
@@ -423,21 +367,21 @@
                               </div>
                             </div>
                           </div>
-    
+
                           <label for=""></label>
                           <div id="editRegionOfOperationInput">
-                            <select id="traderRegionOfOperation" name="traderRegionOfOperation"
+                            <select id="editRegionOfOperation" name="editRegionOfOperation"
                               class="shadow-none selectpicker with-border" multiple>
                             </select>
                           </div>
                           <div id="editRegionOfOperationPlaceholder" style="display: none;">
                             <input type="text" placeholder="Not Applicable" class="shadow-none with-border" disabled>
                           </div>
-                          <p class="text-red-500" id="traderRegionOfOperationValidation"></p>
+                          <p class="text-red-500" id="editRegionOfOperationValidation"></p>
                         </div>
                         <div id="countryOfOperationDiv">
                           <label for="">Country of Operation</label>
-    
+
                           <div class="" id="iOperateOnANationalLevelDiv">
                             <div class="flex justify-between items-center">
                               <div>
@@ -455,22 +399,22 @@
                               </div>
                             </div>
                           </div>
-    
+
                           <label for=""></label>
                           <div id="countryOfOperationInput">
-                            <select id="traderCountryOfOperation" name="traderCountryOfOperation"
+                            <select id="countryOfOperation" name="countryOfOperation"
                               class="shadow-none selectpicker with-border " multiple>
                             </select>
                           </div>
                           <div id="countryOfOperationPlaceholder" style="display: none;">
                             <input type="text" placeholder="Not Applicable" class="shadow-none with-border" disabled>
                           </div>
-                          <p class="text-red-500" id="traderCountryOfOperationValidation"></p>
+                          <p class="text-red-500" id="countryOfOperationValidation"></p>
                         </div>
-    
+
                         <div id="statesOfOperationDiv">
                           <label for="">States of Operation</label>
-    
+
                           <div id="iOperateOnAProvincialLevelDiv">
                             <div class="flex justify-between items-center">
                               <div>
@@ -488,29 +432,23 @@
                               </div>
                             </div>
                           </div>
-    
-                          <label for=""></label>
-                          <div id="countryOfOperationInput2" style="display: none;">
-                            <select id="traderCountryOfOperation2" name="traderCountryOfOperation2"
-                              class="shadow-none selectpicker with-border ">
-                            </select>
-                          </div>
+
                           <label for=""></label>
                           <div id="statesOfOperationInput">
-                            <select id="traderStatesOfOperation" name="traderStatesOfOperation"
+                            <select id="statesOfOperation" name="statesOfOperation"
                               class="shadow-none selectpicker with-border ">
                             </select>
                           </div>
                           <div id="statesOfOperationPlaceholder" style="display: none;">
                             <input type="text" placeholder="Not Applicable" class="shadow-none with-border" disabled>
                           </div>
-                          <p class="text-red-500" id="traderStatesOfOperationValidation"></p>
+                          <p class="text-red-500" id="statesOfOperationValidation"></p>
                         </div>
-    
+
                         <div id="cityOfOperationDiv">
                           <label for="">City of Operation</label>
                           <div id="cityOfOperationInput">
-                            <select id="traderCityOfOperation" name="traderCityOfOperation"
+                            <select id="cityOfOperation" name="cityOfOperation"
                               class="shadow-none selectpicker with-border ">
                             </select>
                           </div>
@@ -518,19 +456,392 @@
                             <input type="text" placeholder="Not Applicable" class="shadow-none with-border" disabled>
                           </div>
                           <p class="text-red-500" id="cityOfOperationValidation"></p>
-                          <p class="text-red-500" id="traderCityOfOperationValidation"></p>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
                 <div class="lg:w-1/3 w-full">
-    
+
                 </div>
               </div>
               <!-- ===============================  -->
               <!-- Region of Operation - END  -->
               <!-- ===============================  -->
+
+
+
+
+              <!-- ===============================  -->
+              <!-- Company Visibility - START  -->
+              <!-- ===============================  -->
+              <div class="lg:flex lg:space-x-10 mt-2.5">
+                <div class="lg:w-2/3 w-full mb-2" id="">
+                  <div class="card mb-2">
+                    <div class="border-b flex items-center justify-between p-4">
+                      <div>
+                        <h2 class="text-lg font-semibold">Visibility
+                          <a class="hover:border-gray-100" href="#">
+                            <span class="icon-feather-info" style="font-size: 16px; font-family: inherit"
+                              uk-tooltip="title: Visibility Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.; pos: right">
+                            </span>
+                          </a>
+                        </h2>
+                      </div>
+                      <div class="text-right">
+                      </div>
+                    </div>
+                    <div class="flex-1 space-y-4 p-6">
+                      <div class="space-y-3">
+                        <!-- <div class="flex justify-between items-center">
+                          <div>
+                            <h4>Visible to your own Global Region?</h4>
+                          </div>
+                          <div class="switches-list -mt-8 is-large">
+                            <div class="switch-container">
+                              <label class="switch">
+                                <input type="checkbox" id="traderVisibleToYourOwnGlobalRegion" name="traderVisibleToYourOwnGlobalRegion" checked>
+                                <span class="switch-button"></span>
+                              </label>
+                            </div>
+                          </div>
+                        </div>
+                        <hr> -->
+                        <!-- <div class="flex justify-between items-center">
+                          <div>
+                            <h4>Visible to your own Country?</h4>
+                          </div>
+                          <div class="switches-list -mt-8 is-large">
+                            <div class="switch-container">
+                              <label class="switch">
+                                <input type="checkbox" id="traderVisibleToYourOwnCountryOnly" name="traderVisibleToYourOwnCountryOnly" checked>
+                                <span class="switch-button"></span>
+                              </label>
+                            </div>
+                          </div>
+                        </div>
+                        <hr> -->
+                        <!-- <div class="flex justify-between items-center">
+                          <div>
+                            <h4>Visible to your own Province / State?</h4>
+                          </div>
+                          <div class="switches-list -mt-8 is-large">
+                            <div class="switch-container">
+                              <label class="switch">
+                                <input type="checkbox" id="traderVisibleToYourOwnStates" name="traderVisibleToYourOwnStates" checked>
+                                <span class="switch-button"></span>
+                              </label>
+                            </div>
+                          </div>
+                        </div>
+                        <hr> -->
+                        <!-- <div class="flex justify-between items-center">
+                          <div>
+                            <h4>Visible to your own City?</h4>
+                          </div>
+                          <div class="switches-list -mt-8 is-large">
+                            <div class="switch-container">
+                              <label class="switch">
+                                <input type="checkbox" id="traderVisibleToYourOwnCity" name="traderVisibleToYourOwnCity" checked>
+                                <span class="switch-button"></span>
+                              </label>
+                            </div>
+                          </div>
+                        </div>
+                        <hr> -->
+                        <div class="flex justify-between items-center">
+                          <div>
+                            <h4> Visible to Small Scale Business, B2C, Micro, Retailer. Searcher? </h4>
+                          </div>
+                          <div class="switches-list -mt-8 is-large">
+                            <div class="switch-container">
+                              <label class="switch">
+                                <input type="checkbox" id="traderVisibleToMicroSmallRetailers"
+                                  name="traderVisibleToMicroSmallRetailers" checked>
+                                <span class="switch-button"></span>
+                              </label>
+                            </div>
+                          </div>
+                        </div>
+                        <hr>
+                        <div class="flex justify-between items-center">
+                          <div>
+                            <h4> Visible to Medium Scale Business, B2B, Searcher?</h4>
+                          </div>
+                          <div class="switches-list -mt-8 is-large">
+                            <div class="switch-container">
+                              <label class="switch">
+                                <input type="checkbox" id="traderVisibleToBtbMediumLargeWholesaleHighEnd"
+                                  name="traderVisibleToBtbMediumLargeWholesaleHighEnd" checked>
+                                <span class="switch-button"></span>
+                              </label>
+                            </div>
+                          </div>
+                        </div>
+                        <hr>
+                        <div class="flex justify-between items-center">
+                          <div>
+                            <h4> Visible to Large Scale / High End Business Searcher?</h4>
+                          </div>
+                          <div class="switches-list -mt-8 is-large">
+                            <div class="switch-container">
+                              <label class="switch">
+                                <input type="checkbox" id="traderVisibleToLargeScaleAndHighEndBusiness"
+                                  name="traderVisibleToLargeScaleAndHighEndBusiness" checked>
+                                <span class="switch-button"></span>
+                              </label>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="lg:w-1/3 w-full" id="divCompanyRepresentative" style="display: block;">
+
+                </div>
+              </div>
+              <!-- ===============================  -->
+              <!-- Company Visibility - END  -->
+              <!-- ===============================  -->
+
+
+
+              <!-- ===============================  -->
+              <!-- Company Videos - START  -->
+              <!-- ===============================  -->
+              <div class="lg:flex lg:space-x-10 mt-2.5">
+                <div class="lg:w-2/3 w-full mb-2">
+                  <div class="card mb-2">
+                    <div class="border-b flex items-center justify-between p-4">
+                      <div>
+                        <h2 class="text-lg font-semibold">Video
+                          <a class="hover:border-gray-100" href="#">
+                            <span class="icon-feather-info" style="font-size: 16px; font-family: inherit"
+                              uk-tooltip="title: Video Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.; pos: right">
+                            </span>
+                          </a>
+                        </h2>
+                      </div>
+                      <div class="text-right">
+                      </div>
+                    </div>
+                    <div class="flex-1 space-y-4 p-6">
+                      <div class="space-y-3">
+                        <label> Video </label>
+                        <div class="relative uk-transition-toggle overflow-hidden">
+                          <div
+                            class="bg-gray-100 border-2 border-dashed flex flex-col h-40 items-center justify-center relative w-full rounded-lg dark:bg-gray-800 dark:border-gray-600">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
+                              class="w-12">
+                              <path
+                                d="M5.5 13a3.5 3.5 0 01-.369-6.98 4 4 0 117.753-1.977A4.5 4.5 0 1113.5 13H11V9.413l1.293 1.293a1 1 0 001.414-1.414l-3-3a1 1 0 00-1.414 0l-3 3a1 1 0 001.414 1.414L9 9.414V13H5.5z" />
+                              <path d="M9 13h2v5a1 1 0 11-2 0v-5z" />
+                            </svg>
+                          </div>
+                          <div class="w-full" uk-form-custom>
+                            <div class="uk-position-bottom uk-transition-bottom-small">
+                              <input type="file" id="videoInput" name="videoInput">
+                              <a href="#"
+                                class="flex font-medium h-9 items-center justify-center px-5 rounded-b-xl text-blue-600 text-white"
+                                id="videoName" style="margin-bottom: 25px;">
+                                Choose file</a>
+                            </div>
+                            <p class="text-red-500" id="traderVideoValidation"></p>
+                          </div>
+                        </div>
+                        <label> Thumbnail </label>
+                        <div class="relative uk-transition-toggle overflow-hidden">
+                          <div
+                            class="bg-gray-100 border-2 border-dashed flex flex-col h-40 items-center justify-center relative w-full rounded-lg dark:bg-gray-800 dark:border-gray-600">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
+                              class="w-12">
+                              <path
+                                d="M5.5 13a3.5 3.5 0 01-.369-6.98 4 4 0 117.753-1.977A4.5 4.5 0 1113.5 13H11V9.413l1.293 1.293a1 1 0 001.414-1.414l-3-3a1 1 0 00-1.414 0l-3 3a1 1 0 001.414 1.414L9 9.414V13H5.5z" />
+                              <path d="M9 13h2v5a1 1 0 11-2 0v-5z" />
+                            </svg>
+                          </div>
+                          <div class="w-full" uk-form-custom>
+                            <div class="uk-position-bottom uk-transition-bottom-small">
+                              <input type="file" id="thumbnailInput" name="thumbnailInput">
+                              <a href="#"
+                                class="flex font-medium h-9 items-center justify-center px-5 rounded-b-xl text-blue-600 text-white"
+                                id="thumbnailName" style="margin-bottom: 25px;">
+                                Choose file</a>
+                            </div>
+                            <p class="text-red-500" id="traderVideoThumbnailValidation"></p>
+                          </div>
+                        </div>
+
+                        <div class="font-semibold text-lg"> Details </div>
+                        <div>
+                          <label> Title </label>
+                          <input type="text" class="with-border" placeholder="" id="videoTitle" name="videoTitle">
+                          <p class="text-red-500" id="videoTitleValidation"></p>
+                        </div>
+                        <div>
+                          <label> Description </label>
+                          <textarea rows="3" class="with-border w-full p-4" placeholder="Video Description."
+                            id="videoDescription" name="videoDescription"></textarea>
+                          <p class="text-red-500" id="videoDescriptionValidation"></p>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- ===============================  -->
+                    <!-- Company Videos - END  -->
+                    <!-- ===============================  -->
+                  </div>
+                </div>
+                <div class="lg:w-1/3 w-full">
+
+                </div>
+              </div>
+              <!-- ===============================  -->
+              <!-- Company Videos - END  -->
+              <!-- ===============================  -->
+
+              <!-- ===============================  -->
+              <!-- Brochure - START  -->
+              <!-- ===============================  -->
+              <div class="lg:flex lg:space-x-10 mt-2.5">
+                <div class="lg:w-2/3 w-full mb-2">
+                  <div class="card mb-2">
+                    <div class="border-b flex items-center justify-between p-4">
+                      <div>
+                        <h2 class="text-lg font-semibold">Brochure
+                          <a class="hover:border-gray-100" href="#">
+                            <span class="icon-feather-info" style="font-size: 16px; font-family: inherit"
+                              uk-tooltip="title: Brochure Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.; pos: right">
+                            </span>
+                          </a>
+                        </h2>
+                      </div>
+                      <div class="text-right">
+                      </div>
+                    </div>
+                    <div class="flex-1 space-y-4 p-6">
+                      <div class="space-y-3">
+                        <label> Brochure </label>
+                        <div class="relative uk-transition-toggle overflow-hidden">
+                          <div
+                            class="bg-gray-100 border-2 border-dashed flex flex-col h-40 items-center justify-center relative w-full rounded-lg dark:bg-gray-800 dark:border-gray-600">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
+                              class="w-12">
+                              <path
+                                d="M5.5 13a3.5 3.5 0 01-.369-6.98 4 4 0 117.753-1.977A4.5 4.5 0 1113.5 13H11V9.413l1.293 1.293a1 1 0 001.414-1.414l-3-3a1 1 0 00-1.414 0l-3 3a1 1 0 001.414 1.414L9 9.414V13H5.5z" />
+                              <path d="M9 13h2v5a1 1 0 11-2 0v-5z" />
+                            </svg>
+                          </div>
+                          <div class="w-full" uk-form-custom>
+                            <div class="uk-position-bottom uk-transition-bottom-small">
+                              <input type="file" id="brochureInput" name="brochureInput">
+                              <a href="#"
+                                class="flex font-medium h-9 items-center justify-center px-5 rounded-b-xl text-blue-600 text-white"
+                                id="brochureName" style="margin-bottom: 25px;">
+                                Choose file</a>
+                            </div>
+                            <p class="text-red-500" id="traderBrochureValidation"></p>
+                          </div>
+                        </div>
+
+                        <div>
+                          <label> Brochure Title </label>
+                          <input type="text" class="with-border" placeholder="" id="brochureTitle" name="brochureTitle">
+                          <p class="text-red-500" id="brochureTitleValidation"></p>
+                        </div>
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="lg:w-1/3 w-full">
+
+                </div>
+              </div>
+              <!-- ===============================  -->
+              <!-- Brochure - END  -->
+              <!-- ===============================  -->
+
+
+
+              <!-- ===============================  -->
+              <!-- Webinars - START  -->
+              <!-- ===============================  -->
+              <div class="lg:flex lg:space-x-10 mt-2.5">
+                <div class="lg:w-2/3 w-full mb-2">
+                  <div class="card mb-2">
+                    <div class="border-b flex items-center justify-between p-4">
+                      <div>
+                        <h2 class="text-lg font-semibold">Webinars
+                          <a class="hover:border-gray-100" href="#">
+                            <span class="icon-feather-info" style="font-size: 16px; font-family: inherit"
+                              uk-tooltip="title: Webinars Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.; pos: right">
+                            </span>
+                          </a>
+                        </h2>
+                      </div>
+                      <div class="text-right">
+                      </div>
+                    </div>
+                    <div class="flex-1 space-y-4 p-6">
+                      <div class="space-y-3">
+                        <label> Webinars Thumbnail </label>
+                        <div class="relative uk-transition-toggle overflow-hidden">
+                          <div
+                            class="bg-gray-100 border-2 border-dashed flex flex-col h-40 items-center justify-center relative w-full rounded-lg dark:bg-gray-800 dark:border-gray-600">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
+                              class="w-12">
+                              <path
+                                d="M5.5 13a3.5 3.5 0 01-.369-6.98 4 4 0 117.753-1.977A4.5 4.5 0 1113.5 13H11V9.413l1.293 1.293a1 1 0 001.414-1.414l-3-3a1 1 0 00-1.414 0l-3 3a1 1 0 001.414 1.414L9 9.414V13H5.5z" />
+                              <path d="M9 13h2v5a1 1 0 11-2 0v-5z" />
+                            </svg>
+                          </div>
+                          <div class="w-full" uk-form-custom>
+                            <div class="uk-position-bottom uk-transition-bottom-small">
+                              <input type="file" id="webinarsThumbnailInput" name="webinarsThumbnailInput">
+                              <a href="#"
+                                class="flex font-medium h-9 items-center justify-center px-5 rounded-b-xl text-blue-600 text-white"
+                                id="webinarsThumbnailName" style="margin-bottom: 25px;">
+                                Choose file</a>
+                            </div>
+                            <p class="text-red-500" id="traderWebinarThumbnailValidation"></p>
+                          </div>
+                        </div>
+                        <div class="font-semibold text-lg"> </div>
+                        <div>
+                          <label> Title </label>
+                          <input type="text" class="with-border" placeholder="" id="webinarsTitle" name="webinarsTitle">
+                          <p class="text-red-500" id="webinarsTitleValidation"></p>
+                        </div>
+                        <div>
+                          <label> Description </label>
+                          <textarea rows="3" class="with-border w-full p-4" placeholder="" id="webinarsDescription"
+                            name="webinarsDescription"></textarea>
+                          <p class="text-red-500" id="webinarsDescriptionValidation"></p>
+                        </div>
+                        <div>
+                          <label> Link </label>
+                          <input type="text" class="with-border" placeholder="" id="webinarsLink" name="webinarsLink">
+                          <p class="text-red-500" id="webinarsLinkValidation"></p>
+                        </div>
+                        <div>
+                          <label> Schedule of Webinars </label>
+                          <input type="date" class="with-border" placeholder="" id="webinarsSchedule"
+                            name="webinarsSchedule">
+                          <p class="text-red-500" id="webinarsScheduleValidation"></p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="lg:w-1/3 w-full">
+
+                </div>
+              </div>
+              <!-- ===============================  -->
+              <!-- Webinars - END  -->
+              <!-- ===============================  -->
+
 
             </form>
           </div>
@@ -540,11 +851,13 @@
     </div>
     <%- include('../includes/scripts/index.ejs') %>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.3.0/sweetalert2.min.js"></script>
-      <script src="assets/js/edit-traders-profile-countries.js"></script>
-      <script src="assets/js/edit-traders-profile-dropdowns.js"></script>
-      <script src="assets/js/edit-traders-profile.js"></script>
+      <script src="assets/js/upgrade-to-traders-countries.js"></script>
+      <script src="assets/js/upgrade-to-traders-dropdowns.js"></script>
+      <script src="assets/js/upgrade-to-traders.js"></script>
+      <script src="assets/js/upgrade-to-traders-validation.js"></script>
       <script src="assets/js/global-countries.js"></script>
-     
+
+
       <script>
 
       </script>

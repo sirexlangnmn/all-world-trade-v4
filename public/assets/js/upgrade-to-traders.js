@@ -143,10 +143,13 @@ function getUsersLogoAndBanner() {
         url: '/api/get/users-logo-and-banners',
         type: 'GET',
         success: function (data) {
-            companyBannerPreview.src = host + '/uploads/users_upload_files/' + data[0].banner;
-            companyLogoPreview.src = host + '/uploads/users_upload_files/' + data[0].logo;
-            companyLogoId.value = data[0].id;
-            companyBannerId.value = data[0].id;
+            if (data.length > 0) {
+                let companyBannerImage = data[0].banner ?  '/uploads/users_upload_files/' + data[0].banner : '/uploads/placeholder/banner-placeholder2.jpg';
+                companyBannerPreview.src = host + companyBannerImage;
+                companyLogoPreview.src = host + '/uploads/users_upload_files/' + data[0].logo;
+                companyLogoId.value = data[0].id;
+                companyBannerId.value = data[0].id;
+            }
         },
     });
 }
@@ -368,8 +371,8 @@ btnUpgradeToTraders.addEventListener('click', (e) => {
     e.preventDefault();
 
     let validation = upgradeToTradersClientSideValidation();
-    
-    // if (validation === 'true') {
+    console.log(validation);
+    if (validation === 'true') {
         $.ajax({
             url: '/api/post/upgrade-to-traders',
             type: 'post',
@@ -377,7 +380,8 @@ btnUpgradeToTraders.addEventListener('click', (e) => {
         }).done((response) => {
             console.log(response);
             if (response.id) {
-                registrationUsersBusinessMedias(response.uuid);
+                // registrationUsersBusinessMedias(response.uuid);
+                registrationUploadBusinessMedias(response.uuid);
                 Swal.fire('Success', 'Upgrade Success.', 'success');
             }
 
@@ -385,7 +389,7 @@ btnUpgradeToTraders.addEventListener('click', (e) => {
             //     location.replace(host + '/profile');
             // }
         });
-   // }
+   }
 });
 
 function registrationUsersBusinessMedias(uuid) {
@@ -418,15 +422,15 @@ function registrationUsersBusinessMedias(uuid) {
     });
 }
 
-videoInput.addEventListener('change', videoInputFileName);
+// videoInput.addEventListener('change', videoInputFileName);
 thumbnailInput.addEventListener('change', inputThumbnailFileName);
 webinarsThumbnailInput.addEventListener('change', webinarsThumbnailFileName);
 brochureInput.addEventListener('change', brochureFileName);
 
-function videoInputFileName() {
-    let fileName = videoInput.value;
-    videoName.innerHTML = fileName;
-}
+// function videoInputFileName() {
+//     let fileName = videoInput.value;
+//     videoName.innerHTML = fileName;
+// }
 
 function inputThumbnailFileName() {
     let fileName = thumbnailInput.value;
