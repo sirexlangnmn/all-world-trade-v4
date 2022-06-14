@@ -103,17 +103,17 @@ companyBanner.onchange = (evt) => {
 
 function registrationValidation() {
     let output = 'true';
-    if (companyBanner.files.length == 0) {
-        output = 'empty1';
-        companyBannerValidation.style.display = 'block';
-        companyBannerValidation.innerHTML = 'Please upload banner';
-        companyBannerPreview.src = host + '/uploads/placeholder/banner-placeholder.png';
-    }
-    if (companyLogo.files.length == 0) {
-        output = 'empty2';
-        companyLogoPreview.src = host + '/uploads/placeholder/logo-placeholder.jpg';
-        companyLogoValidation.innerHTML = 'Upload logo';
-    }
+    // if (companyBanner.files.length == 0) {
+    //     output = 'empty1';
+    //     companyBannerValidation.style.display = 'block';
+    //     companyBannerValidation.innerHTML = 'Please upload banner';
+    //     companyBannerPreview.src = host + '/uploads/placeholder/banner-placeholder.png';
+    // }
+    // if (companyLogo.files.length == 0) {
+    //     output = 'empty2';
+    //     companyLogoPreview.src = host + '/uploads/placeholder/logo-placeholder.jpg';
+    //     companyLogoValidation.innerHTML = 'Upload logo';
+    // }
 
 
 

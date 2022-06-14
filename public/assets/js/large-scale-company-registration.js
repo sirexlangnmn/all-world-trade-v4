@@ -236,6 +236,10 @@ function hashedPassword() {
     }
 }
 
+traderPassword.addEventListener('blur', function () {
+    passwordComparison('traderPassword', 'traderConfirmPassword');
+});
+
 traderConfirmPassword.addEventListener('blur', function () {
     passwordComparison('traderPassword', 'traderConfirmPassword');
 });
@@ -256,58 +260,65 @@ let btnTraderRegistrationForm;
 btnTraderRegistrationForm = getId('btnTraderRegistrationForm');
 
 btnTraderRegistrationForm.addEventListener('click', (e) => {
+
     //stop submit the form, we will post it manually.
     e.preventDefault();
 
     let validation = tradersRegistrationValidation();
+    
+    console.log("validation");
     console.log(validation);
+
     if (validation === 'true') {
         //if (validation != '') {
         $.ajax({
             url: '/api/post/looking-for-large-scale-company-registration',
             type: 'post',
             data: $form.serialize(),
-        }).done((response) => {
-            console.log(response);
-            if (response.id) {
-                usersMediasProcess(response.uuid, response.verification_code);
+        }).done((res) => {
+            console.log(res);
+            if (res.id) {
+                // usersMediasProcess(res.uuid, res.verification_code);
+                // Swal.fire('Success', 'Registration Success.', 'success');
+                registrationUploadBusinessMedias(res.uuid);
+                registrationEmailVerification(res.uuid, res.verification_code, res.email_or_social_media);
                 Swal.fire('Success', 'Registration Success.', 'success');
             }
 
-            // if (response.message) {
-            //     tradersRegistrationServerValidation(response.message);
+            // if (res.message) {
+            //     tradersRegistrationServerValidation(res.message);
             // }
         });
     }
 });
 
-function usersMediasProcess(uuid, verification_code) {
-    // Get form
-    let form = $('#traderRegistrationForm')[0];
+// function usersMediasProcess(uuid, verification_code) {
+//     // Get form
+//     let form = $('#traderRegistrationForm')[0];
 
-    // Create an FormData object
-    let formData = new FormData(form);
-    formData.append('uuid', uuid);
-    formData.append('verification_code', verification_code);
+//     // Create an FormData object
+//     let formData = new FormData(form);
+//     formData.append('uuid', uuid);
+//     formData.append('verification_code', verification_code);
 
-    $.ajax({
-        type: 'post',
-        enctype: 'multipart/form-data',
-        url: '/api/post/users-medias-process',
-        data: formData,
-        processData: false,
-        contentType: false,
-        cache: false,
-        timeout: 800000,
-        success: function (data) {
-            console.log(data);
+//     $.ajax({
+//         type: 'post',
+//         enctype: 'multipart/form-data',
+//         url: '/api/post/users-medias-process',
+//         data: formData,
+//         processData: false,
+//         contentType: false,
+//         cache: false,
+//         timeout: 800000,
+//         success: function (data) {
+//             console.log(data);
 
-            if (data === 'success upload files') {
-                location.replace(host + '/email-verification');
-            }
-        },
-        error: function (e) {
-            // some code here
-        },
-    });
-}
+//             if (data === 'success upload files') {
+//                 location.replace(host + '/email-verification');
+//             }
+//         },
+//         error: function (e) {
+//             // some code here
+//         },
+//     });
+// }

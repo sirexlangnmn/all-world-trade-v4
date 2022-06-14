@@ -63,6 +63,10 @@ function hashedPasswordProcess() {
     }
 }
 
+password.addEventListener('blur', function () {
+    passwordComparison('password', 'confirmPassword');
+});
+
 confirmPassword.addEventListener('blur', function () {
     passwordComparison('password', 'confirmPassword');
 });
@@ -79,57 +83,66 @@ function passwordComparison(tags1, tags2) {
 }
 
 btnRegistration.addEventListener('click', (e) => {
+    // registrationUploadBusinessMedias(1);
     //stop submit the form, we will post it manually.
     e.preventDefault();
 
     const form = $('#lookingForSmallScaleCompanyForm');
     let validation = registrationValidation();
+    console.log("validation");
+    console.log(validation);
+
     if (validation === 'true') {
         //     //if (validation != '') {
         $.ajax({
             url: '/api/post/looking-for-small-scale-company-registration',
             type: 'post',
             data: form.serialize(),
-        }).done((response) => {
-            console.log(response);
-            if (response.id) {
-                usersMediasProcess(response.uuid, response.verification_code);
+        }).done((res) => {
+            console.log(res);
+            if (res.id) {
+                // usersMediasProcess(res.uuid, res.verification_code);
+                registrationUploadBusinessMedias(res.uuid);
+                registrationEmailVerification(res.uuid, res.verification_code, res.email_or_social_media);
                 Swal.fire('Success', 'Registration Success.', 'success');
             }
-            // if (response.message) {
-            //     tradersRegistrationServerValidation(response.message);
+
+            // if (res.message) {
+            //     tradersRegistrationServerValidation(res.message);
             // }
         });
     }
 });
 
-function usersMediasProcess(uuid, verification_code) {
-    // Get form
-    let form = $('#lookingForSmallScaleCompanyForm')[0];
 
-    // Create an FormData object
-    let formData = new FormData(form);
-    formData.append('uuid', uuid);
-    formData.append('verification_code', verification_code);
 
-    $.ajax({
-        type: 'post',
-        enctype: 'multipart/form-data',
-        url: '/api/post/users-medias-process',
-        data: formData,
-        processData: false,
-        contentType: false,
-        cache: false,
-        timeout: 800000,
-        success: function (data) {
-            console.log(data);
+// function usersMediasProcess(uuid, verification_code) {
+//     // Get form
+//     let form = $('#lookingForSmallScaleCompanyForm')[0];
 
-            if (data === 'success upload files') {
-                location.replace(host + '/email-verification');
-            }
-        },
-        error: function (e) {
-            // some code here
-        },
-    });
-}
+//     // Create an FormData object
+//     let formData = new FormData(form);
+//     formData.append('uuid', uuid);
+//     formData.append('verification_code', verification_code);
+
+//     $.ajax({
+//         type: 'post',
+//         enctype: 'multipart/form-data',
+//         url: '/api/post/users-medias-process',
+//         data: formData,
+//         processData: false,
+//         contentType: false,
+//         cache: false,
+//         timeout: 800000,
+//         success: function (data) {
+//             console.log(data);
+
+//             if (data === 'success upload files') {
+//                 location.replace(host + '/email-verification');
+//             }
+//         },
+//         error: function (e) {
+//             // some code here
+//         },
+//     });
+// }

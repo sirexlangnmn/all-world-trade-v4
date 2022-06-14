@@ -135,6 +135,7 @@ Model.create = (newModel, result) => {
                             } else {
                                 newModel.session.verification_code = newModel.verification_code;
                                 newModel.session.registration_uuid = newModel.uuid;
+                                newModel.session.registration_email_address = newModel.email_or_social_media;
                                 result(null, { id: rows.insertId, ...newModel });
                             }
                         });
