@@ -3,6 +3,7 @@
         <a
             class="text-center block border-white rounded-custom hover:border-gray-100 hover:bg-gray-100 py-3 px-14"
             href="#"
+            onclick="goToHomePage()" 
         >
             <span class="icon-feather-home" style="font-size: 24px; font-family: inherit"> </span>
         </a>
@@ -51,8 +52,35 @@
         <a
             class="text-center block border-white rounded-custom hover:border-gray-100 hover:bg-gray-100 py-3 px-14"
             href="#"
+            onclick="goToSelectionPage()"
         >
             <span class="icon-feather-book-open" style="font-size: 24px; font-family: inherit"> </span>
         </a>
     </li>
+    <li class="" uk-tooltip="title: Help / Suggestion; pos: bottom">
+        <a
+            class="text-center block border-white rounded-custom hover:border-gray-100 hover:bg-gray-100 py-3 px-14"
+            href="#"
+            onclick="goToHelpSuggestionPage()"
+        >
+            <span class="icon-feather-video" style="font-size: 24px; font-family: inherit"> </span>
+        </a>
+    </li>
 </ul>
+
+
+<script>
+function goToHomePage() {
+    location.replace(host + '/');
+}
+
+
+function goToSelectionPage() {
+    location.replace(host + '/selection');
+}
+
+function goToHelpSuggestionPage() {
+    const URL = 'https://meet.allworldtrade.com/groupcall/room_id=9331471206227628/call_id=1130471144/section_id=15b61668-191c-443a-8a52-b40b02cc06fa/&has_video=true&initialize_video=true&nonce=XzaiyOuEjQWf&thread_type=1&use_joining_context=true&peer_id=115829777114941&server_info_data=ontr9avpS0KA6qX2tg5ydqlpbRu47B9NF8hUVRFyQqO1QdBAOrHbcWoLmZ8JRs8sM2/company_name=all-world-trade/section_id=help_and_suggestion';
+    window.open(URL, '_blank');
+}
+</script>
