@@ -103,6 +103,51 @@ function getLanguageName(string, elementId) {
     }
 }
 
+function getCountryNameUsingCode(code, elementId) {
+    if (code) {
+        fetch('assets/json/countries.json')
+            .then(function (resp) {
+                return resp.json();
+            })
+            .then(function (data) {
+                let filtered = data.filter((d) => d.iso2 == code);
+                document.getElementById(elementId).innerHTML = filtered[0].name;
+            });
+    } else {
+        document.getElementById(elementId).innerHTML = 'N/A';
+    }
+}
+
+function getStatesNameUsingCode(code, elementId) {
+    if (code) {
+        fetch('assets/json/states.json')
+            .then(function (resp) {
+                return resp.json();
+            })
+            .then(function (data) {
+                let filtered = data.filter((d) => d.id == code);
+                document.getElementById(elementId).innerHTML = filtered[0].name;
+            });
+    } else {
+        document.getElementById(elementId).innerHTML = 'N/A';
+    }
+}
+
+function getCityNameUsingCode(code, elementId) {
+    if (code) {
+        fetch('assets/json/cities.json')
+            .then(function (resp) {
+                return resp.json();
+            })
+            .then(function (data) {
+                let filtered = data.filter((d) => d.id == code);
+                document.getElementById(elementId).innerHTML = filtered[0].name + ', ';
+            });
+    } else {
+        document.getElementById(elementId).innerHTML = 'N/A, ';
+    }
+}
+
 function getLanguageNameByCode(code) {
     let value;
     $.ajax({

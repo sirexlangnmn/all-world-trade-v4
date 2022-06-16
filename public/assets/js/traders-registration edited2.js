@@ -141,10 +141,11 @@ tradeCategoriesForRegistration.addEventListener('change', function () {
 
 // display all minor sub categories under sub category in frontend select option
 traderSubCategoryToggleField1.addEventListener('change', function () {
-    traderMinorSubCategoryToggleField1.disabled = false;
     $('#traderMinorSubCategoryToggleField1').empty();
+    $('#traderMinorSubCategoryToggleField2').empty();
     let subCategoryId = this.value;
 
+    console.log('traderSubCategoryToggleField1: ' + subCategoryId)
     if (this.options[this.selectedIndex].value == 'customOption') {
         toggleField(this, this.nextSibling);
         this.selectedIndex = '0';
@@ -154,9 +155,14 @@ traderSubCategoryToggleField1.addEventListener('change', function () {
 
         traderMinorSubCategoryToggleField2.style.display = 'block';
         traderMinorSubCategoryToggleField2.disabled = false;
-    }
+    } else {
+        
+        // traderMinorSubCategoryToggleField1.style.display = 'block';
+        // traderMinorSubCategoryToggleField1.disabled = false;
 
-    if (this.options[this.selectedIndex].value !== 'customOption' && subCategoryId !== 'customOption') {
+        // traderMinorSubCategoryToggleField2.style.display = 'none';
+        // traderMinorSubCategoryToggleField2.disabled = true;
+
         async function getMinorSubCategoriesByTradeCategoryId() {
             let response = await fetch(host + '/api/get/minor-sub-categories-by-sub-category-id/' + subCategoryId);
             let data = await response.json();
@@ -164,17 +170,32 @@ traderSubCategoryToggleField1.addEventListener('change', function () {
         }
 
         getMinorSubCategoriesByTradeCategoryId().then((data) => {
+
+            console.log("subCategoryId data");
+            console.log(data);
+            console.log(data.errorResponse);
+
             if (data.length === undefined) {
-                $('#traderMinorSubCategoryToggleField1').empty();
                 traderMinorSubCategoryToggleField1.style.display = 'none';
                 traderMinorSubCategoryToggleField1.disabled = true;
 
                 traderMinorSubCategoryToggleField2.style.display = 'block';
                 traderMinorSubCategoryToggleField2.disabled = false;
-                traderMinorSubCategoryToggleField2.style.display = 'inline';
-                traderMinorSubCategoryToggleField2.focus();
-            } else {
+
+            }
+            if (data.errorResponse != undefined) {
+                traderMinorSubCategoryToggleField1.style.display = 'none';
+                traderMinorSubCategoryToggleField1.disabled = true;
+
+                traderMinorSubCategoryToggleField2.style.display = 'block';
+                traderMinorSubCategoryToggleField2.disabled = false;
+
+            } 
+              else if (data.errorResponse === undefined) {
+                traderMinorSubCategoryToggleField1.style.display = 'block';
                 traderMinorSubCategoryToggleField1.disabled = false;
+
+                traderMinorSubCategoryToggleField2.style.display = 'none';
                 traderMinorSubCategoryToggleField2.disabled = true;
 
                 for (var i = 0; i < data.length; i++) {
@@ -189,6 +210,30 @@ traderSubCategoryToggleField1.addEventListener('change', function () {
                 traderMinorSubCategoryToggleField1.innerHTML =
                     traderMinorSubCategoryToggleField1.innerHTML +
                     '<option value="none">None</option><option value="customOption">Other (Type a custom value)</option><input id="traderMinorSubCategoryToggleField2" name="traderMinorSubCategoryToggleField" style="display:none;" disabled="disabled" >';
+                
+                $('#traderMinorSubCategoryToggleField1').selectpicker('refresh');
+            }
+            else {
+                traderMinorSubCategoryToggleField1.style.display = 'block';
+                traderMinorSubCategoryToggleField1.disabled = false;
+
+                traderMinorSubCategoryToggleField2.style.display = 'none';
+                traderMinorSubCategoryToggleField2.disabled = true;
+
+                for (var i = 0; i < data.length; i++) {
+                    traderMinorSubCategoryToggleField1.innerHTML =
+                        traderMinorSubCategoryToggleField1.innerHTML +
+                        '<option value="' +
+                        data[i]['id'] +
+                        '">' +
+                        data[i]['title'] +
+                        '</option>';
+                }
+                traderMinorSubCategoryToggleField1.innerHTML =
+                    traderMinorSubCategoryToggleField1.innerHTML +
+                    '<option value="none">None</option><option value="customOption">Other (Type a custom value)</option><input id="traderMinorSubCategoryToggleField2" name="traderMinorSubCategoryToggleField" style="display:none;" disabled="disabled" >';
+                
+                $('#traderMinorSubCategoryToggleField1').selectpicker('refresh');
             }
         });
     }
@@ -215,9 +260,9 @@ traderMinorSubCategoryToggleField1.addEventListener('change', function () {
 });
 
 traderMinorSubCategoryToggleField2.addEventListener('blur', function () {
-    if (this.value == '') {
-        toggleField(this, this.previousSibling);
-    }
+    // if (this.value == '') {
+    //     toggleField(this, this.previousSibling);
+    // }
 });
 
 function toggleField(hideObj, showObj) {

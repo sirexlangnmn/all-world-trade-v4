@@ -44,6 +44,7 @@ exports.create = (req, res) => {
         type: 1, // trader
 
         // users_accounts
+        social_media_contact_type: req.body.personalSocialMediaContactNumber,
         contact_number: req.body.traderCellphone,
         email_or_social_media: req.body.traderEmailAddress,
         password: req.body.traderHashedPassword,

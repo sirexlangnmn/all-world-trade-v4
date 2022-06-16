@@ -150,7 +150,7 @@ traderSubCategoryToggleField1.addEventListener('change', function () {
         this.selectedIndex = '0';
 
         traderMinorSubCategoryToggleField1.style.display = 'none';
-        traderMinorSubCategoryToggleField1.disabled = true;
+        traderMinorSubCategoryToggleField1.disabled = false;
 
         traderMinorSubCategoryToggleField2.style.display = 'block';
         traderMinorSubCategoryToggleField2.disabled = false;
@@ -167,7 +167,7 @@ traderSubCategoryToggleField1.addEventListener('change', function () {
             if (data.length === undefined) {
                 $('#traderMinorSubCategoryToggleField1').empty();
                 traderMinorSubCategoryToggleField1.style.display = 'none';
-                traderMinorSubCategoryToggleField1.disabled = true;
+                traderMinorSubCategoryToggleField1.disabled = false;
 
                 traderMinorSubCategoryToggleField2.style.display = 'block';
                 traderMinorSubCategoryToggleField2.disabled = false;
@@ -175,7 +175,6 @@ traderSubCategoryToggleField1.addEventListener('change', function () {
                 traderMinorSubCategoryToggleField2.focus();
             } else {
                 traderMinorSubCategoryToggleField1.disabled = false;
-                traderMinorSubCategoryToggleField2.disabled = true;
 
                 for (var i = 0; i < data.length; i++) {
                     traderMinorSubCategoryToggleField1.innerHTML =

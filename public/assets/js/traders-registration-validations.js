@@ -320,10 +320,10 @@ function tradersRegistrationValidation() {
         output = 'empty SubCategory';
         traderSubCategoryValidation.innerHTML = 'SubCategory required';
     }
-    if (traderMinorSubCategoryToggleField1.value.length == 0) {
-        output = 'empty Minor Sub Category ';
-        traderMinorSubCategoryValidation.innerHTML = 'Minor Sub Category required';;
-    }
+    // if (traderMinorSubCategoryToggleField1.value.length == 0) {
+    //     output = 'empty Minor Sub Category ';
+    //     traderMinorSubCategoryValidation.innerHTML = 'Minor Sub Category required';
+    // }
     if (textAreaAddKeywords.value.length == 0) {
         output = 'empty Tags';
         traderTagsValidation.innerHTML = 'Tags required';
@@ -508,9 +508,9 @@ traderSubCategoryToggleField1.onchange = function () {
     required(traderSubCategoryToggleField1, traderSubCategoryValidation, 'Sub Category is required');
 };
 
-traderMinorSubCategoryToggleField1.onchange = function () {
-    required(traderMinorSubCategoryToggleField1, traderMinorSubCategoryValidation, 'Minor Sub Category is required');
-};
+// traderMinorSubCategoryToggleField1.onchange = function () {
+//     required(traderMinorSubCategoryToggleField1, traderMinorSubCategoryValidation, 'Minor Sub Category is required');
+// };
 
 inputAddKeyword.onkeyup = function () {
     required(textAreaAddKeywords, traderTagsValidation, 'Tags is required');

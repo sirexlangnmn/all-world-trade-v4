@@ -122,6 +122,7 @@ const Model = function (model) {
     this.uuid = uuidV4();
 
     // users_accounts
+    this.social_media_contact_type = model.social_media_contact_type;
     this.contact_number = model.contact_number;
     this.email_or_social_media = model.email_or_social_media;
     this.password = model.password;
@@ -210,6 +211,7 @@ Model.create = (newModel, result) => {
                 // users_accounts
                 const usersAccountsObject = {
                     user_id: rows.insertId,
+                    social_media_contact_type: newModel.social_media_contact_type,
                     contact_number: newModel.contact_number,
                     email_or_social_media: newModel.email_or_social_media,
                     password: newModel.password,
