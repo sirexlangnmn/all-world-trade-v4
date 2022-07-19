@@ -16,3 +16,5 @@ package-lock.json
 
 # personal env
 #.env
+
+public/uploads/users_upload_files/
