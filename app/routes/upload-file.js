@@ -15,9 +15,9 @@ module.exports = (app) => {
     const db = mysql.createConnection({
         host: 'localhost',
         user: 'root',
-        // password: 'FightForYourDreams7!',
-        password: '',
-        database: 'awt_db_7',
+        password: 'FightForYourDreams7!',
+        // password: '',
+        database: 'awt_db_5',
     });
 
     db.connect(function (err) {
