@@ -25,7 +25,25 @@ function getUsersAccount() {
         type: 'POST',
         success: function (data) {
             console.log(data);
-            // document.getElementById('emailAddress').innerHTML = data[0].email_or_social_media;
+            console.log('getUsersAccount() | type: ' + data[0].type);
+            if (data[0].type === 1) {
+                $('#mediumScale').prop('disabled', true);
+                document.getElementById('mediumScale').style.display = 'none';
+                $('#largeScale').prop('disabled', true);
+                document.getElementById('largeScale').style.display = 'none';
+                $('#tradersScale').prop('disabled', true);
+                document.getElementById('tradersScale').style.display = 'none';
+            }
+            if (data[0].type === 2) {
+                $('#mediumScale').prop('disabled', true);
+                document.getElementById('mediumScale').style.display = 'none';
+                $('#largeScale').prop('disabled', true);
+                document.getElementById('largeScale').style.display = 'none';
+            }
+            if (data[0].type === 3) {
+                $('#mediumScale').prop('disabled', true);
+                document.getElementById('mediumScale').style.display = 'none';
+            }
         },
     });
 }

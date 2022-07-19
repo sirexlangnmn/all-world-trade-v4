@@ -3,6 +3,11 @@ const QUERY = {
 
     SELECT_BANNER: 'SELECT id, banner FROM users_business_medias',
 
+	CREATE_NO: 'INSERT INTO users_business_medias (' +
+		'uuid, ' +
+		'date_created) VALUES' +
+		'(?, ?)',
+
 	CREATE_ALL: 'INSERT INTO users_business_medias (' +
 		'logo, ' +
 		'banner, ' +

@@ -16,6 +16,7 @@ module.exports = (app) => {
     const usersAccounts = require('../controllers/users-accounts.controller.js');
     const usersAddress = require('../controllers/users-address.controller.js');
     const usersBusinessCharacteristics = require('../controllers/users-business-characteristics.controller.js');
+    const usersBusinessVisibility = require('../controllers/users-business-visibility.controller.js');
     const usersBusinessVideos = require('../controllers/users-business-videos.controller.js');
     const usersBusinessMedias = require('../controllers/users-business-medias.controller.js');
     const selection = require('../controllers/selection.controller.js');
@@ -81,6 +82,8 @@ module.exports = (app) => {
     // Retrieve minor sub categories using id
     app.get('/api/get/minor-sub-categories-by-id/:id', minorSubCategories.getMinorSubCategoriesById);
 
+    app.get('/api/get/minor-sub-category-by-title/:title', minorSubCategories.getMinorSubCategoryByTitle);
+
     app.post(['/api/post/login-process'], login.create);
 
     // Retrieve all Company Details
@@ -102,6 +105,8 @@ module.exports = (app) => {
 
     app.post(['/api/get/user-business-characteristics'], usersBusinessCharacteristics.findAll);
 
+    app.post(['/api/get/users-business-visibility'], usersBusinessVisibility.get);
+
     // Retrieve all users business videos
     app.get(['/api/get/users-business-videos'], usersBusinessVideos.findAll);
 
@@ -116,7 +121,9 @@ module.exports = (app) => {
 
     app.post(['/api/get/companies-profile-picture'], usersBusinessMedias.companiesProfilePicture);
 
-    app.post(['/api/get/get-companies-related-to-current-user'], selection.findAllPublished);
+    app.post(['/api/get/get-companies-related-to-current-user'], selection.findCompaniesRelatedToCurrentUser);
+    
+    app.post(['/api/get/get-random-companies'], selection.findRandomCompanies);
 
     app.post(['/api/post/selection-search-parameter'], selection.findAllBySearchParameter);
 

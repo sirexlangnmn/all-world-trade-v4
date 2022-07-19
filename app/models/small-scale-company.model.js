@@ -15,9 +15,11 @@ const Model = function (data) {
     this.state_or_province = data.state_or_province;
     this.city = data.city;
 
+    // users_accounts
+    this.social_media_contact_type = data.social_media_contact_type;
+    this.contact_number = data.contact_number;
+
     // users_business
-    this.business_social_media_contact_type = data.business_social_media_contact_type;
-    this.business_social_media_contact_number = data.business_social_media_contact_number;
     this.business_language_of_communication =
         data.editLanguagesOfCommunication === undefined
             ? data.currentLanguagesOfCommunication
@@ -34,11 +36,16 @@ Model.update = (data, result) => {
     // users_address
     const usersAddressData = [data.country, data.state_or_province, data.city, data.uuid];
 
+    //users_accounts
+    const usersAccountsData = [
+        data.social_media_contact_type,
+        data.contact_number,
+        data.uuid,
+    ];
+
     // users_business
     const usersBusinessData = [
         data.business_language_of_communication,
-        data.business_social_media_contact_type,
-        data.business_social_media_contact_number,
         data.uuid,
     ];
 
@@ -53,53 +60,64 @@ Model.update = (data, result) => {
         state_or_province = ?, 
         city = ?
         WHERE uuid = ?`;
+    
+    const usersAccountsQuery = `UPDATE users_accounts SET 
+        social_media_contact_type = ?, 
+        contact_number = ?
+        WHERE uuid = ?`;
 
     const usersBusinessQuery = `UPDATE users_business SET 
-        business_language_of_communication = ?, 
-        business_social_media_contact_type = ?, 
-        business_social_media_contact_number = ?
+        business_language_of_communication = ?
         WHERE uuid = ?`;
 
     /* Begin transaction */
-    // sql.beginTransaction(function (err) {
-    //     if (err) {
-    //         throw err;
-    //     }
+    sql.beginTransaction(function (err) {
+        if (err) {
+            throw err;
+        }
 
-    //     sql.query(usersQuery, usersData, function (err, rows) {
-    //         if (err) {
-    //             sql.rollback(function () {
-    //                 throw err;
-    //             });
-    //         } else {
-    //             sql.query(usersAddressQuery, usersAddressData, (err, rows) => {
-    //                 if (err) {
-    //                     sql.rollback(function () {
-    //                         throw err;
-    //                     });
-    //                 } else {
-    //                     sql.query(usersBusinessQuery, usersBusinessData, (err, rows) => {
-    //                         if (err) {
-    //                             sql.rollback(function () {
-    //                                 throw err;
-    //                             });
-    //                         } else {
-    //                             sql.commit(function (err) {
-    //                                 if (err) {
-    //                                     sql.rollback(function () {
-    //                                         throw err;
-    //                                     });
-    //                                 } else {
-    //                                     result(null, { id: rows.insertId, ...data });
-    //                                 }
-    //                             });
-    //                         }
-    //                     });
-    //                 }
-    //             });
-    //         }
-    //     });
-    // });
+        sql.query(usersQuery, usersData, function (err, rows) {
+            if (err) {
+                sql.rollback(function () {
+                    throw err;
+                });
+            } else {
+                sql.query(usersAddressQuery, usersAddressData, (err, rows) => {
+                    if (err) {
+                        sql.rollback(function () {
+                            throw err;
+                        });
+                    } else {
+                        sql.query(usersBusinessQuery, usersBusinessData, (err, rows) => {
+                            if (err) {
+                                sql.rollback(function () {
+                                    throw err;
+                                });
+                            } else {
+                                sql.query(usersAccountsQuery, usersAccountsData, (err, rows) => {
+                                    if (err) {
+                                        sql.rollback(function () {
+                                            throw err;
+                                        });
+                                    } else {
+                                        sql.commit(function (err) {
+                                            if (err) {
+                                                sql.rollback(function () {
+                                                    throw err;
+                                                });
+                                            } else {
+                                                result(null, { id: rows.insertId, ...data });
+                                            }
+                                        });
+                                    }
+                                });
+                            }
+                        });
+                    }
+                });
+            }
+        });
+    });
     /* End transaction */
 };
 

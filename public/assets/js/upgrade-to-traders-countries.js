@@ -26,9 +26,9 @@ function getBusinessLocationCode() {
         url: '/api/get/business-location-code',
         type: 'POST',
         success: function (data) {
-            getBusinessCountryLocation(data, 'editBusinessCountryLocation');
-            getBusinessStatesLocation(data, 'editBusinessStatesLocation');
-            getBusinessCityLocation(data, 'editBusinessCityLocation');
+            getBusinessCountryLocationToBeEditAndOptions(data, 'editBusinessCountryLocation');
+            getBusinessStatesLocationToBeEditAndOptions(data, 'editBusinessStatesLocation');
+            getBusinessCityLocationToBeEditAndOptions(data, 'editBusinessCityLocation');
 
             getCountryOfOperation(data, 'countryOfOperation');
             getStatesOfOperation(data, 'statesOfOperation');
@@ -56,7 +56,7 @@ function getBusinessLocationCode() {
             //     document.getElementById('countryOfOperationValidation').innerHTML = 'Country Of Operation is required';
             // }
             // if (data[0].states_of_operation == null || data[0].states_of_operation == "") {
-            //     document.getElementById('statesOfOperationValidation').innerHTML = 'States Of Operation is required';
+            //     document.getElementById('statesOfOperationValidation').innerHTML = 'State / Province of Operation is required';
             // }
             // if (data[0].city_of_operation == null || data[0].city_of_operation == "") {
             //     document.getElementById('cityOfOperationValidation').innerHTML = 'City Of Operation is required';
@@ -323,8 +323,8 @@ function getUsersAddress() {
         type: 'POST',
         success: function (data) {
             document.getElementById('displayReprestativeAddress').innerHTML = data[0].address;
-            getCityNameUsingCode(data[0].city, 'displayReprestativeAddressCity');
-            getStatesNameUsingCode(data[0].state_or_province, 'displayReprestativeAddressStates');
+            getCityNameToBeDisplayUsingCode(data[0].city, 'displayReprestativeAddressCity');
+            getStatesNameToBeDisplayUsingCode(data[0].state_or_province, 'displayReprestativeAddressStates');
             getCountryNameUsingCode(data[0].country, 'displayReprestativeAddressCountry');
         },
     });
@@ -346,7 +346,7 @@ function getCountryNameUsingCode(code, elementId) {
     }
 }
 
-function getStatesNameUsingCode(code, elementId) {
+function getStatesNameToBeDisplayUsingCode(code, elementId) {
     if (code) {
         fetch('assets/json/states.json')
             .then(function (resp) {
@@ -361,7 +361,7 @@ function getStatesNameUsingCode(code, elementId) {
     }
 }
 
-function getCityNameUsingCode(code, elementId) {
+function getCityNameToBeDisplayUsingCode(code, elementId) {
     if (code) {
         fetch('assets/json/cities.json')
             .then(function (resp) {

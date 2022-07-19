@@ -50,7 +50,7 @@ document.getElementById('countryOfOperation').onchange = function () {
     required('countryOfOperation', 'countryOfOperationValidation', 'Country of Operation is required');
 };
 document.getElementById('statesOfOperation').onchange = function () {
-    required('statesOfOperation', 'statesOfOperationValidation', 'States of Operation is required');
+    required('statesOfOperation', 'statesOfOperationValidation', 'State / Province of Operation is required');
 };
 document.getElementById('cityOfOperation').onchange = function () {
     required('cityOfOperation', 'cityOfOperationValidation', 'City of Operation is required');
@@ -160,7 +160,7 @@ function upgradeToTradersClientSideValidation() {
     }
     if (document.getElementById('statesOfOperation').value.length == 0) {
         output = 'empty_statesOfOperation';
-        document.getElementById('statesOfOperationValidation').innerHTML = 'States of Operation is required';
+        document.getElementById('statesOfOperationValidation').innerHTML = 'State / Province of Operation is required';
     }
     if (document.getElementById('cityOfOperation').value.length == 0) {
         output = 'empty_cityOfOperation';

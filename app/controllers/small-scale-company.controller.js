@@ -50,9 +50,9 @@ exports.update = (req, res) => {
         // email_or_social_media: req.body.emailAddress,  // Note: email update is not valid in this module. If update email is necessary, need new module with email verification for new email address.
         // password: req.body.hashedPassword, // same, need new module for change password
 
-        // users_business
-        business_social_media_contact_type: req.body.socialMediaContactType,
-        business_social_media_contact_number: req.body.socialMediaContactNumber,
+        // users_accounts
+        social_media_contact_type: req.body.socialMediaContactType,
+        contact_number: req.body.socialMediaContactNumber,
 
         // users_business
         // business_language_of_communication: req.body.language,

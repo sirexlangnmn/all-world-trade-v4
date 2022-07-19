@@ -8,6 +8,8 @@ exports.getMinorSubCategoryTitleById = (req, res) => {};
 
 exports.getMinorSubCategoriesById = (req, res) => {};
 
+exports.getMinorSubCategoryByTitle = (req, res) => {};
+
 // ===================
 // Retrieve objects
 // ===================
@@ -72,6 +74,24 @@ exports.getMinorSubCategoriesById = (req, res) => {
             } else {
                 res.status(500).send({
                     message: 'Error retrieving minor sub category title with  id ' + req.params.id,
+                });
+            }
+        } else res.send(data);
+    });
+};
+
+
+exports.getMinorSubCategoryByTitle = (req, res) => {
+    // console.log('getMinorSubCategoryByTitle controller:', req.params.title);
+    Model.getMinorSubCategoryByTitle(req.params.title, (err, data) => {
+        if (err) {
+            if (err.kind === 'not_found') {
+                res.status(404).send({
+                    message: `Not found minor sub category id with title ${req.params.title}.`,
+                });
+            } else {
+                res.status(500).send({
+                    message: 'Error retrieving minor sub category id with title ' + req.params.title,
                 });
             }
         } else res.send(data);

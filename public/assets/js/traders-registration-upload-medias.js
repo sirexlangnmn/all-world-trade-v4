@@ -36,6 +36,20 @@ function registrationUploadBusinessMedias(uuid) {
     console.log(isWantToUploadCompanyWebinar);
 
     if (
+        companyLogo == 0 &&
+        companyBanner == 0 &&
+        isWantToUploadVideo == '' &&
+        isWantToUploadBrochure == '' &&
+        isWantToUploadCompanyWebinar == ''
+    ) {
+        let response = registrationNoUpload(uuid);
+        console.log('yes registrationNoUpload');
+        console.log('registrationNoUpload: ' + response);
+    } else {
+        console.log('no registrationNoUpload');
+    }
+
+    if (
         companyLogo == 1 &&
         companyBanner == 1 &&
         thumbnailInput == 1 &&
@@ -358,6 +372,28 @@ function registrationUploadBusinessMedias(uuid) {
     } else {
         console.log('no registrationUploadCompanyWebinar');
     }
+}
+
+
+function registrationNoUpload(uuid) {
+    let value;
+
+    $.ajax({
+        url: '/api/post/registration-no-upload',
+        type: 'POST',
+        data: {
+            uuid: uuid,
+        },
+        success: function (data) {
+            console.log(data);
+            value = data;
+        },
+        error: function (e) {
+            // some code here
+        },
+    });
+
+    return value;
 }
 
 function registrationUploadAllUsersBusinessMedias(uuid) {

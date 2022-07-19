@@ -21,6 +21,7 @@ let traderBusinessAddress;
 let traderBusinessAddressValidation;
 let traderBusinessCountryLocationValidation;
 let traderBusinessCityLocationValidation;
+let traderBusinessCityLocationsValidation;
 let traderLanguagesOfCommunicationValidation;
 let traderTradeCategory;
 let traderTradeCategoryValidation;
@@ -64,6 +65,7 @@ traderBusinessAddress = getId('traderBusinessAddress');
 traderBusinessAddressValidation = getId('traderBusinessAddressValidation');
 traderBusinessCountryLocationValidation = getId('traderBusinessCountryLocationValidation');
 traderBusinessCityLocationValidation = getId('traderBusinessCityLocationValidation');
+traderBusinessCityLocationsValidation = getId('traderBusinessCityLocationsValidation');
 traderLanguagesOfCommunication = getId('traderLanguagesOfCommunication');
 traderLanguagesOfCommunicationValidation = getId('traderLanguagesOfCommunicationValidation');
 traderTradeCategory = getId('traderTradeCategory');
@@ -133,7 +135,11 @@ function tradersRegistrationValidation() {
     }
     if (traderBusinessCityLocation.value.length == 0) {
         output = 'empty15';
-        traderBusinessCityLocationValidation.innerHTML = 'Business City Location is required';
+        traderBusinessCityLocationValidation.innerHTML = 'Business State Location is required';
+    }
+    if (traderBusinessCityLocations.value.length == 0) {
+        output = 'empty15';
+        traderBusinessCityLocationsValidation.innerHTML = 'Business City Location is required';
     }
     if (traderLanguagesOfCommunication.value.length == 0) {
         output = 'empty19';
@@ -165,7 +171,11 @@ function tradersRegistrationValidation() {
     }
     if (traderCityOfResidence.value.length == 0) {
         output = 'empty29';
-        traderCityOfResidenceValidation.innerHTML = 'City of residence is required';
+        traderCityOfResidenceValidation.innerHTML = 'State of residence is required';
+    }
+    if (traderCityOfResidences.value.length == 0) {
+        output = 'empty29';
+        traderCityOfResidencesValidation.innerHTML = 'City of residence is required';
     }
     if (emailAddress.value.length == 0) {
         output = 'empty31';
@@ -240,10 +250,23 @@ traderBusinessCountryLocation.onchange = function () {
         traderBusinessCountryLocationValidation,
         'Business Country Location is required',
     );
+
+    setTimeout(function () {
+        required(traderBusinessCityLocation, traderBusinessCityLocationValidation, 'Business States Location is required');
+        required(traderBusinessCityLocations, traderBusinessCityLocationsValidation, 'Business City Location is required');
+    }, 3 * 1000);
 };
 
 traderBusinessCityLocation.onchange = function () {
     required(traderBusinessCityLocation, traderBusinessCityLocationValidation, 'Business City Location is required');
+
+    setTimeout(function () {
+        required(traderBusinessCityLocations, traderBusinessCityLocationsValidation, 'Business City Location is required');
+    }, 3 * 1000);
+};
+
+traderBusinessCityLocations.onchange = function () {
+    required(traderBusinessCityLocations, traderBusinessCityLocationsValidation, 'Business City Location is required');
 };
 
 traderLanguagesOfCommunication.onchange = function () {
@@ -272,10 +295,23 @@ traderGivenNameOfRepresentative.onkeyup = function () {
 
 traderCountryofResidence.onchange = function () {
     required(traderCountryofResidence, traderCountryofResidenceValidation, 'Country of residence is required');
+
+    setTimeout(function () {
+        required(traderCityOfResidence, traderCityOfResidenceValidation, 'State of residence is required');
+        required(traderCityOfResidences, traderCityOfResidencesValidation, 'City of residence is required');
+    }, 3 * 1000);
 };
 
 traderCityOfResidence.onchange = function () {
-    required(traderCityOfResidence, traderCityOfResidenceValidation, 'City of residence is required');
+    required(traderCityOfResidence, traderCityOfResidenceValidation, 'State of residence is required');
+
+    setTimeout(function () {
+        required(traderCityOfResidences, traderCityOfResidencesValidation, 'City of residence is required');
+    }, 3 * 1000);
+};
+
+traderCityOfResidences.onchange = function () {
+    required(traderCityOfResidences, traderCityOfResidencesValidation, 'City of residence is required');
 };
 
 emailAddress.onchange = function () {

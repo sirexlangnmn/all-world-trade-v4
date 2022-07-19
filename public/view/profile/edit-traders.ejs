@@ -18,7 +18,7 @@
                 <form action="javascript:void(0);" method="POST" id="editcompanyBanner"
                   name="editcompanyBanner" enctype="multipart/form-data" accept-charset="utf-8">
                   <label for="companyBanner">
-                    <img id="companyBannerPreview" src="uploads/banner/banner.jpg" />
+                    <img id="companyBannerPreview" src="uploads/placeholder/banner-placeholder2.jpg" />
                   </label>
                   <input type="file" id="companyBanner" name="companyBanner" />
                   <input type="text" id="companyBannerId" name="companyBannerId" />
@@ -30,7 +30,7 @@
                   <div class="profile_avatar image-upload">
                     <div class="profile_avatar_holder">
                       <label for="companyLogo">
-                        <img id="companyLogoPreview" src="uploads/logo/circle-logo2.png" />
+                        <img id="companyLogoPreview" src="uploads/placeholder/logo-placeholder2.jpg" />
                       </label>
                     </div>
                     <input type="file" id="companyLogo" name="companyLogo" />
@@ -229,13 +229,13 @@
                       <div class="grid grid-cols-2 gap-3">
                         <div>
                           <label for="">Start of Operating Hour (Local)</label>
-                          <input type="time" class="shadow-none selectpicker with-border" placeholder=""
+                          <input type="time" class="shadow-none selectpicker with-border indent-10px" placeholder=""
                             id="startOperatingHour" name="startOperatingHour">
                           <p class="text-red-500" id="startOperatingHourValidation"></p>
                         </div>
                         <div>
                           <label for="">End of Operating Hour (Local)</label>
-                          <input type="time" class="shadow-none selectpicker with-border" placeholder=""
+                          <input type="time" class="shadow-none selectpicker with-border indent-10px" placeholder=""
                             id="endOperatingHour" name="endOperatingHour">
                           <p class="text-red-500" id="endOperatingHourValidation"></p>
                         </div>
@@ -244,6 +244,7 @@
                       <select class="selectpicker" id="editLanguagesOfCommunication" name="editLanguagesOfCommunication"
                         multiple>
                       </select>
+                      <p class="text-red-500" id="editLanguagesOfCommunicationValidation"></p>
                       <div class="col-span-2" style="display:none;">
                         <label for="" class="mb-0 ml-2 text-gray-600 text-sm"> Languages of communication </label>
                         <textarea type="text" rows="5" class="shadow-none with-border"
@@ -267,7 +268,7 @@
                         </select>
                         <p class="text-red-500" id="traderSubCategoryValidation"></p>
                       </div>
-                      <div>
+                      <!-- <div>
                         <label for="">Minor Sub Category (Optional)</label>
                         <select id="traderMinorSubCategoryToggleField1" name="traderMinorSubCategoryToggleField">
                           <option></option>
@@ -275,6 +276,16 @@
                             id="traderMinorSubCategoryToggleField2" name="traderMinorSubCategoryToggleField"
                             style="display:none;" disabled="disabled">
                           <p class="text-red-500" id="traderMinorSubCategoryValidation"></p>
+                      </div> -->
+                      <div>
+                        <label for="minorSubCategory">Minor Sub Category (Optional)</label>
+                        <input list="minorSubCategories" name="minorSubCategory" id="minorSubCategory" autocomplete="off">
+                        <datalist id="minorSubCategories">
+                        </datalist>
+                      </div>
+                      <div style="display: block;">
+                        <label for="minorSubCategory">Minor Sub Category Input</label>
+                        <input name="minorSubCategoryInput" id="minorSubCategoryInput" >
                       </div>
                       <div>
                         <label for="">Search Keywords (Maximum of 10)</label>
@@ -368,10 +379,10 @@
                   <div class="bg-white rounded-md lg:shadow-md shadow">
                     <div class="border-b flex items-center justify-between p-4">
                       <div>
-                        <h2 class="text-lg font-semibold">Region of Operation
+                        <h2 class="text-lg font-semibold">Global Region of Operation
                           <a class="hover:border-gray-100" href="#">
                             <span class="icon-feather-info" style="font-size: 16px; font-family: inherit"
-                              uk-tooltip="title: Region of Operation Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.; pos: right">
+                              uk-tooltip="title: Global Region of Operation Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.; pos: right">
                             </span>
                           </a>
                         </h2>
@@ -469,7 +480,7 @@
                         </div>
     
                         <div id="statesOfOperationDiv">
-                          <label for="">States of Operation</label>
+                          <label for="">State / Province of Operation</label>
     
                           <div id="iOperateOnAProvincialLevelDiv">
                             <div class="flex justify-between items-center">
@@ -543,7 +554,16 @@
       <script src="assets/js/edit-traders-profile-countries.js"></script>
       <script src="assets/js/edit-traders-profile-dropdowns.js"></script>
       <script src="assets/js/edit-traders-profile.js"></script>
-      <script src="assets/js/global-countries.js"></script>
+      <script src="assets/js/traders-registration-operation-toogle.js"></script>
+      <script src="assets/js/edit-traders-profile-validations.js"></script>
+      <script src="assets/js/getBusinessCountryLocationToBeEditAndOptions.js"></script>
+      <script src="assets/js/getBusinessStatesLocationToBeEditAndOptions.js"></script>
+      <script src="assets/js/getBusinessCityLocationToBeEditAndOptions.js"></script>
+      <script src="assets/js/getStatesNameToBeDisplayUsingCode.js"></script>
+      <script src="assets/js/getCityNameToBeDisplayUsingCode.js"></script>
+      <script src="assets/js/getMinorSubCategoryOptions.js"></script>
+      
+       
      
       <script>
 

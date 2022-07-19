@@ -1,22 +1,16 @@
-
 let btnAddKeyword;
 let inputAddKeyword;
 let textAreaAddKeywords;
 
 let editTradeCategory;
-let traderMinorSubCategoryToggleField1;
-let traderMinorSubCategoryToggleField2;
 let traderSubCategoryToggleField1;
 let traderSubCategoryToggleField2;
-
 
 btnAddKeyword = getId('btnAddKeyword');
 inputAddKeyword = getId('inputAddKeyword');
 textAreaAddKeywords = getId('textAreaAddKeywords');
 
 editTradeCategory = getId('editTradeCategory');
-traderMinorSubCategoryToggleField1 = getId('traderMinorSubCategoryToggleField1');
-traderMinorSubCategoryToggleField2 = getId('traderMinorSubCategoryToggleField2');
 traderSubCategoryToggleField1 = getId('traderSubCategoryToggleField1');
 traderSubCategoryToggleField2 = getId('traderSubCategoryToggleField2');
 
@@ -24,39 +18,60 @@ $(function () {
     getUserBusinessCharacteristics();
 });
 
-
 let editLanguagesOfCommunication;
 editLanguagesOfCommunication = getId('editLanguagesOfCommunication');
 
-// consume api to get all languages
-async function getLanguages() {
-    let response = await fetch(host + '/api/get/languages');
-    let data = await response.json();
-    return data;
-}
-
-// display all languages in frontend select option
-getLanguages().then((data) => {
-    editLanguagesOfCommunication.innerHTML = '<option value="" disabled>Status Quo</option>';
-    for (var i = 0; i < data.length; i++) {
-        editLanguagesOfCommunication.innerHTML =
-            editLanguagesOfCommunication.innerHTML +
-            '<option value="' +
-            data[i]['code'] +
-            '">' +
-            data[i]['name'] +
-            '</option>';
+function business_language_of_communication(languages) {
+    // consume api to get all languages
+    async function getLanguages() {
+        let response = await fetch(host + '/api/get/languages');
+        let data = await response.json();
+        return data;
     }
-});
+
+    // display all languages in frontend select option
+    getLanguages().then((data) => {
+        let arr = languages.split(',');
+
+        editLanguagesOfCommunication.innerHTML = '';
+
+        for (var i = 0; i < data.length; i++) {
+            for (var x = 0; x < arr.length; x++) {
+                if (arr[x] == data[i]['code']) {
+                    editLanguagesOfCommunication.innerHTML =
+                        editLanguagesOfCommunication.innerHTML +
+                        '<option value="' +
+                        data[i]['code'] +
+                        '" selected>' +
+                        data[i]['name'] +
+                        '</option>';
+                }
+            }
+
+            if (i < data.length) {
+                $('#editLanguagesOfCommunication').selectpicker('refresh');
+            }
+        }
+
+        for (var i = 0; i < data.length; i++) {
+            editLanguagesOfCommunication.innerHTML +=
+                '<option value="' + data[i]['code'] + '">' + data[i]['name'] + '</option>';
+            if (i < data.length) {
+                $('#editLanguagesOfCommunication').selectpicker('refresh');
+            }
+        }
+    });
+}
 
 function getUserBusinessCharacteristics() {
     $.ajax({
         url: '/api/get/user-business-characteristics',
         type: 'POST',
         success: function (value) {
+            console.log('getUserBusinessCharacteristics', value);
             getTradeCategoriesFunction(value);
             getSubCategoriesByTradeCategoryIdFunction(value);
-            getMinorSubCategoriesByIdFunction(value);
+            getMinorSubCategoryOptions(value);
             getUsersBusinessScale(value);
             document.getElementById('textAreaCurrentKeywords').value = value[0].business_industry_belong_to;
         },
@@ -69,49 +84,68 @@ function getTradeCategoriesFunction(value) {
         let data = await response.json();
         return data;
     }
-    
+
     getTradeCategories().then((data) => {
-        traderMinorSubCategoryToggleField1.disabled = true;
-    
-        let code =  value[0].business_major_category;
+        let code = value[0].business_major_category;
         let filtered = data.filter((d) => d.id == code);
-    
+
         editTradeCategory.innerHTML = '<option value="' + filtered[0].id + '">' + filtered[0].title + '</option>';
         for (var i = 0; i < data.length; i++) {
             editTradeCategory.innerHTML =
                 editTradeCategory.innerHTML + '<option value="' + data[i]['id'] + '">' + data[i]['title'] + '</option>';
+
+            if (i < data.length) {
+                $('#editTradeCategory').selectpicker('refresh');
+            }
         }
     });
 }
 
 function getSubCategoriesByTradeCategoryIdFunction(value) {
     async function getSubCategoriesByTradeCategoryId() {
-        let tradeCategoryId =  value[0].business_major_category;
+        let tradeCategoryId = value[0].business_major_category;
         let response = await fetch(host + '/api/get/sub-categories-by-trade-category-id/' + tradeCategoryId);
         let data = await response.json();
         return data;
     }
-    
+
     getSubCategoriesByTradeCategoryId().then((data) => {
+        $('#traderSubCategoryToggleField1').empty();
         traderSubCategoryToggleField1.disabled = false;
-    
-        let code = value[0].business_sub_category;
-        let filtered = data.filter((d) => d.id == code);
-    
-        traderSubCategoryToggleField1.innerHTML =
-            '<option value="' + filtered[0].id + '">' + filtered[0].title + '</option>';
-        for (var i = 0; i < data.length; i++) {
+
+        // let code = value[0].business_sub_category;
+        let subCategoryId = value[0].business_sub_category;
+        let subCategoryString = value[0].business_sub_category_str;
+
+        if (subCategoryId) {
+            console.log('getSubCategoriesByTradeCategoryId subCategoryId', subCategoryId);
+            let filtered = data.filter((d) => d.id == subCategoryId);
+
+            traderSubCategoryToggleField1.innerHTML =
+                '<option value="' + filtered[0].id + '">' + filtered[0].title + '</option>';
+            for (var i = 0; i < data.length; i++) {
+                traderSubCategoryToggleField1.innerHTML =
+                    traderSubCategoryToggleField1.innerHTML +
+                    '<option value="' +
+                    data[i]['id'] +
+                    '">' +
+                    data[i]['title'] +
+                    '</option>';
+            }
             traderSubCategoryToggleField1.innerHTML =
                 traderSubCategoryToggleField1.innerHTML +
-                '<option value="' +
-                data[i]['id'] +
-                '">' +
-                data[i]['title'] +
-                '</option>';
+                '<option value="customOption">Other (Type a custom value)</option><input type="text" class="shadow-none with-border" id="traderSubCategoryToggleField2" name="editSubCategory" style="display:none;" disabled="disabled" >';
+
+            // $('#traderSubCategoryToggleField1').selectpicker('refresh');
         }
-        traderSubCategoryToggleField1.innerHTML =
-            traderSubCategoryToggleField1.innerHTML +
-            '<option value="customOption">Other (Type a custom value)</option><input id="traderSubCategoryToggleField2" name="editSubCategory" style="display:none;" disabled="disabled" >';
+
+        if (subCategoryString) {
+            console.log('getSubCategoriesByTradeCategoryId subCategoryString', subCategoryString);
+            $('#traderSubCategoryToggleField1').hide();
+            document.getElementById('traderSubCategoryToggleField2').style.display = 'block';
+            document.getElementById('traderSubCategoryToggleField2').disabled = false;
+            document.getElementById('traderSubCategoryToggleField2').value = subCategoryString;
+        }
     });
 }
 
@@ -127,7 +161,7 @@ editTradeCategory.addEventListener('change', function () {
     getSubCategoriesByTradeCategoryId().then((data) => {
         traderSubCategoryToggleField1.disabled = false;
 
-        traderSubCategoryToggleField1.innerHTML = '<option value=""> Any </option>';
+        traderSubCategoryToggleField1.innerHTML = '<option value=""> Select </option>';
         for (var i = 0; i < data.length; i++) {
             traderSubCategoryToggleField1.innerHTML =
                 traderSubCategoryToggleField1.innerHTML +
@@ -143,63 +177,16 @@ editTradeCategory.addEventListener('change', function () {
     });
 });
 
-function getMinorSubCategoriesByIdFunction(value) {
-    async function getMinorSubCategoriesById() {
-        let subCategoryId = value[0].business_sub_category;
-        let response = await fetch(host + '/api/get/minor-sub-categories-by-sub-category-id/' + subCategoryId);
-        let data = await response.json();
-        return data;
-    }
-    
-    getMinorSubCategoriesById().then((data) => {
-        let minorSubCategoryId = value[0].business_minor_sub_category;
-        let filtered = data.filter((d) => d.id == minorSubCategoryId);
-        traderMinorSubCategoryToggleField1.innerHTML =
-            '<option value="' + filtered[0].id + '" >' + filtered[0].title + '</option>';
-    
-        if (data.length === undefined) {
-            $('#traderMinorSubCategoryToggleField1').empty();
-            traderMinorSubCategoryToggleField1.style.display = 'none';
-            traderMinorSubCategoryToggleField1.disabled = false;
-    
-            traderMinorSubCategoryToggleField2.style.display = 'block';
-            traderMinorSubCategoryToggleField2.disabled = false;
-            traderMinorSubCategoryToggleField2.style.display = 'inline';
-            traderMinorSubCategoryToggleField2.focus();
-        } else {
-            traderMinorSubCategoryToggleField1.disabled = false;
-    
-            for (var i = 0; i < data.length; i++) {
-                traderMinorSubCategoryToggleField1.innerHTML =
-                    traderMinorSubCategoryToggleField1.innerHTML +
-                    '<option value="' +
-                    data[i]['id'] +
-                    '">' +
-                    data[i]['title'] +
-                    '</option>';
-            }
-            traderMinorSubCategoryToggleField1.innerHTML =
-                traderMinorSubCategoryToggleField1.innerHTML +
-                '<option value="none">None</option><option value="customOption">Other (Type a custom value)</option><input id="traderMinorSubCategoryToggleField2" name="editMinorSubCategory" style="display:none;" disabled="disabled" >';
-        }
-    });
-}
-
 // display all minor sub categories under sub category in frontend select option
 traderSubCategoryToggleField1.addEventListener('change', function () {
-    traderMinorSubCategoryToggleField1.disabled = false;
-    $('#traderMinorSubCategoryToggleField1').empty();
     let subCategoryId = this.value;
 
     if (this.options[this.selectedIndex].value == 'customOption') {
         toggleField(this, this.nextSibling);
         this.selectedIndex = '0';
 
-        traderMinorSubCategoryToggleField1.style.display = 'none';
-        traderMinorSubCategoryToggleField1.disabled = false;
-
-        traderMinorSubCategoryToggleField2.style.display = 'block';
-        traderMinorSubCategoryToggleField2.disabled = false;
+        document.getElementById('minorSubCategory').value = '';
+        document.getElementById('minorSubCategoryInput').value = '';
     }
 
     if (this.options[this.selectedIndex].value !== 'customOption' && subCategoryId !== 'customOption') {
@@ -210,57 +197,19 @@ traderSubCategoryToggleField1.addEventListener('change', function () {
         }
 
         getMinorSubCategoriesByTradeCategoryId().then((data) => {
-            console.log(data.length);
-            if (data.length === undefined) {
-                $('#traderMinorSubCategoryToggleField1').empty();
-                traderMinorSubCategoryToggleField1.style.display = 'none';
-                traderMinorSubCategoryToggleField1.disabled = false;
-
-                traderMinorSubCategoryToggleField2.style.display = 'block';
-                traderMinorSubCategoryToggleField2.disabled = false;
-                traderMinorSubCategoryToggleField2.style.display = 'inline';
-                traderMinorSubCategoryToggleField2.focus();
-            } else {
-                traderMinorSubCategoryToggleField1.disabled = false;
-
+            if (data.length > 0) {
+                $('#minorSubCategories').empty();
                 for (var i = 0; i < data.length; i++) {
-                    traderMinorSubCategoryToggleField1.innerHTML =
-                        traderMinorSubCategoryToggleField1.innerHTML +
-                        '<option value="' +
-                        data[i]['id'] +
-                        '">' +
-                        data[i]['title'] +
-                        '</option>';
+                    let option = document.createElement('option');
+                    option.value = data[i]['title'];
+                    document.getElementById('minorSubCategories').appendChild(option);
                 }
-                traderMinorSubCategoryToggleField1.innerHTML =
-                    traderMinorSubCategoryToggleField1.innerHTML +
-                    '<option value="none">None</option><option value="customOption">Other (Type a custom value)</option><input id="traderMinorSubCategoryToggleField2" name="editMinorSubCategory" style="display:none;" disabled="disabled" >';
             }
         });
     }
 });
 
 traderSubCategoryToggleField2.addEventListener('blur', function () {
-    if (this.value == '') {
-        toggleField(this, this.previousSibling);
-
-        traderMinorSubCategoryToggleField2.style.display = 'none';
-        traderMinorSubCategoryToggleField2.disabled = false;
-        traderMinorSubCategoryToggleField2.value = '';
-
-        traderMinorSubCategoryToggleField1.style.display = 'block';
-        traderMinorSubCategoryToggleField1.disabled = false;
-    }
-});
-
-traderMinorSubCategoryToggleField1.addEventListener('change', function () {
-    if (this.options[this.selectedIndex].value == 'customOption') {
-        toggleField(this, this.nextSibling);
-        this.selectedIndex = '0';
-    }
-});
-
-traderMinorSubCategoryToggleField2.addEventListener('blur', function () {
     if (this.value == '') {
         toggleField(this, this.previousSibling);
     }

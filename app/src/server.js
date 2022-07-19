@@ -125,6 +125,8 @@ app.get(['/'], (req, res) => {
             first_name: req.session.user.first_name,
             last_name: req.session.user.last_name,
             email: req.session.user.email_or_social_media,
+            country: req.session.user.country,
+            state_or_province: req.session.user.state_or_province,
         };
         
         res.render(path.join(__dirname, '../../', 'public/view/home/index'));

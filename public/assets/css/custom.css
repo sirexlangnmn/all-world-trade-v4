@@ -163,7 +163,7 @@ div.ex4 {
 }
 
 .selection-company-details-right {
-    height: 455px;
+    height: 420px;
 }
 
 .selection-company-details-left {
@@ -186,4 +186,36 @@ div.ex4 {
 
 .image-upload > input {
     display: none;
+}
+
+.selectpicker-custom {
+    text-indent: 10px;
+    padding-right: 35px;
+}
+
+.indent-10px {
+    text-indent: 10px;
+}
+
+.selectpicker-option-custom {
+    margin: 1000px;
+    padding-right: 35px;
+    clear: both;
+    font-weight: normal;
+    line-height: 21px;
+    color: white;
+    border-radius: 6px;
+}
+
+.selectpicker-custom option {
+    /* display: block; */
+    /* padding: 7px 10px; */
+    padding-right: 35px;
+    clear: both;
+    font-weight: normal;
+    line-height: 21px;
+    /* color: #808080; */
+    /* color: red; */
+    color: white;
+    border-radius: 6px;
 }

@@ -67,13 +67,13 @@ function getCompanyDetails() {
             // getBusinessSocialMediaContactType(data[0].business_social_media_contact_type);
             getSocialMediaContactType(data[0].business_social_media_contact_type, 'businessSocialMediaContactType');
 
-            getBusinessCountryLocation(data, 'businessCountryLocation');
+            getBusinessCountryLocationToBeEditAndOptions(data, 'businessCountryLocation');
 
             if (data[0].business_country && data[0].business_states) {
-                getBusinessStatesLocation(data, 'businessStatesLocation');
+                getBusinessStatesLocationToBeEditAndOptions(data, 'businessStatesLocation');
             }
             if (data[0].business_country && data[0].business_states && data[0].business_city) {
-                getBusinessCityLocation(data, 'businessCityLocation');
+                getBusinessCityLocationToBeEditAndOptions(data, 'businessCityLocation');
             }
 
             if (data[0].business_name == null || data[0].business_name == "") {
@@ -135,7 +135,7 @@ getLanguages().then((data) => {
     }
 });
 
-function getBusinessCountryLocation(value, elementId) {
+function getBusinessCountryLocationToBeEditAndOptions(value, elementId) {
     fetch('assets/json/countries.json')
         .then(function (resp) {
             return resp.json();
@@ -165,7 +165,7 @@ function getBusinessCountryLocation(value, elementId) {
         });
 }
 
-function getBusinessStatesLocation(value, elementId) {
+function getBusinessStatesLocationToBeEditAndOptions(value, elementId) {
     fetch('assets/json/states.json')
         .then(function (resp) {
             return resp.json();
@@ -188,7 +188,7 @@ function getBusinessStatesLocation(value, elementId) {
         });
 }
 
-function getBusinessCityLocation(value, elementId) {
+function getBusinessCityLocationToBeEditAndOptions(value, elementId) {
     fetch('assets/json/cities.json')
         .then(function (resp) {
             return resp.json();

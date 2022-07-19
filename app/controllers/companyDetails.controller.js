@@ -53,23 +53,28 @@ exports.update = (req, res) => {
         business_country: req.body.editBusinessCountryLocation,
         business_states: req.body.editBusinessStatesLocation,
         business_city: req.body.editBusinessCityLocation,
-        region_of_operation: req.body.editRegionOfOperation,
-        country_of_operation: req.body.countryOfOperation,
-        states_of_operation: req.body.statesOfOperation,
+        region_of_operation: req.body.traderRegionOfOperation,
+        country_of_operation: req.body.traderCountryOfOperation,
+        country_for_state: req.body.traderCountryOfOperation2,
+        states_of_operation: req.body.traderStatesOfOperation,
 
         // users_business_characteristics
         business_major_category: req.body.editTradeCategory,
         business_sub_category: req.body.traderSubCategoryToggleField,
-        business_minor_sub_category: req.body.traderMinorSubCategoryToggleField,
-        textAreaAddKeywords: req.body.textAreaAddKeywords, // new tags/kewords
-        textAreaCurrentKeywords: req.body.textAreaCurrentKeywords, // current tags/kewords
+        business_minor_sub_category: req.body.minorSubCategoryInput,
+        textAreaAddKeywords: req.body.textAreaAddKeywords,
+        textAreaCurrentKeywords: req.body.textAreaCurrentKeywords,
         business_scale: req.body.editBusinessScale,
+
+        // users_business_visibility
+        i_operate_on_a_world_wide_level: req.body.iOperateOnAWorldWideLevelRadioButton,
+        i_operate_on_a_global_regional_level: req.body.iOperateOnAGlobalRegionalLevelRadioButton,
+        i_operate_on_a_national_level: req.body.iOperateOnANationalLevelRadioButton,
+        i_operate_on_a_state_level: req.body.iOperateOnAStateLevelRadioButton,
     });
 
-    // Save Controller in the database
+    //Save Controller in the database
     Controller.update(inputData, (err, data) => {
-        // console.log('controller response data');
-        // console.log(data);
         if (err)
             res.status(500).send({
                 message: err.message || 'Some error occurred while creating the Model.',

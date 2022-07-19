@@ -23,9 +23,12 @@ function getUsersAddress() {
         url: '/api/get/users-address',
         type: 'POST',
         success: function (data) {
+            console.log('getUsersAddress', data);
             getCountryLocation(data, 'country');
-            getStatesLocation(data, 'states');
-            getCityLocation(data, 'city');
+            // getStatesLocation(data, 'states');
+            getUsersStatesLocationToBeEditAndOptions(data, 'states');
+            // getCityLocation(data, 'city');
+            getUsersCityLocationToBeEditAndOptions(data, 'city');
         },
     });
 }
@@ -46,7 +49,7 @@ function getCompanyDetails() {
         url: '/api/get/company-details',
         type: 'POST',
         success: function (data) {
-            console.log(data);
+            console.log('getCompanyDetails', data);
             document.getElementById('companyName').value = data[0].business_name;
             document.getElementById('tagline').value = data[0].business_tagline;
             document.getElementById('businessAddress').value = data[0].business_address;
@@ -56,9 +59,9 @@ function getCompanyDetails() {
             document.getElementById('businessSocialMediaContactNumber').value = data[0].business_social_media_contact_number;
             document.getElementById('currentLanguagesOfCommunication').value = data[0].business_language_of_communication;
             getBusinessSocialMediaContactType(data[0].business_social_media_contact_type);
-            getBusinessCountryLocation(data, 'businessCountryLocation');
-            getBusinessStatesLocation(data, 'businessStatesLocation');
-            getBusinessCityLocation(data, 'businessCityLocation');
+            getBusinessCountryLocationToBeEditAndOptions(data, 'businessCountryLocation');
+            getBusinessStatesLocationToBeEditAndOptions(data, 'businessStatesLocation');
+            getBusinessCityLocationToBeEditAndOptions(data, 'businessCityLocation');
         },
     });
 }
@@ -85,76 +88,76 @@ getLanguages().then((data) => {
     }
 });
 
-function getBusinessCountryLocation(value, elementId) {
-    fetch('assets/json/countries.json')
-        .then(function (resp) {
-            return resp.json();
-        })
-        .then(function (data) {
-            let filtered = data.filter((d) => d.iso2 == value[0].business_country);
+// function getBusinessCountryLocationToBeEditAndOptions(value, elementId) {
+//     fetch('assets/json/countries.json')
+//         .then(function (resp) {
+//             return resp.json();
+//         })
+//         .then(function (data) {
+//             let filtered = data.filter((d) => d.iso2 == value[0].business_country);
 
-            document.getElementById(elementId).innerHTML =
-                '<option value="' + filtered[0].iso2 + '" >' + filtered[0].name + '</option>';
+//             document.getElementById(elementId).innerHTML =
+//                 '<option value="' + filtered[0].iso2 + '" >' + filtered[0].name + '</option>';
 
-            for (var i = 0; i < data.length; i++) {
-                document.getElementById(elementId).innerHTML =
-                    document.getElementById(elementId).innerHTML +
-                    '<option value="' +
-                    data[i].iso2 +
-                    '">' +
-                    data[i].name +
-                    '</option>';
-            }
-            $('#' + elementId).selectpicker('refresh');
-        });
-}
+//             for (var i = 0; i < data.length; i++) {
+//                 document.getElementById(elementId).innerHTML =
+//                     document.getElementById(elementId).innerHTML +
+//                     '<option value="' +
+//                     data[i].iso2 +
+//                     '">' +
+//                     data[i].name +
+//                     '</option>';
+//             }
+//             $('#' + elementId).selectpicker('refresh');
+//         });
+// }
 
-function getBusinessStatesLocation(value, elementId) {
-    fetch('assets/json/states.json')
-        .then(function (resp) {
-            return resp.json();
-        })
-        .then(function (data) {
-            let filtered = data.filter((d) => d.country_code == value[0].business_country);
-            let filtered2 = filtered.filter((x) => x.id == value[0].business_states);
+// function getBusinessStatesLocationToBeEditAndOptions(value, elementId) {
+//     fetch('assets/json/states.json')
+//         .then(function (resp) {
+//             return resp.json();
+//         })
+//         .then(function (data) {
+//             let filtered = data.filter((d) => d.country_code == value[0].business_country);
+//             let filtered2 = filtered.filter((x) => x.id == value[0].business_states);
 
-            document.getElementById(elementId).innerHTML =
-                '<option value="' + filtered2[0].id + '" >' + filtered2[0].name + '</option>';
+//             document.getElementById(elementId).innerHTML =
+//                 '<option value="' + filtered2[0].id + '" >' + filtered2[0].name + '</option>';
 
-            for (var i = 0; i < filtered.length; i++) {
-                let option = document.createElement('option');
-                option.value = filtered[i].id;
-                option.innerHTML = filtered[i].name;
-                document.getElementById(elementId).appendChild(option);
-            }
+//             for (var i = 0; i < filtered.length; i++) {
+//                 let option = document.createElement('option');
+//                 option.value = filtered[i].id;
+//                 option.innerHTML = filtered[i].name;
+//                 document.getElementById(elementId).appendChild(option);
+//             }
 
-            $('#' + elementId).selectpicker('refresh');
-        });
-}
+//             $('#' + elementId).selectpicker('refresh');
+//         });
+// }
 
-function getBusinessCityLocation(value, elementId) {
-    fetch('assets/json/cities.json')
-        .then(function (resp) {
-            return resp.json();
-        })
-        .then(function (data) {
-            let filtered = data.filter((d) => d.country_code == value[0].business_country);
-            let filtered2 = filtered.filter((x) => x.state_id == value[0].business_states);
-            let filtered3 = filtered.filter((x) => x.id == value[0].business_city);
+// function getBusinessCityLocationToBeEditAndOptions(value, elementId) {
+//     fetch('assets/json/cities.json')
+//         .then(function (resp) {
+//             return resp.json();
+//         })
+//         .then(function (data) {
+//             let filtered = data.filter((d) => d.country_code == value[0].business_country);
+//             let filtered2 = filtered.filter((x) => x.state_id == value[0].business_states);
+//             let filtered3 = filtered.filter((x) => x.id == value[0].business_city);
 
-            document.getElementById(elementId).innerHTML =
-                '<option value="' + filtered3[0].id + '" >' + filtered3[0].name + '</option>';
+//             document.getElementById(elementId).innerHTML =
+//                 '<option value="' + filtered3[0].id + '" >' + filtered3[0].name + '</option>';
 
-            for (var i = 0; i < filtered2.length; i++) {
-                let option = document.createElement('option');
-                option.value = filtered2[i].id;
-                option.innerHTML = filtered2[i].name;
-                document.getElementById(elementId).appendChild(option);
-            }
+//             for (var i = 0; i < filtered2.length; i++) {
+//                 let option = document.createElement('option');
+//                 option.value = filtered2[i].id;
+//                 option.innerHTML = filtered2[i].name;
+//                 document.getElementById(elementId).appendChild(option);
+//             }
 
-            $('#' + elementId).selectpicker('refresh');
-        });
-}
+//             $('#' + elementId).selectpicker('refresh');
+//         });
+// }
 
 document.getElementById('businessCountryLocation').addEventListener('change', function () {
     $('#businessStatesLocation').empty();
@@ -259,7 +262,7 @@ function getUserBusinessCharacteristics() {
         url: '/api/get/user-business-characteristics',
         type: 'POST',
         success: function (value) {
-            console.log(value);
+            console.log('getUserBusinessCharacteristics', value);
             getTradeCategoriesFunction(value);
             getSubCategoriesByTradeCategoryIdFunction(value);
             getMinorSubCategoriesByIdFunction(value);
@@ -305,72 +308,168 @@ function getSubCategoriesByTradeCategoryIdFunction(value) {
     }
 
     getSubCategoriesByTradeCategoryId().then((data) => {
-        document.getElementById('traderSubCategoryToggleField1').disabled = false;
+        $('#traderSubCategoryToggleField1').empty();
+        traderSubCategoryToggleField1.disabled = false;
 
-        let code = value[0].business_sub_category;
-        let filtered = data.filter((d) => d.id == code);
-
-        document.getElementById('traderSubCategoryToggleField1').innerHTML =
-            '<option value="' + filtered[0].id + '">' + filtered[0].title + '</option>';
-        for (var i = 0; i < data.length; i++) {
-            document.getElementById('traderSubCategoryToggleField1').innerHTML =
-                document.getElementById('traderSubCategoryToggleField1').innerHTML +
-                '<option value="' +
-                data[i]['id'] +
-                '">' +
-                data[i]['title'] +
-                '</option>';
-        }
-        document.getElementById('traderSubCategoryToggleField1').innerHTML =
-            document.getElementById('traderSubCategoryToggleField1').innerHTML +
-            '<option value="customOption">Other (Type a custom value)</option><input id="traderSubCategoryToggleField2" name="editSubCategory" style="display:none;" disabled="disabled" >';
-
-        
-        // $('#traderSubCategoryToggleField1').selectpicker('refresh');
-    });
-}
-
-function getMinorSubCategoriesByIdFunction(value) {
-    async function getMinorSubCategoriesById() {
+        // let code = value[0].business_sub_category;
         let subCategoryId = value[0].business_sub_category;
-        let response = await fetch(host + '/api/get/minor-sub-categories-by-sub-category-id/' + subCategoryId);
-        let data = await response.json();
-        return data;
-    }
+        let subCategoryString = value[0].business_sub_category_str;
 
-    getMinorSubCategoriesById().then((data) => {
-        let minorSubCategoryId = value[0].business_minor_sub_category;
-        let filtered = data.filter((d) => d.id == minorSubCategoryId);
-        document.getElementById('traderMinorSubCategoryToggleField1').innerHTML =
-            '<option value="' + filtered[0].id + '" >' + filtered[0].title + '</option>';
+        if (subCategoryId) {
+            console.log('getSubCategoriesByTradeCategoryId subCategoryId', subCategoryId);
+            let filtered = data.filter((d) => d.id == subCategoryId);
 
-        if (data.length === undefined) {
-            $('#traderMinorSubCategoryToggleField1').empty();
-            document.getElementById('traderMinorSubCategoryToggleField1').style.display = 'none';
-            document.getElementById('traderMinorSubCategoryToggleField1').disabled = false;
-
-            document.getElementById('traderMinorSubCategoryToggleField2').style.display = 'block';
-            document.getElementById('traderMinorSubCategoryToggleField2').disabled = false;
-            document.getElementById('traderMinorSubCategoryToggleField2').style.display = 'inline';
-            document.getElementById('traderMinorSubCategoryToggleField2').focus();
-        } else {
-            document.getElementById('traderMinorSubCategoryToggleField1').disabled = false;
-
+            traderSubCategoryToggleField1.innerHTML =
+                '<option value="' + filtered[0].id + '">' + filtered[0].title + '</option>';
             for (var i = 0; i < data.length; i++) {
-                document.getElementById('traderMinorSubCategoryToggleField1').innerHTML =
-                    document.getElementById('traderMinorSubCategoryToggleField1').innerHTML +
+                traderSubCategoryToggleField1.innerHTML =
+                    traderSubCategoryToggleField1.innerHTML +
                     '<option value="' +
                     data[i]['id'] +
                     '">' +
                     data[i]['title'] +
                     '</option>';
             }
-            document.getElementById('traderMinorSubCategoryToggleField1').innerHTML =
-                document.getElementById('traderMinorSubCategoryToggleField1').innerHTML +
-                '<option value="none">None</option><option value="customOption">Other (Type a custom value)</option><input id="traderMinorSubCategoryToggleField2" name="editMinorSubCategory" style="display:none;" disabled="disabled" >';
+            traderSubCategoryToggleField1.innerHTML =
+                traderSubCategoryToggleField1.innerHTML +
+                '<option value="customOption">Other (Type a custom value)</option><input type="text" class="shadow-none with-border" id="traderSubCategoryToggleField2" name="editSubCategory" style="display:none;" disabled="disabled" >';
+
+            // $('#traderSubCategoryToggleField1').selectpicker('refresh');
+        }
+
+        if (subCategoryString) {
+            console.log('getSubCategoriesByTradeCategoryId subCategoryString', subCategoryString);
+            $('#traderSubCategoryToggleField1').hide();
+            document.getElementById('traderSubCategoryToggleField2').style.display = 'block';
+            document.getElementById('traderSubCategoryToggleField2').disabled = false;
+            document.getElementById('traderSubCategoryToggleField2').value = subCategoryString;
+        }
+    });
+}
+// function getSubCategoriesByTradeCategoryIdFunction(value) {
+//     async function getSubCategoriesByTradeCategoryId() {
+//         let tradeCategoryId = value[0].business_major_category;
+//         let response = await fetch(host + '/api/get/sub-categories-by-trade-category-id/' + tradeCategoryId);
+//         let data = await response.json();
+//         return data;
+//     }
+
+//     getSubCategoriesByTradeCategoryId().then((data) => {
+//         document.getElementById('traderSubCategoryToggleField1').disabled = false;
+
+//         let code = value[0].business_sub_category;
+//         let filtered = data.filter((d) => d.id == code);
+
+//         document.getElementById('traderSubCategoryToggleField1').innerHTML =
+//             '<option value="' + filtered[0].id + '">' + filtered[0].title + '</option>';
+//         for (var i = 0; i < data.length; i++) {
+//             document.getElementById('traderSubCategoryToggleField1').innerHTML =
+//                 document.getElementById('traderSubCategoryToggleField1').innerHTML +
+//                 '<option value="' +
+//                 data[i]['id'] +
+//                 '">' +
+//                 data[i]['title'] +
+//                 '</option>';
+//         }
+//         document.getElementById('traderSubCategoryToggleField1').innerHTML =
+//             document.getElementById('traderSubCategoryToggleField1').innerHTML +
+//             '<option value="customOption">Other (Type a custom value)</option><input id="traderSubCategoryToggleField2" name="editSubCategory" style="display:none;" disabled="disabled" >';
+
+        
+//         // $('#traderSubCategoryToggleField1').selectpicker('refresh');
+//     });
+// }
+
+// function getMinorSubCategoriesByIdFunction(value) {
+//     async function getMinorSubCategoriesById() {
+//         let subCategoryId = value[0].business_sub_category;
+//         let response = await fetch(host + '/api/get/minor-sub-categories-by-sub-category-id/' + subCategoryId);
+//         let data = await response.json();
+//         return data;
+//     }
+
+//     getMinorSubCategoriesById().then((data) => {
+//         let minorSubCategoryId = value[0].business_minor_sub_category;
+//         let filtered = data.filter((d) => d.id == minorSubCategoryId);
+//         document.getElementById('traderMinorSubCategoryToggleField1').innerHTML =
+//             '<option value="' + filtered[0].id + '" >' + filtered[0].title + '</option>';
+
+//         if (data.length === undefined) {
+//             $('#traderMinorSubCategoryToggleField1').empty();
+//             document.getElementById('traderMinorSubCategoryToggleField1').style.display = 'none';
+//             document.getElementById('traderMinorSubCategoryToggleField1').disabled = false;
+
+//             document.getElementById('traderMinorSubCategoryToggleField2').style.display = 'block';
+//             document.getElementById('traderMinorSubCategoryToggleField2').disabled = false;
+//             document.getElementById('traderMinorSubCategoryToggleField2').style.display = 'inline';
+//             document.getElementById('traderMinorSubCategoryToggleField2').focus();
+//         } else {
+//             document.getElementById('traderMinorSubCategoryToggleField1').disabled = false;
+
+//             for (var i = 0; i < data.length; i++) {
+//                 document.getElementById('traderMinorSubCategoryToggleField1').innerHTML =
+//                     document.getElementById('traderMinorSubCategoryToggleField1').innerHTML +
+//                     '<option value="' +
+//                     data[i]['id'] +
+//                     '">' +
+//                     data[i]['title'] +
+//                     '</option>';
+//             }
+//             document.getElementById('traderMinorSubCategoryToggleField1').innerHTML =
+//                 document.getElementById('traderMinorSubCategoryToggleField1').innerHTML +
+//                 '<option value="none">None</option><option value="customOption">Other (Type a custom value)</option><input id="traderMinorSubCategoryToggleField2" name="editMinorSubCategory" style="display:none;" disabled="disabled" >';
+
+//             // $('#traderMinorSubCategoryToggleField1').selectpicker('refresh');
+//         }
+//     });
+// }
+
+function getMinorSubCategoriesByIdFunction(value) {
+    async function getMinorSubCategoriesById() {
+        let subCategoryId = value[0].business_sub_category;
+
+        if (subCategoryId) {
+            let response = await fetch(host + '/api/get/minor-sub-categories-by-sub-category-id/' + subCategoryId);
+            let data = await response.json();
+            return data;
+        }
+    }
+
+    getMinorSubCategoriesById().then((data) => {
+        let minorSubCategoryId = value[0].business_minor_sub_category;
+        let minorSubCategoryString = value[0].business_minor_sub_category_str;
+
+        if (minorSubCategoryId) {
+            console.log('getMinorSubCategoriesByIdFunction minorSubCategoryId', minorSubCategoryId);
+            let filtered = data.filter((d) => d.id == minorSubCategoryId);
+
+            traderMinorSubCategoryToggleField1.innerHTML =
+                '<option value="' + filtered[0].id + '">' + filtered[0].title + '</option>';
+            for (var i = 0; i < data.length; i++) {
+                traderMinorSubCategoryToggleField1.innerHTML =
+                    traderMinorSubCategoryToggleField1.innerHTML +
+                    '<option value="' +
+                    data[i]['id'] +
+                    '">' +
+                    data[i]['title'] +
+                    '</option>';
+            }
+            traderMinorSubCategoryToggleField1.innerHTML =
+                traderMinorSubCategoryToggleField1.innerHTML +
+                '<option value="customOption">Other (Type a custom value)</option><input type="text" class="shadow-none with-border" id="traderMinorSubCategoryToggleField2" name="editMinorSubCategory" style="display:none;" disabled="disabled" >';
 
             // $('#traderMinorSubCategoryToggleField1').selectpicker('refresh');
         }
+
+        if (minorSubCategoryString) {
+            console.log('getMinorSubCategoriesByIdFunction minorSubCategoryIdString', minorSubCategoryString);
+            $('#traderMinorSubCategoryToggleField1').hide();
+            document.getElementById('traderMinorSubCategoryToggleField2').style.display = 'block';
+            document.getElementById('traderMinorSubCategoryToggleField2').disabled = false;
+            document.getElementById('traderMinorSubCategoryToggleField2').value = minorSubCategoryString;
+        }
+
+        
     });
 }
 
@@ -478,9 +577,23 @@ document.getElementById('traderMinorSubCategoryToggleField1').addEventListener('
     }
 });
 
+// document.getElementById('traderMinorSubCategoryToggleField2').addEventListener('blur', function () {
+//     if (this.value == '') {
+//         toggleField(this, this.previousSibling);
+//     }
+// });
+
 document.getElementById('traderMinorSubCategoryToggleField2').addEventListener('blur', function () {
-    if (this.value == '') {
-        toggleField(this, this.previousSibling);
+    if (
+        (this.value == '' && document.getElementById('traderSubCategoryToggleField1').value == 'customOption') ||
+        document.getElementById('traderSubCategoryToggleField2').value != ''
+    ) {
+        document.getElementById('traderMinorSubCategoryToggleField2').style.display = 'block';
+        document.getElementById('traderMinorSubCategoryToggleField2').disabled = false;
+    } else {
+        if (this.value == '') {
+            toggleField(this, this.previousSibling);
+        }
     }
 });
 
@@ -516,53 +629,53 @@ function getCountryLocation(value, elementId) {
     });
 }
 
-function getStatesLocation(value, elementId) {
-    fetch('assets/json/states.json')
-        .then(function (resp) {
-            return resp.json();
-        })
-        .then(function (data) {
-            let filtered = data.filter((d) => d.country_code == value[0].country);
-            let filtered2 = filtered.filter((x) => x.id == value[0].state_or_province);
+// function getStatesLocation(value, elementId) {
+//     fetch('assets/json/states.json')
+//         .then(function (resp) {
+//             return resp.json();
+//         })
+//         .then(function (data) {
+//             let filtered = data.filter((d) => d.country_code == value[0].country);
+//             let filtered2 = filtered.filter((x) => x.id == value[0].state_or_province);
 
-            document.getElementById(elementId).innerHTML =
-                '<option value="' + filtered2[0].id + '" >' + filtered2[0].name + '</option>';
+//             document.getElementById(elementId).innerHTML =
+//                 '<option value="' + filtered2[0].id + '" >' + filtered2[0].name + '</option>';
     
-            for (var i = 0; i < filtered.length; i++) {
-                let option = document.createElement('option');
-                option.value = filtered[i].id;
-                option.innerHTML = filtered[i].name;
-                document.getElementById(elementId).appendChild(option);
-            }
+//             for (var i = 0; i < filtered.length; i++) {
+//                 let option = document.createElement('option');
+//                 option.value = filtered[i].id;
+//                 option.innerHTML = filtered[i].name;
+//                 document.getElementById(elementId).appendChild(option);
+//             }
             
-            $("#"+elementId).selectpicker('refresh');
-        });
+//             $("#"+elementId).selectpicker('refresh');
+//         });
 
-}
+// }
 
-function getCityLocation(value, elementId) {
-    fetch('assets/json/cities.json')
-        .then(function (resp) {
-            return resp.json();
-        })
-        .then(function (data) {
-            let filtered = data.filter((d) => d.country_code == value[0].country);
-            let filtered2 = filtered.filter((x) => x.state_id == value[0].state_or_province);
-            let filtered3 = filtered.filter((x) => x.id == value[0].city);
+// function getCityLocation(value, elementId) {
+//     fetch('assets/json/cities.json')
+//         .then(function (resp) {
+//             return resp.json();
+//         })
+//         .then(function (data) {
+//             let filtered = data.filter((d) => d.country_code == value[0].country);
+//             let filtered2 = filtered.filter((x) => x.state_id == value[0].state_or_province);
+//             let filtered3 = filtered.filter((x) => x.id == value[0].city);
     
-            document.getElementById(elementId).innerHTML =
-                '<option value="' + filtered3[0].id + '" >' + filtered3[0].name + '</option>';
+//             document.getElementById(elementId).innerHTML =
+//                 '<option value="' + filtered3[0].id + '" >' + filtered3[0].name + '</option>';
     
-            for (var i = 0; i < filtered2.length; i++) {
-                let option = document.createElement('option');
-                option.value = filtered2[i].id;
-                option.innerHTML = filtered2[i].name;
-                document.getElementById(elementId).appendChild(option);
-            }
+//             for (var i = 0; i < filtered2.length; i++) {
+//                 let option = document.createElement('option');
+//                 option.value = filtered2[i].id;
+//                 option.innerHTML = filtered2[i].name;
+//                 document.getElementById(elementId).appendChild(option);
+//             }
             
-            $("#"+elementId).selectpicker('refresh');
-        });
-}
+//             $("#"+elementId).selectpicker('refresh');
+//         });
+// }
 
 document.getElementById("country").addEventListener('change', function () {
     $('#states').empty();

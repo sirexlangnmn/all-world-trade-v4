@@ -15,18 +15,54 @@ $(function () {
 
 
 
+// function getUsersLogoAndBanner() {
+//     $.ajax({
+//         url: '/api/get/users-logo-and-banners',
+//         type: 'GET',
+//         success: function (data) {
+//             console.log('getUsersLogoAndBanner()', data);
+//             if (data.length > 0) {
+//                 let companyLogoImage = data[0].banner ?  '/uploads/users_upload_files/' + data[0].logo : '/uploads/placeholder/logo-placeholder2.jpg';
+//                 let companyBannerImage = data[0].banner ?  '/uploads/users_upload_files/' + data[0].banner : '/uploads/placeholder/banner-placeholder2.jpg';
+//                 companyBannerPreview.src = host + companyBannerImage;
+//                 companyLogoPreview.src = host + companyLogoImage;
+//                 companyLogoId.value = data[0].id;
+//                 companyBannerId.value = data[0].id;
+//                 testImage(host + companyLogoImage, isValidLogo);
+//                 testImage(host + companyBannerImage, isValidBanner);
+//             }
+//         },
+//     });
+// }
+
 function getUsersLogoAndBanner() {
     $.ajax({
         url: '/api/get/users-logo-and-banners',
         type: 'GET',
         success: function (data) {
-            console.log(data);
+            console.log('getUsersLogoAndBanner() | data: ', data);
+            console.log('getUsersLogoAndBanner() | data.length : ', data.length );
             if (data.length > 0) {
-                let companyBannerImage = data[0].banner ?  '/uploads/users_upload_files/' + data[0].banner : '/uploads/placeholder/banner-placeholder2.jpg';
-                companyBannerPreview.src = host + companyBannerImage;
-                companyLogoPreview.src = host + '/uploads/users_upload_files/' + data[0].logo;
+                if (data[0].banner) {
+                    companyBannerPreview.src = host + '/uploads/users_upload_files/' + data[0].banner;
+                } else {
+                    companyBannerPreview.src = host + '/uploads/placeholder/banner-placeholder.png';
+                }
+                if (data[0].logo) {
+                    companyLogoPreview.src = host + '/uploads/users_upload_files/' + data[0].logo;
+                } else {
+                    companyLogoPreview.src = host + '/uploads/placeholder/logo-placeholder.jpg';
+                }
                 companyLogoId.value = data[0].id;
                 companyBannerId.value = data[0].id;
+
+                let companyLogoImage = data[0].banner ?  '/uploads/users_upload_files/' + data[0].logo : '/uploads/placeholder/logo-placeholder2.jpg';
+                let companyBannerImage = data[0].banner ?  '/uploads/users_upload_files/' + data[0].banner : '/uploads/placeholder/banner-placeholder2.jpg';
+                testImage(host + companyLogoImage, isValidLogo);
+                testImage(host + companyBannerImage, isValidBanner);
+            } else {
+                companyBannerPreview.src = host + '/uploads/placeholder/banner-placeholder.png';
+                companyLogoPreview.src = host + '/uploads/placeholder/logo-placeholder.jpg';
             }
         },
     });

@@ -88,20 +88,16 @@ function registrationValidation() {
         output = 'empty4';
         lastNameValidation.innerHTML = 'Lastname is required';
     }
-    if (middleName.value.length == 0) {
-        output = 'empty5';
-        middleNameValidation.innerHTML = 'Middlename is required';
-    }
     if (country.value.length == 0) {
         output = 'empty6';
         countryValidation.innerHTML = 'Country is required';
     }
     if (states.value.length == 0) {
-        output = 'empty7';
+        output = 'empty States';
         statesValidation.innerHTML = 'States is required';
     }
     if (city.value.length == 0) {
-        output = 'empty8';
+        output = 'empty City';
         cityValidation.innerHTML = 'City is required';
     }
     if (language.value.length == 0) {
@@ -134,14 +130,20 @@ firstName.onkeyup = function () {
 lastName.onkeyup = function () {
     required(lastName, lastNameValidation, 'Lastname');
 };
-middleName.onkeyup = function () {
-    required(middleName, middleNameValidation, 'Middlename');
-};
 country.onchange = function () {
     required(country, countryValidation, 'Country');
+
+    setTimeout(function () {
+        required(states, statesValidation, 'States');
+        required(city, cityValidation, 'City');
+    }, 3 * 1000);
 };
 states.onchange = function () {
     required(states, statesValidation, 'States');
+
+    setTimeout(function () {
+        required(city, cityValidation, 'City');
+    }, 3 * 1000);
 };
 city.onchange = function () {
     required(city, cityValidation, 'City');
@@ -161,6 +163,7 @@ confirmPassword.onkeyup = function () {
 };
 
 function required(elementIdInput, elementIdValidation, message) {
+    console.log('required: ', elementIdInput.value);
     if (elementIdInput.value.length == 0) {
         elementIdValidation.style.display = 'block';
         elementIdValidation.innerHTML = message + ' is required';

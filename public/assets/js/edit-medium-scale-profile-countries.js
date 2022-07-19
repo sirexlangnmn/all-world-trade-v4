@@ -8,8 +8,8 @@ function getUsersAddress() {
         type: 'POST',
         success: function (data) {
             getCountryLocation(data, 'country');
-            getStatesLocation(data, 'states');
-            getCityLocation(data, 'city');
+            getUsersStatesLocationToBeEditAndOptions(data, 'states');
+            getUsersCityLocationToBeEditAndOptions(data, 'city');
         },
     });
 }
@@ -38,56 +38,56 @@ function getCountryLocation(value, elementId) {
     });
 }
 
-function getStatesLocation(value, elementId) {
-    fetch('assets/json/states.json')
-        .then(function (resp) {
-            return resp.json();
-        })
-        .then(function (data) {
-            let filtered = data.filter((d) => d.country_code == value[0].country);
-            let filtered2 = filtered.filter((x) => x.id == value[0].state_or_province);
+// function getStatesLocation(value, elementId) {
+//     fetch('assets/json/states.json')
+//         .then(function (resp) {
+//             return resp.json();
+//         })
+//         .then(function (data) {
+//             let filtered = data.filter((d) => d.country_code == value[0].country);
+//             let filtered2 = filtered.filter((x) => x.id == value[0].state_or_province);
 
-            document.getElementById(elementId).innerHTML =
-                '<option value="' + filtered2[0].id + '" >' + filtered2[0].name + '</option>';
+//             document.getElementById(elementId).innerHTML =
+//                 '<option value="' + filtered2[0].id + '" >' + filtered2[0].name + '</option>';
     
-            for (var i = 0; i < filtered.length; i++) {
-                let option = document.createElement('option');
-                option.value = filtered[i].id;
-                option.innerHTML = filtered[i].name;
-                document.getElementById(elementId).appendChild(option);
-            }
+//             for (var i = 0; i < filtered.length; i++) {
+//                 let option = document.createElement('option');
+//                 option.value = filtered[i].id;
+//                 option.innerHTML = filtered[i].name;
+//                 document.getElementById(elementId).appendChild(option);
+//             }
             
-            $("#"+elementId).selectpicker('refresh');
-        });
+//             $("#"+elementId).selectpicker('refresh');
+//         });
 
-}
+// }
 
-function getCityLocation(value, elementId) {
-    fetch('assets/json/cities.json')
-        .then(function (resp) {
-            return resp.json();
-        })
-        .then(function (data) {
-            let filtered = data.filter((d) => d.country_code == value[0].country);
-            let filtered2 = filtered.filter((x) => x.state_id == value[0].state_or_province);
-            let filtered3 = filtered.filter((x) => x.id == value[0].city);
+// function getCityLocation(value, elementId) {
+//     fetch('assets/json/cities.json')
+//         .then(function (resp) {
+//             return resp.json();
+//         })
+//         .then(function (data) {
+//             let filtered = data.filter((d) => d.country_code == value[0].country);
+//             let filtered2 = filtered.filter((x) => x.state_id == value[0].state_or_province);
+//             let filtered3 = filtered.filter((x) => x.id == value[0].city);
     
-            document.getElementById(elementId).innerHTML =
-                '<option value="' + filtered3[0].id + '" >' + filtered3[0].name + '</option>';
+//             document.getElementById(elementId).innerHTML =
+//                 '<option value="' + filtered3[0].id + '" >' + filtered3[0].name + '</option>';
     
-            for (var i = 0; i < filtered2.length; i++) {
-                let option = document.createElement('option');
-                option.value = filtered2[i].id;
-                option.innerHTML = filtered2[i].name;
-                document.getElementById(elementId).appendChild(option);
-            }
+//             for (var i = 0; i < filtered2.length; i++) {
+//                 let option = document.createElement('option');
+//                 option.value = filtered2[i].id;
+//                 option.innerHTML = filtered2[i].name;
+//                 document.getElementById(elementId).appendChild(option);
+//             }
             
-            $("#"+elementId).selectpicker('refresh');
-        });
-}
+//             $("#"+elementId).selectpicker('refresh');
+//         });
+// }
 
 
-function getBusinessCountryLocation(value, elementId) {
+function getBusinessCountryLocationToBeEditAndOptions(value, elementId) {
     fetch('assets/json/countries.json')
     .then(function (resp) {
         return resp.json();
@@ -111,31 +111,31 @@ function getBusinessCountryLocation(value, elementId) {
     });
 }
 
-function getBusinessStatesLocation(value, elementId) {
-    fetch('assets/json/states.json')
-        .then(function (resp) {
-            return resp.json();
-        })
-        .then(function (data) {
-            let filtered = data.filter((d) => d.country_code == value[0].business_country);
-            let filtered2 = filtered.filter((x) => x.id == value[0].business_states);
+// function getBusinessStatesLocationToBeEditAndOptions(value, elementId) {
+//     fetch('assets/json/states.json')
+//         .then(function (resp) {
+//             return resp.json();
+//         })
+//         .then(function (data) {
+//             let filtered = data.filter((d) => d.country_code == value[0].business_country);
+//             let filtered2 = filtered.filter((x) => x.id == value[0].business_states);
 
-            document.getElementById(elementId).innerHTML =
-                '<option value="' + filtered2[0].id + '" >' + filtered2[0].name + '</option>';
+//             document.getElementById(elementId).innerHTML =
+//                 '<option value="' + filtered2[0].id + '" >' + filtered2[0].name + '</option>';
     
-            for (var i = 0; i < filtered.length; i++) {
-                let option = document.createElement('option');
-                option.value = filtered[i].id;
-                option.innerHTML = filtered[i].name;
-                document.getElementById(elementId).appendChild(option);
-            }
+//             for (var i = 0; i < filtered.length; i++) {
+//                 let option = document.createElement('option');
+//                 option.value = filtered[i].id;
+//                 option.innerHTML = filtered[i].name;
+//                 document.getElementById(elementId).appendChild(option);
+//             }
             
-            $("#"+elementId).selectpicker('refresh');
-        });
+//             $("#"+elementId).selectpicker('refresh');
+//         });
 
-}
+// }
 
-function getBusinessCityLocation(value, elementId) {
+function getBusinessCityLocationToBeEditAndOptions(value, elementId) {
     fetch('assets/json/cities.json')
         .then(function (resp) {
             return resp.json();

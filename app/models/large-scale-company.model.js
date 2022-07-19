@@ -4,6 +4,35 @@ const Model = function (model) {
     console.log('large-scale-company.model.js | const Model = function (model): ');
     console.log(model);
 
+    let businessSubCategoryInt;
+    let businessSubCategoryStr;
+    let inputBusinessSubCategory = model.business_sub_category;
+    let parsedBusinessSubCategory = parseInt(model.business_sub_category);
+
+    if (isNaN(parsedBusinessSubCategory)) {
+        businessSubCategoryInt = null;
+        businessSubCategoryStr = inputBusinessSubCategory;
+    } else {
+        businessSubCategoryInt = inputBusinessSubCategory;
+        businessSubCategoryStr = null;
+    }
+
+    let businessMinorSubCategoryInt;
+    let businessMinorSubCategoryStr;
+    let inputBusinessMinorSubCategory = model.business_minor_sub_category;
+    let parsedBusinessMinorSubCategory = parseInt(model.business_minor_sub_category);
+
+
+
+    if (isNaN(parsedBusinessMinorSubCategory)) {
+        businessMinorSubCategoryInt = null;
+        businessMinorSubCategoryStr = inputBusinessMinorSubCategory;
+    } else {
+        businessMinorSubCategoryInt = parsedBusinessMinorSubCategory;
+        businessMinorSubCategoryStr = null;
+    }
+
+
     this.uuid = model.uuid;
 
     // users ok
@@ -34,17 +63,20 @@ const Model = function (model) {
     this.business_city = model.business_city;
     this.business_language_of_communication = model.editLanguagesOfCommunication === undefined ? model.currentLanguagesOfCommunication : model.editLanguagesOfCommunication.toString(); //new
 
-    // users_business_characteristics ok
+
+    // users_business_characteristics
     this.business_major_category = model.business_major_category;
-    this.business_sub_category = model.business_sub_category;
-    this.business_minor_sub_category = model.business_minor_sub_category;   
+    this.business_sub_category = businessSubCategoryInt;
+    this.business_sub_category_str = businessSubCategoryStr;
+    this.business_minor_sub_category = businessMinorSubCategoryInt;
+    this.business_minor_sub_category_str = businessMinorSubCategoryStr;
 };
 
 Model.update = (newModel, result) => {
     console.log('Model.create = (newModel, result) => {');
     console.log(newModel);
 
-    // users ok
+    // users
     const usersData = [
         newModel.first_name,
         newModel.last_name,
@@ -58,7 +90,7 @@ Model.update = (newModel, result) => {
         middle_name = ?
         WHERE uuid = ?`;
 
-     // users_accounts ok
+     // users_accounts
     const usersAccountsData = [
         newModel.social_media_contact_type,
         newModel.contact_number,
@@ -70,7 +102,7 @@ Model.update = (newModel, result) => {
         contact_number = ?
         WHERE uuid = ?`;
 
-    // users_address ok
+    // users_address
     const usersAddressData = [
         newModel.country,
         newModel.state_or_province,
@@ -117,17 +149,35 @@ Model.update = (newModel, result) => {
         WHERE uuid = ?`;
     
     // users_business_characteristics ok
+    // const usersBusinessCharacteristicsData = [
+    //     newModel.business_major_category,
+    //     newModel.business_sub_category,
+    //     newModel.business_minor_sub_category,
+    //     newModel.uuid,
+    // ];
+
+    // const usersBusinessCharacteristicsQuery = `UPDATE users_business_characteristics SET 
+    //     business_major_category = ?, 
+    //     business_sub_category = ?, 
+    //     business_minor_sub_category = ?
+    //     WHERE uuid = ?`;
+
+    // users_business_characteristics
     const usersBusinessCharacteristicsData = [
         newModel.business_major_category,
         newModel.business_sub_category,
+        newModel.business_sub_category_str,
         newModel.business_minor_sub_category,
+        newModel.business_minor_sub_category_str,
         newModel.uuid,
     ];
 
     const usersBusinessCharacteristicsQuery = `UPDATE users_business_characteristics SET 
         business_major_category = ?, 
         business_sub_category = ?, 
-        business_minor_sub_category = ?
+        business_sub_category_str = ?, 
+        business_minor_sub_category = ?, 
+        business_minor_sub_category_str = ?
         WHERE uuid = ?`;
 
 

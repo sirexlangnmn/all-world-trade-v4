@@ -25,8 +25,8 @@ function getUserAddress() {
         url: '/api/get/users-address',
         type: 'POST',
         success: function (data) {
-            getCityNameUsingCode(data[0].city, 'city');
-            getStatesNameUsingCode(data[0].state_or_province, 'states');
+            getCityNameToBeDisplayUsingCode(data[0].city, 'city');
+            getStatesNameToBeDisplayUsingCode(data[0].state_or_province, 'states');
             getCountryNameUsingCode(data[0].country, 'country');
         },
     });
@@ -98,7 +98,7 @@ function getCountryNameUsingCode(code, elementId) {
     }
 }
 
-function getStatesNameUsingCode(code, elementId) {
+function getStatesNameToBeDisplayUsingCode(code, elementId) {
     if (code) {
         fetch('assets/json/states.json')
             .then(function (resp) {
@@ -113,7 +113,7 @@ function getStatesNameUsingCode(code, elementId) {
     }
 }
 
-function getCityNameUsingCode(code, elementId) {
+function getCityNameToBeDisplayUsingCode(code, elementId) {
     if (code) {
         fetch('assets/json/cities.json')
             .then(function (resp) {

@@ -9,6 +9,16 @@
 /* Typography
 ----------------------------------------------------------------- */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+/* @import url('/public/assets/fonts/Demo-Nasalization/Demo_Fonts/Fontspring-DEMO-nasalization-rg.otf'); */
+
+/* @font-face {
+    font-family: 'nasalizationregular';
+    src: url('/assets/fonts2/webfontkit-20220627-215729/fontspring-demo-nasalization-rg-webfont.woff2') format('woff2'),
+         url('/assets/fonts2/webfontkit-20220627-215729/fontspring-demo-nasalization-rg-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+} */
 /* -------------------------------------------------------------- */
 /* Header Settings for Desktop Devices
 ----------------------------------------------------------------- */
@@ -822,6 +832,7 @@ body {
     font-size: 15px;
     line-height: 27px;
     font-family: Inter, sans-serif !important;
+    /* font-family: 'nasalizationregular' !important; */
     text-transform: none;
 }
 

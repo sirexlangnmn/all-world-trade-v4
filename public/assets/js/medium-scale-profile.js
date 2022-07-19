@@ -22,8 +22,8 @@ function getUserAddress() {
         url: '/api/get/users-address',
         type: 'POST',
         success: function (data) {
-            getCityNameUsingCode(data[0].city, 'city');
-            getStatesNameUsingCode(data[0].state_or_province, 'states');
+            getCityNameToBeDisplayUsingCode(data[0].city, 'city');
+            getStatesNameToBeDisplayUsingCode(data[0].state_or_province, 'states');
             getCountryNameUsingCode(data[0].country, 'country');
         },
     });
@@ -42,8 +42,8 @@ function getCompanyDetails() {
             displayBusinessSocialMediaContactType(data[0].business_social_media_contact_type, 'businessSocialMediaContactType');
             document.getElementById('businessSocialMediaContactNumber').innerHTML = data[0].business_social_media_contact_number;
             getLanguageName(data[0].business_language_of_communication, "languageOfComm");
-            getCityNameUsingCode(data[0].business_city, 'businessCity');
-            getStatesNameUsingCode(data[0].business_states, 'businessStates');
+            getCityNameToBeDisplayUsingCode(data[0].business_city, 'businessCity');
+            getStatesNameToBeDisplayUsingCode(data[0].business_states, 'businessStates');
             getCountryNameUsingCode(data[0].business_country, 'businessCountry');
         },
     });
@@ -59,6 +59,21 @@ function getUsersAccount() {
             document.getElementById('socialMediaContactNumber').innerHTML = data[0].contact_number;
         },
     });
+}
+
+function getCountryNameUsingCode(code, elementId) {
+    if (code) {
+        fetch('assets/json/countries.json')
+            .then(function (resp) {
+                return resp.json();
+            })
+            .then(function (data) {
+                let filtered = data.filter((d) => d.iso2 == code);
+                document.getElementById(elementId).innerHTML = filtered[0].name;
+            });
+    } else {
+        document.getElementById(elementId).innerHTML = 'N/A';
+    }
 }
 
 function getLanguageName(string, elementId) {

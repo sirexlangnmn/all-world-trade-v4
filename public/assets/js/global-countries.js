@@ -1,12 +1,12 @@
 
 
-function getBusinessCountryLocation(value, elementId) {
+function getBusinessCountryLocationToBeEditAndOptions(value, elementId) {
     fetch('assets/json/countries.json')
         .then(function (resp) {
             return resp.json();
         })
         .then(function (data) {
-            // console.log('global-countries.js | function getBusinessCountryLocation(value, elementId)');
+            // console.log('global-countries.js | function getBusinessCountryLocationToBeEditAndOptions(value, elementId)');
             // console.log(data);
             // console.log(value);
 
@@ -35,13 +35,13 @@ function getBusinessCountryLocation(value, elementId) {
         });
 }
 
-function getBusinessStatesLocation(value, elementId) {
+function getBusinessStatesLocationToBeEditAndOptions(value, elementId) {
     fetch('assets/json/states.json')
         .then(function (resp) {
             return resp.json();
         })
         .then(function (data) {
-            console.log('global-countries.js | function getBusinessStatesLocation(value, elementId)');
+            console.log('global-countries.js | function getBusinessStatesLocationToBeEditAndOptions(value, elementId)');
             console.log(data);
             console.log(value);
 
@@ -67,13 +67,13 @@ function getBusinessStatesLocation(value, elementId) {
         });
 }
 
-function getBusinessCityLocation(value, elementId) {
+function getBusinessCityLocationToBeEditAndOptions(value, elementId) {
     fetch('assets/json/cities.json')
         .then(function (resp) {
             return resp.json();
         })
         .then(function (data) {
-            console.log('global-countries.js | function getBusinessCityLocation(value, elementId)');
+            console.log('global-countries.js | function getBusinessCityLocationToBeEditAndOptions(value, elementId)');
             console.log(data);
             console.log(value);
 
@@ -86,7 +86,7 @@ function getBusinessCityLocation(value, elementId) {
                 let filtered2 = data.filter((d) => d.country_code == countryCode);
                 let filtered3 = filtered.filter((x) => x.id == value[0].business_city);
 
-                console.log('global-countries.js | function getBusinessCityLocation(value, elementId) part 2');
+                console.log('global-countries.js | function getBusinessCityLocationToBeEditAndOptions(value, elementId) part 2');
                 console.log(stateCode);
                 console.log(countryCode);
                 console.log('filtered');

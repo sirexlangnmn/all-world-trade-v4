@@ -57,13 +57,13 @@ function getCompanyDetails() {
             document.getElementById('currentLanguagesOfCommunication').value =
                 data[0].business_language_of_communication;
 
-            getBusinessCountryLocation(data, 'businessCountryLocation');
+            getBusinessCountryLocationToBeEditAndOptions(data, 'businessCountryLocation');
 
             if (data[0].business_country && data[0].business_states) {
-                getBusinessStatesLocation(data, 'businessStatesLocation');
+                getBusinessStatesLocationToBeEditAndOptions(data, 'businessStatesLocation');
             }
             if (data[0].business_country && data[0].business_states && data[0].business_city) {
-                getBusinessCityLocation(data, 'businessCityLocation');
+                getBusinessCityLocationToBeEditAndOptions(data, 'businessCityLocation');
             }
 
             if (data[0].business_name == null || data[0].business_name == "") {

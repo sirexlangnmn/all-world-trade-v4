@@ -51,6 +51,7 @@ function getCompanyDetails() {
         url: '/api/get/company-details',
         type: 'POST',
         success: function (data) {
+            console.log('getCompanyDetails()', data);
             businessAddress.value = data[0].business_address;
             currentLanguagesOfCommunication.value = data[0].business_language_of_communication;
             tagline.value = data[0].business_tagline;
@@ -59,6 +60,10 @@ function getCompanyDetails() {
             businessContactNumber.value = data[0].business_contact;
             getBusinessSocialMediaContactType(data[0].business_social_media_contact_type);
             businessSocialMediaContactNumber.value = data[0].business_social_media_contact_number;
+            business_language_of_communication(data[0].business_language_of_communication);
+            document.getElementById("startOperatingHour").value = data[0].start_operating_hour;
+            document.getElementById("endOperatingHour").value = data[0].end_operating_hour;
+            //document.getElementById("myTime").value = "22:53:05";
         },
     });
 }
@@ -89,15 +94,53 @@ function getBusinessSocialMediaContactType(value) {
 }
 
 // display all users logo and banners in frontend profiles
+// function getUsersLogoAndBanner() {
+//     $.ajax({
+//         url: '/api/get/users-logo-and-banners',
+//         type: 'GET',
+//         success: function (data) {
+//             console.log(data);
+//             if (data) {
+//                 let bannerSrc = data[0].banner
+//                     ? host + '/uploads/users_upload_files/' + data[0].banner
+//                     : host + '/uploads/placeholder/banner-placeholder.png';
+//                 let logoSrc = data[0].banner
+//                     ? host + '/uploads/users_upload_files/' + data[0].logo
+//                     : host + '/uploads/placeholder/logo-placeholder.jpg';
+//                 companyBannerPreview.src = bannerSrc;
+//                 companyLogoPreview.src = logoSrc;
+//                 companyLogoId.value = data[0].id;
+//                 companyBannerId.value = data[0].id;
+//             }
+//         },
+//     });
+// }
+
+
 function getUsersLogoAndBanner() {
     $.ajax({
         url: '/api/get/users-logo-and-banners',
         type: 'GET',
         success: function (data) {
-            companyBannerPreview.src = host + '/uploads/users_upload_files/' + data[0].banner;
-            companyLogoPreview.src = host + '/uploads/users_upload_files/' + data[0].logo;
-            companyLogoId.value = data[0].id;
-            companyBannerId.value = data[0].id;
+            console.log('getUsersLogoAndBanner() | data: ', data);
+            console.log('getUsersLogoAndBanner() | data.length : ', data.length );
+            if (data.length > 0) {
+                if (data[0].banner) {
+                    companyBannerPreview.src = host + '/uploads/users_upload_files/' + data[0].banner;
+                } else {
+                    companyBannerPreview.src = host + '/uploads/placeholder/banner-placeholder.png';
+                }
+                if (data[0].logo) {
+                    companyLogoPreview.src = host + '/uploads/users_upload_files/' + data[0].logo;
+                } else {
+                    companyLogoPreview.src = host + '/uploads/placeholder/logo-placeholder.jpg';
+                }
+                companyLogoId.value = data[0].id;
+                companyBannerId.value = data[0].id;
+            } else {
+                companyBannerPreview.src = host + '/uploads/placeholder/banner-placeholder.png';
+                companyLogoPreview.src = host + '/uploads/placeholder/logo-placeholder.jpg';
+            }
         },
     });
 }
@@ -274,7 +317,6 @@ function editcompanyBanner() {
     });
 }
 
-
 function getUsersBusinessScale(data) {
     let value = data[0].business_scale;
     let x = getBusinessScaleTitle(value);
@@ -307,20 +349,28 @@ btnUpdateCompanyDetails.addEventListener('click', (e) => {
     //stop submit the form, we will post it manually.
     e.preventDefault();
 
-    $.ajax({
-        url: '/api/post/update-company-details',
-        type: 'post',
-        data: $form.serialize(),
-    }).done((response) => {
-        // console.log(response.uuid);
-        console.log(response);
-        // if (response.id) {
-        //     Swal.fire('Success', 'Registration Success.', 'success');
-        // }
-        if (response === 'success') {
-            location.replace(host + '/profile');
-        }
-    });
+    let validation = updateTradersProfileValidation();
+    console.log('validation');
+    console.log(validation);
+
+    if (validation === 'true') {
+        $.ajax({
+            url: '/api/post/update-company-details',
+            type: 'post',
+            data: $form.serialize(),
+        }).done((response) => {
+            // console.log(response.uuid);
+            console.log(response);
+            // if (response.id) {
+            //     Swal.fire('Success', 'Registration Success.', 'success');
+            // }
+            if (response === 'success') {
+                location.replace(host + '/profile');
+            }
+        });
+    } else {
+        Swal.fire('Warning', 'At least one required field is incomplete.', 'warning');
+    }
 });
 
 function backProfile() {

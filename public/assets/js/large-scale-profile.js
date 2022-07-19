@@ -35,8 +35,8 @@ function getUserAddress() {
         url: '/api/get/users-address',
         type: 'POST',
         success: function (data) {
-            getCityNameUsingCode(data[0].city, 'city');
-            getStatesNameUsingCode(data[0].state_or_province, 'states');
+            getCityNameToBeDisplayUsingCode(data[0].city, 'city');
+            getStatesNameToBeDisplayUsingCode(data[0].state_or_province, 'states');
             getCountryNameUsingCode(data[0].country, 'country');
         },
     });
@@ -62,8 +62,8 @@ function getCompanyDetails() {
                 data[0].business_social_media_contact_number;
             getLanguageName(data[0].business_language_of_communication, 'languageOfComm');
             document.getElementById('businessAddress').innerHTML = data[0].business_address;
-            getCityNameUsingCode(data[0].business_city, 'businessCity');
-            getStatesNameUsingCode(data[0].business_states, 'businessStates');
+            getCityNameToBeDisplayUsingCode(data[0].business_city, 'businessCity');
+            getStatesNameToBeDisplayUsingCode(data[0].business_states, 'businessStates');
             getCountryNameUsingCode(data[0].business_country, 'businessCountry');
         },
     });
@@ -83,6 +83,7 @@ function getUsersBusinessCharacteristics() {
             );
             document.getElementById('displayBusinessMinorCategory').innerHTML = getMinorSubCategoriesTitleById(
                 data[0].business_minor_sub_category,
+                data[0].business_minor_sub_category_str,
             );
         },
     });
@@ -118,35 +119,35 @@ function getCountryNameUsingCode(code, elementId) {
     }
 }
 
-function getStatesNameUsingCode(code, elementId) {
-    if (code) {
-        fetch('assets/json/states.json')
-            .then(function (resp) {
-                return resp.json();
-            })
-            .then(function (data) {
-                let filtered = data.filter((d) => d.id == code);
-                document.getElementById(elementId).innerHTML = filtered[0].name;
-            });
-    } else {
-        document.getElementById(elementId).innerHTML = 'N/A';
-    }
-}
+// function getStatesNameToBeDisplayUsingCode(code, elementId) {
+//     if (code) {
+//         fetch('assets/json/states.json')
+//             .then(function (resp) {
+//                 return resp.json();
+//             })
+//             .then(function (data) {
+//                 let filtered = data.filter((d) => d.id == code);
+//                 document.getElementById(elementId).innerHTML = filtered[0].name;
+//             });
+//     } else {
+//         document.getElementById(elementId).innerHTML = 'N/A';
+//     }
+// }
 
-function getCityNameUsingCode(code, elementId) {
-    if (code) {
-        fetch('assets/json/cities.json')
-            .then(function (resp) {
-                return resp.json();
-            })
-            .then(function (data) {
-                let filtered = data.filter((d) => d.id == code);
-                document.getElementById(elementId).innerHTML = filtered[0].name + ', ';
-            });
-    } else {
-        document.getElementById(elementId).innerHTML = 'N/A, ';
-    }
-}
+// function getCityNameToBeDisplayUsingCode(code, elementId) {
+//     if (code) {
+//         fetch('assets/json/cities.json')
+//             .then(function (resp) {
+//                 return resp.json();
+//             })
+//             .then(function (data) {
+//                 let filtered = data.filter((d) => d.id == code);
+//                 document.getElementById(elementId).innerHTML = filtered[0].name + ', ';
+//             });
+//     } else {
+//         document.getElementById(elementId).innerHTML = 'N/A, ';
+//     }
+// }
 
 function getLanguageNameByCode(code) {
     let value;
@@ -184,16 +185,28 @@ function getSubCategoriesTitleById(id) {
     return value;
 }
 
-function getMinorSubCategoriesTitleById(id) {
-    let value;
-    $.ajax({
-        url: host + '/api/get/minor-sub-category-title-by-id/' + id,
-        async: false,
-        success: function (data) {
-            value = data[0].title;
-        },
-    });
-    return value;
+function getMinorSubCategoriesTitleById(id, str) {
+    console.log("getMinorSubCategoriesTitleById", id, str);
+    if (id || str) {
+        if (id) {
+            let value;
+            $.ajax({
+                url: host + '/api/get/minor-sub-category-title-by-id/' + id,
+                async: false,
+                success: function (data) {
+                    value = data[0].title;
+                },
+            });
+            return value;
+        }
+
+        if (str) {
+            return str;
+        }
+    } else {
+        return 'N/A';
+       
+    }
 }
 
 function displayBusinessSocialMediaContactType(value, elementId) {

@@ -68,4 +68,25 @@ Model.getMinorSubCategoriesById = (id, result) => {
     });
 };
 
+Model.getMinorSubCategoryByTitle = (title, result) => {
+    // console.log('getMinorSubCategoryByTitle model:', id);
+    sql.query(`SELECT id, title FROM minor_sub_categories WHERE title = "${title}"`, (err, res) => {
+        //console.log('id model res:', res);
+        if (err) {
+            //console.log('error: ', err);
+            result(err, null);
+            return;
+        }
+
+        if (res.length) {
+            //console.log('found minor sub categories title: ', res[0]);
+            result(null, res);
+            return;
+        }
+
+        // not found Tutorial with the id
+        result({ kind: 'not_found' }, null);
+    });
+};
+
 module.exports = Model;

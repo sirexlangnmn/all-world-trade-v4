@@ -42,9 +42,9 @@ function getCompanyDetails() {
             getSocialMediaContactType(data[0].business_social_media_contact_type, 'businessSocialMediaContactType');
             document.getElementById('businessSocialMediaContactNumber').value = data[0].business_social_media_contact_number;
             document.getElementById('currentLanguagesOfCommunication').value = data[0].business_language_of_communication;
-            getBusinessCountryLocation(data, 'businessCountryLocation')
-            getBusinessStatesLocation(data, 'businessStatesLocation');
-            getBusinessCityLocation(data, 'businessCityLocation');
+            getBusinessCountryLocationToBeEditAndOptions(data, 'businessCountryLocation')
+            getBusinessStatesLocationToBeEditAndOptions(data, 'businessStatesLocation');
+            getBusinessCityLocationToBeEditAndOptions(data, 'businessCityLocation');
         },
     });
 }

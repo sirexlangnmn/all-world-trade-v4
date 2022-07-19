@@ -1,13 +1,19 @@
 const Model = require('../models/selection.model.js');
 
-exports.findAllPublished = (req, res) => {};
+exports.findCompaniesRelatedToCurrentUser = (req, res) => {};
 
 exports.findAllBySearchParameter = (req, res) => {};
 
-exports.findAllPublished = (req, res) => {
-    const uuid = req.session.user.uuid;
+exports.findRandomCompanies = (req, res) => {};
 
-    Model.getAllPublished(uuid, (err, data) => {
+exports.findCompaniesRelatedToCurrentUser = (req, res) => {
+    const parameters = {
+        uuid: req.session.user.uuid,
+        country: req.session.user.country,
+        state_or_province: req.session.user.state_or_province,
+    };
+
+    Model.getCompaniesRelatedToCurrentUser(parameters, (err, data) => {
         if (err)
             res.status(500).send({
                 message: err.message || 'Some error occurred while retrieving companies.',
@@ -37,6 +43,17 @@ exports.findAllBySearchParameter = (req, res) => {
     };
 
     Model.getAllBySearchParameter(parameters, (err, data) => {
+        if (err)
+            res.status(500).send({
+                message: err.message || 'Some error occurred while retrieving companies.',
+            });
+        else res.send(data);
+    });
+};
+
+
+exports.findRandomCompanies = (req, res) => {
+    Model.getRandomCompanies((err, data) => {
         if (err)
             res.status(500).send({
                 message: err.message || 'Some error occurred while retrieving companies.',

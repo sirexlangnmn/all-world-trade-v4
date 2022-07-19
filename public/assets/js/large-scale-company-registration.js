@@ -191,9 +191,20 @@ traderMinorSubCategoryToggleField1.addEventListener('change', function () {
     }
 });
 
+// traderMinorSubCategoryToggleField2.addEventListener('blur', function () {
+//     if (this.value == '') {
+//         toggleField(this, this.previousSibling);
+//     }
+// });
+
 traderMinorSubCategoryToggleField2.addEventListener('blur', function () {
-    if (this.value == '') {
-        toggleField(this, this.previousSibling);
+    if (this.value == '' && traderSubCategoryToggleField1.value == "customOption" || traderSubCategoryToggleField2.value != "") {
+        traderMinorSubCategoryToggleField2.style.display = 'block';
+        traderMinorSubCategoryToggleField2.disabled = false;
+    } else {
+        if (this.value == '') {
+            toggleField(this, this.previousSibling);
+        }
     }
 });
 
@@ -289,36 +300,8 @@ btnTraderRegistrationForm.addEventListener('click', (e) => {
             //     tradersRegistrationServerValidation(res.message);
             // }
         });
+    } else {
+        Swal.fire('Warning', 'At least one required field is incomplete.', 'warning');
     }
 });
 
-// function usersMediasProcess(uuid, verification_code) {
-//     // Get form
-//     let form = $('#traderRegistrationForm')[0];
-
-//     // Create an FormData object
-//     let formData = new FormData(form);
-//     formData.append('uuid', uuid);
-//     formData.append('verification_code', verification_code);
-
-//     $.ajax({
-//         type: 'post',
-//         enctype: 'multipart/form-data',
-//         url: '/api/post/users-medias-process',
-//         data: formData,
-//         processData: false,
-//         contentType: false,
-//         cache: false,
-//         timeout: 800000,
-//         success: function (data) {
-//             console.log(data);
-
-//             if (data === 'success upload files') {
-//                 location.replace(host + '/email-verification');
-//             }
-//         },
-//         error: function (e) {
-//             // some code here
-//         },
-//     });
-// }

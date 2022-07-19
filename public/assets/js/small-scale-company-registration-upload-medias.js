@@ -19,6 +19,17 @@ function registrationUploadBusinessMedias(uuid) {
 
 
     if (
+        companyLogo == 0 &&
+        companyBanner == 0
+    ) {
+        let response = registrationNoUpload(uuid);
+        console.log('yes registrationNoUpload');
+        console.log('registrationNoUpload: ' + response);
+    } else {
+        console.log('no registrationNoUpload');
+    }
+
+    if (
         companyLogo == 1 &&
         companyBanner == 0
     ) {
@@ -54,6 +65,27 @@ function registrationUploadBusinessMedias(uuid) {
 
 }
 
+
+function registrationNoUpload(uuid) {
+    let value;
+
+    $.ajax({
+        url: '/api/post/registration-no-upload',
+        type: 'POST',
+        data: {
+            uuid: uuid,
+        },
+        success: function (data) {
+            console.log(data);
+            value = data;
+        },
+        error: function (e) {
+            // some code here
+        },
+    });
+
+    return value;
+}
 
 function registrationUploadCompanyLogo(uuid) {
     let value;

@@ -15,15 +15,43 @@ $(function () {
 
 
 
+// function getUsersLogoAndBanner() {
+//     $.ajax({
+//         url: '/api/get/users-logo-and-banners',
+//         type: 'GET',
+//         success: function (data) {
+//             companyBannerPreview.src = host + '/uploads/users_upload_files/' + data[0].banner;
+//             companyLogoPreview.src = host + '/uploads/users_upload_files/' + data[0].logo;
+//             companyLogoId.value = data[0].id;
+//             companyBannerId.value = data[0].id;
+//         },
+//     });
+// }
+
 function getUsersLogoAndBanner() {
     $.ajax({
         url: '/api/get/users-logo-and-banners',
         type: 'GET',
         success: function (data) {
-            companyBannerPreview.src = host + '/uploads/users_upload_files/' + data[0].banner;
-            companyLogoPreview.src = host + '/uploads/users_upload_files/' + data[0].logo;
-            companyLogoId.value = data[0].id;
-            companyBannerId.value = data[0].id;
+            console.log('getUsersLogoAndBanner() | data: ', data);
+            console.log('getUsersLogoAndBanner() | data.length : ', data.length );
+            if (data.length > 0) {
+                if (data[0].banner) {
+                    companyBannerPreview.src = host + '/uploads/users_upload_files/' + data[0].banner;
+                } else {
+                    companyBannerPreview.src = host + '/uploads/placeholder/banner-placeholder.png';
+                }
+                if (data[0].logo) {
+                    companyLogoPreview.src = host + '/uploads/users_upload_files/' + data[0].logo;
+                } else {
+                    companyLogoPreview.src = host + '/uploads/placeholder/logo-placeholder.jpg';
+                }
+                companyLogoId.value = data[0].id;
+                companyBannerId.value = data[0].id;
+            } else {
+                companyBannerPreview.src = host + '/uploads/placeholder/banner-placeholder.png';
+                companyLogoPreview.src = host + '/uploads/placeholder/logo-placeholder.jpg';
+            }
         },
     });
 }

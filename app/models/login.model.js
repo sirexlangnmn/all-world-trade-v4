@@ -16,10 +16,14 @@ Model.create = (newModel, result) => {
     users_accounts.password, 
     users_accounts.type, 
     users.first_name, 
-    users.last_name 
+    users.last_name,
+    users_address.country,
+    users_address.state_or_province
     FROM users_accounts
     INNER JOIN users 
     ON users.uuid = users_accounts.uuid 
+    INNER JOIN users_address 
+    ON users_address.uuid = users_accounts.uuid 
     WHERE users_accounts.email_or_social_media = "${newModel.email_or_social_media}"`;
 
     sql.query(usersAccountsQuery, (err, res) => {

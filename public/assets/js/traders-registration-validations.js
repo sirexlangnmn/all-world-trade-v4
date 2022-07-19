@@ -30,9 +30,10 @@ let traderBusinessSocialMediaContactNumber;
 let traderBusinessSocialMediaContactNumberValidation;
 let traderBusinessAddress;
 let traderBusinessAddressValidation;
-// let traderBusinessCountryLocation; declared na sa registration-countries2.js
+
 let traderBusinessCountryLocationValidation;
 let traderBusinessCityLocationValidation;
+let traderBusinessCityLocationsValidation;
 let traderStartOperatingHour;
 let traderStartOperatingHourValidation;
 let traderEndOperatingHour;
@@ -113,6 +114,7 @@ traderBusinessAddress = getId('traderBusinessAddress');
 traderBusinessAddressValidation = getId('traderBusinessAddressValidation');
 traderBusinessCountryLocationValidation = getId('traderBusinessCountryLocationValidation');
 traderBusinessCityLocationValidation = getId('traderBusinessCityLocationValidation');
+traderBusinessCityLocationsValidation = getId('traderBusinessCityLocationsValidation');
 traderStartOperatingHour = getId('traderStartOperatingHour');
 traderStartOperatingHourValidation = getId('traderStartOperatingHourValidation');
 traderEndOperatingHour = getId('traderEndOperatingHour');
@@ -294,8 +296,13 @@ function tradersRegistrationValidation() {
         traderBusinessCountryLocationValidation.innerHTML = 'Business Country Location is required';
     }
     if (traderBusinessCityLocation.value.length == 0) {
+        output = 'empty business state location';
+        traderBusinessCityLocationValidation.innerHTML = 'Business State Location is required';
+    }
+    
+    if (traderBusinessCityLocations.value.length == 0) {
         output = 'empty business city location';
-        traderBusinessCityLocationValidation.innerHTML = 'Business City Location is required';
+        traderBusinessCityLocationsValidation.innerHTML = 'Business City Location is required';
     }
     
     // validation of region of operation moved to bottom of this function
@@ -349,8 +356,12 @@ function tradersRegistrationValidation() {
         traderCountryofResidenceValidation.innerHTML = 'Representative country of residence required';;
     }
     if (traderCityOfResidence.value.length == 0) {
+        output = 'empty Representative state of residence';
+        traderCityOfResidenceValidation.innerHTML = 'Representative state of residence requiredd';
+    }
+    if (traderCityOfResidences.value.length == 0) {
         output = 'empty Representative city of residence';
-        traderCityOfResidenceValidation.innerHTML = 'Representative city of residence requiredd';
+        traderCityOfResidencesValidation.innerHTML = 'Representative city of residence requiredd';
     }
     if (traderCellphone.value.length == 0) {
         output = 'empty Representative cell phone';
@@ -478,10 +489,23 @@ traderBusinessCountryLocation.onchange = function () {
         traderBusinessCountryLocationValidation,
         'Business Country Location is required',
     );
+
+    setTimeout(function() {
+        required(traderBusinessCityLocation, traderBusinessCityLocationValidation, 'Business State Location is required');
+        required(traderBusinessCityLocations, traderBusinessCityLocationsValidation, 'Business City Location is required');
+    }, (3 * 1000));
 };
 
 traderBusinessCityLocation.onchange = function () {
-    required(traderBusinessCityLocation, traderBusinessCityLocationValidation, 'Business City Location is required');
+    required(traderBusinessCityLocation, traderBusinessCityLocationValidation, 'Business State Location is required');
+
+    setTimeout(function() {
+        required(traderBusinessCityLocations, traderBusinessCityLocationsValidation, 'Business City Location is required');
+    }, (3 * 1000));
+};
+
+traderBusinessCityLocations.onchange = function () {
+    required(traderBusinessCityLocations, traderBusinessCityLocationsValidation, 'Business City Location is required');
 };
 
 traderRegionOfOperation.onchange = function () {
@@ -533,12 +557,26 @@ traderHomeAddress.onkeyup = function () {
 };
 
 traderCountryofResidence.onchange = function () {
-    required(traderCountryofResidence, traderCountryofResidenceValidation, 'Country of residence is required');;
+    required(traderCountryofResidence, traderCountryofResidenceValidation, 'Country of residence is required');
+
+    setTimeout(function() {
+        required(traderCityOfResidence, traderCityOfResidenceValidation, 'State of residence is required');
+        required(traderCityOfResidences, traderCityOfResidencesValidation, 'City Location is required');
+    }, (3 * 1000));
 };
 
 traderCityOfResidence.onchange = function () {
-    required(traderCityOfResidence, traderCityOfResidenceValidation, 'City of residence is required');
+    required(traderCityOfResidence, traderCityOfResidenceValidation, 'State of residence is required');
+
+    setTimeout(function() {
+        required(traderCityOfResidences, traderCityOfResidencesValidation, 'City Location is required');
+    }, (3 * 1000));
 };
+
+traderCityOfResidences.onchange = function () {
+    required(traderCityOfResidences, traderCityOfResidencesValidation, 'City of residence is required');
+};
+
 
 traderCellphone.onchange = function () {
     required(traderCellphone, traderCellphoneValidation, 'Representative cellphone number is required');
@@ -591,7 +629,6 @@ function required(elementIdInput, elementIdValidation, message) {
 }
 
 function required2(elementIdValidation, message) {
-    console.log(message);
     if (message.length != 0) {
         elementIdValidation.style.display = 'block';
         elementIdValidation.innerHTML = message[0].msg;

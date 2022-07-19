@@ -86,7 +86,7 @@ function getCityLocation(value, elementId) {
         });
 }
 
-function getBusinessCountryLocation(value, elementId) {
+function getBusinessCountryLocationToBeEditAndOptions(value, elementId) {
     fetch('assets/json/countries.json')
         .then(function (resp) {
             return resp.json();
@@ -115,7 +115,7 @@ function getBusinessCountryLocation(value, elementId) {
         });
 }
 
-function getBusinessStatesLocation(value, elementId) {
+function getBusinessStatesLocationToBeEditAndOptions(value, elementId) {
     fetch('assets/json/states.json')
         .then(function (resp) {
             return resp.json();
@@ -138,7 +138,7 @@ function getBusinessStatesLocation(value, elementId) {
         });
 }
 
-function getBusinessCityLocation(value, elementId) {
+function getBusinessCityLocationToBeEditAndOptions(value, elementId) {
     fetch('assets/json/cities.json')
         .then(function (resp) {
             return resp.json();

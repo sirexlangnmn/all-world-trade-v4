@@ -15,9 +15,9 @@ module.exports = (app) => {
     const db = mysql.createConnection({
         host: 'localhost',
         user: 'root',
-        password: 'FightForYourDreams7!',
-        // password: '',
-        database: 'awt_db_5',
+        // password: 'FightForYourDreams7!',
+        password: '',
+        database: 'awt_db_7',
     });
 
     db.connect(function (err) {
@@ -245,6 +245,26 @@ module.exports = (app) => {
                 }
             });
         }
+    });
+
+    app.post('/api/post/registration-no-upload', (req, res) => {
+        console.log('registration-no-upload uuid', req.body.uuid);
+        const inputObject = {
+            uuid: req.body.uuid,
+            date_created: new Date().toISOString().replace('T', ' ').substr(0, 19),
+        };
+
+        console.log('registration-no-upload inputObject', inputObject);
+
+        db.query(USERS_BUSINESS_MEDIAS.CREATE_NO, Object.values(inputObject), (err, result) => {
+            if (err) {
+                //throw err;
+                console.log(err);
+            } else {
+                res.send('success upload files');
+                console.log('success upload files');
+            }
+        });
     });
 
     app.post(
@@ -958,7 +978,7 @@ module.exports = (app) => {
             secure: false, // true for 465, false for other ports
             auth: {
                 user: 'verification@allworldtrade.com', // allworldtrade.com@gmail.com
-                pass: 'FightForYourDreams7!', //
+                pass: 'FightForYourDreams7!()', //
             },
             tls: {
                 rejectUnauthorized: false,

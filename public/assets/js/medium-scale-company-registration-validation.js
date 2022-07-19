@@ -115,10 +115,6 @@ function registrationValidation() {
     //     companyLogoValidation.innerHTML = 'Upload logo';
     // }
 
-
-
-
-
     if (companyName.value.length == 0) {
         output = 'empty3';
         companyNameValidation.innerHTML = 'Company Name is required';
@@ -152,11 +148,6 @@ function registrationValidation() {
         businessCityLocationValidation.innerHTML = 'Business City Location is required';
     }
 
-
-
-
-
-
     if (firstName.value.length == 0) {
         output = 'empty3';
         firstNameValidation.innerHTML = 'Firstname is required';
@@ -164,10 +155,6 @@ function registrationValidation() {
     if (lastName.value.length == 0) {
         output = 'empty4';
         lastNameValidation.innerHTML = 'Lastname is required';
-    }
-    if (middleName.value.length == 0) {
-        output = 'empty5';
-        middleNameValidation.innerHTML = 'Middlename is required';
     }
     if (country.value.length == 0) {
         output = 'empty6';
@@ -201,7 +188,6 @@ function registrationValidation() {
     return output;
 }
 
-
 companyName.onkeyup = function () {
     required(companyName, companyNameValidation, 'Company Name');
 };
@@ -215,19 +201,30 @@ businessContactNumber.onkeyup = function () {
     required(businessContactNumber, businessContactNumberValidation, 'Business Contact Number');
 };
 businessSocialMediaContactNumber.onkeyup = function () {
-    required(businessSocialMediaContactNumber, businessSocialMediaContactNumberValidation, 'Messaging App Contact Number');
+    required(
+        businessSocialMediaContactNumber,
+        businessSocialMediaContactNumberValidation,
+        'Messaging App Contact Number',
+    );
 };
-firstName.onkeyup = function () {
-    required(firstName, firstNameValidation, 'Firstname');
-};
-firstName.onkeyup = function () {
-    required(firstName, firstNameValidation, 'Firstname');
-};
-firstName.onkeyup = function () {
-    required(firstName, firstNameValidation, 'Firstname');
-};
+businessCountryLocation.onchange = function () {
+    required(businessCountryLocation, businessCountryLocationValidation, 'Business Country Location');
 
+    setTimeout(function () {
+        required(businessStatesLocation, businessStatesLocationValidation, 'Business States Location');
+        required(businessCityLocation, businessCityLocationValidation, 'Business City Location');
+    }, 3 * 1000);
+};
+businessStatesLocation.onchange = function () {
+    required(businessStatesLocation, businessStatesLocationValidation, 'Business States Location');
 
+    setTimeout(function () {
+        required(businessCityLocation, businessCityLocationValidation, 'Business City Location');
+    }, 3 * 1000);
+};
+businessCityLocation.onchange = function () {
+    required(businessCityLocation, businessCityLocationValidation, 'Business City Location');
+};
 
 firstName.onkeyup = function () {
     required(firstName, firstNameValidation, 'Firstname');
@@ -240,9 +237,18 @@ middleName.onkeyup = function () {
 };
 country.onchange = function () {
     required(country, countryValidation, 'Country');
+
+    setTimeout(function () {
+        required(states, statesValidation, 'States');
+        required(city, cityValidation, 'City');
+    }, 3 * 1000);
 };
 states.onchange = function () {
     required(states, statesValidation, 'States');
+    
+    setTimeout(function () {
+        required(city, cityValidation, 'City');
+    }, 3 * 1000);
 };
 city.onchange = function () {
     required(city, cityValidation, 'City');

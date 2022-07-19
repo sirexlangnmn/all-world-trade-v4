@@ -214,9 +214,20 @@ traderMinorSubCategoryToggleField1.addEventListener('change', function () {
     }
 });
 
+// traderMinorSubCategoryToggleField2.addEventListener('blur', function () {
+//     if (this.value == '') {
+//         toggleField(this, this.previousSibling);
+//     }
+// });
+
 traderMinorSubCategoryToggleField2.addEventListener('blur', function () {
-    if (this.value == '') {
-        toggleField(this, this.previousSibling);
+    if (this.value == '' && traderSubCategoryToggleField1.value == "customOption" || traderSubCategoryToggleField2.value != "") {
+        traderMinorSubCategoryToggleField2.style.display = 'block';
+        traderMinorSubCategoryToggleField2.disabled = false;
+    } else {
+        if (this.value == '') {
+            toggleField(this, this.previousSibling);
+        }
     }
 });
 
@@ -306,10 +317,6 @@ btnTraderRegistrationForm.addEventListener('click', (e) => {
             type: 'post',
             data: $form.serialize(),
         }).done((res) => {
-            console.log(res);
-            console.log(res.uuid);
-            console.log(res.verification_code);
-            console.log(res.email_or_social_media);
             if (res.uuid && res.verification_code) {
                 registrationUploadBusinessMedias(res.uuid);
                 registrationEmailVerification(res.uuid, res.verification_code, res.email_or_social_media);
